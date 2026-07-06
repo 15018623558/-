@@ -2349,7 +2349,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .qa-menu-app.no-open:active .qa-menu-ic{transform:none}
 .qa-menu-ic{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(15,23,42,.04);box-shadow:var(--sx);transition:transform .12s}
 .qa-menu-ic svg{width:23px;height:23px}
-.qa-menu-label{width:100%;font-size:12px;font-weight:500;color:var(--c7);line-height:1.25;text-align:center;white-space:normal;word-break:keep-all}
+.qa-menu-label{width:100%;max-width:68px;min-height:30px;font-size:12px;font-weight:500;color:var(--c7);line-height:1.25;text-align:center;white-space:normal;overflow-wrap:anywhere;word-break:break-all}
 .qa-edit-tip{font-size:12px;color:var(--c5);line-height:1.45;margin:-4px 0 14px}
 .qa-edit-common{background:var(--sf);border-radius:var(--r3);padding:14px 12px 16px;box-shadow:var(--sx);border:1px solid var(--bd);margin-bottom:12px}
 .qa-edit-common .qa-menu-section-hd{margin-bottom:4px;padding:0 2px}
@@ -4711,37 +4711,49 @@ const TODO_AVATAR_PALETTE = [
 
 /* ═══ 快捷入口数据池 ═══ */
 const QUICK_GROUPS = {
-  zp:'招聘', rs:'人事', kq:'考勤', jx:'绩效', xx:'培训', xc:'薪酬'
+  zp:'招聘管理', rs:'人事管理', kq:'考勤管理', jx:'绩效管理', xc:'薪酬管理'
+};
+const QUICK_GROUP_APP_ORDER = {
+  zp:['shaixuan','mianshi','neizhao','toudijilu'],
+  rs:['dangank','tuandui','ruzhi','zhuanzheng','diaodong','jinsheng','lizhi','ygxxbg'],
+  kq:['xiujia','buqian','jiaban','xiaojia','chuchai','gongchu','tiaoban','juwei','kaoqinss'],
+  jx:['wojimubiao','tuanduijx'],
+  xc:['gongzi','tiaoxintz']
 };
 const QUICK_POOL = {
-  attend:{label:'考勤',bg:'var(--pr50)',stroke:'#2563EB',action:'switchTab(1)',svg:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 4v6l4 2"/>',group:'kq'},
+  attend:{label:'考勤',bg:'var(--pr50)',stroke:'#2563EB',action:'switchTab(1)',svg:'<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 4v6l4 2"/>',group:'common'},
   allApps:{label:'更多',bg:'var(--s3)',stroke:'#64748B',action:'openQuickAdd()',svg:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',group:'common'},
   /* 招聘管理 */
   shaixuan:{label:'筛选',bg:'var(--pr50)',stroke:'#2563EB',action:'',svg:'<polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>',group:'zp'},
   mianshi:{label:'面试',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',group:'zp'},
   neizhao:{label:'内招职位',bg:'var(--em50)',stroke:'#10B981',action:'',svg:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 00-8 0v2"/>',group:'zp'},
+  toudijilu:{label:'投递记录',bg:'var(--cy50)',stroke:'#06B6D4',action:'',svg:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/>',group:'zp'},
   /* 人事申请 */
   zhuanzheng:{label:'转正',bg:'var(--em50)',stroke:'#10B981',action:'',svg:'<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/>',group:'rs'},
   diaodong:{label:'调动',bg:'var(--pr50)',stroke:'#2563EB',action:"openDetail('dt-transfer')",svg:'<path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',group:'rs'},
   lizhi:{label:'离职',bg:'var(--ro50)',stroke:'#F43F5E',action:'',svg:'<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>',group:'rs'},
-  jinsheng:{label:'晋升见习',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',group:'rs'},
+  jinsheng:{label:'晋升见习转正',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',group:'rs'},
   jiediao:{label:'借调',bg:'var(--cy50)',stroke:'#06B6D4',action:'',svg:'<path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>',group:'rs'},
   dangank:{label:'我的档案',bg:'var(--pr50)',stroke:'#2563EB',action:"openDetail('dt-profile')",svg:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>',group:'rs'},
-  tuandui:{label:'我的团队',bg:'var(--cy50)',stroke:'#06B6D4',action:"openDetail('dt-team')",svg:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',group:'rs'},
+  tuandui:{label:'团队档案',bg:'var(--cy50)',stroke:'#06B6D4',action:"openDetail('dt-team')",svg:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',group:'rs'},
   zhengming:{label:'开具证明',bg:'rgba(168,85,247,.08)',stroke:'#7C3AED',action:'',svg:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8m8 4H8m2-8H8"/>',group:'rs'},
+  ruzhi:{label:'入职',bg:'var(--em50)',stroke:'#10B981',action:'',svg:'<path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M16 11h6"/>',group:'rs'},
+  ygxxbg:{label:'员工信息变更申请',bg:'var(--or50)',stroke:'#F97316',action:'',svg:'<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16.5 11.5l3 3L13 21l-4 1 1-4 6.5-6.5z"/>',group:'rs'},
   /* 考勤申请 */
+  xiujia:{label:'请假',bg:'var(--em50)',stroke:'#10B981',action:"openDetail('dt-leave')",svg:'<path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/><path d="M9 12l2 2 4-4"/>',group:'kq'},
   buqian:{label:'补签',bg:'var(--or50)',stroke:'#F97316',action:"openDetail('dt-buqian')",svg:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',group:'kq'},
   jiaban:{label:'加班',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',group:'kq'},
-  xiujia:{label:'请假',bg:'var(--em50)',stroke:'#10B981',action:"openDetail('dt-leave')",svg:'<path d="M3 12a9 9 0 1018 0 9 9 0 00-18 0z"/><path d="M9 12l2 2 4-4"/>',group:'kq'},
   xiaojia:{label:'销假',bg:'var(--pr50)',stroke:'#2563EB',action:'',svg:'<path d="M18 6L6 18M6 6l12 12"/>',group:'kq'},
-  tiaoban:{label:'调班',bg:'var(--ac50)',stroke:'#F59E0B',action:'',svg:'<path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/>',group:'kq'},
   chuchai:{label:'出差',bg:'var(--cy50)',stroke:'#06B6D4',action:'',svg:'<path d="M3 12h4l3-9 4 18 3-9h4"/>',group:'kq'},
   gongchu:{label:'公出',bg:'var(--ro50)',stroke:'#F43F5E',action:'',svg:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>',group:'kq'},
-  juwei:{label:'居委办公',bg:'var(--em50)',stroke:'#10B981',action:'',svg:'<rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 7v10M16 7v10M2 12h20"/>',group:'kq'},
+  tiaoban:{label:'调班',bg:'var(--ac50)',stroke:'#F59E0B',action:'',svg:'<path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/>',group:'kq'},
+  juwei:{label:'居家办公',bg:'var(--em50)',stroke:'#10B981',action:'',svg:'<path d="M3 10.5L12 3l9 7.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',group:'kq'},
+  kaoqinss:{label:'考勤申诉',bg:'var(--ac50)',stroke:'#F59E0B',action:'',svg:'<path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4z"/><path d="M12 7v5"/><path d="M12 16h.01"/>',group:'kq'},
   /* 绩效管理 */
   mubiao:{label:'目标管理',bg:'var(--pr50)',stroke:'#2563EB',action:'',svg:'<path d="M12 20V10M18 20V4M6 20v-4"/>',group:'jx'},
-  wojimubiao:{label:'绩效目标',bg:'var(--em50)',stroke:'#10B981',action:"openDetail('dt-goal-form')",svg:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',group:'jx'},
+  wojimubiao:{label:'我的绩效',bg:'var(--em50)',stroke:'#10B981',action:"openDetail('dt-goal-form')",svg:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',group:'jx'},
   jixiaodai:{label:'绩效待办',bg:'var(--ac50)',stroke:'#F59E0B',action:'',svg:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',group:'jx'},
+  tuanduijx:{label:'团队绩效',bg:'var(--cy50)',stroke:'#06B6D4',action:'',svg:'<path d="M4 19h16"/><path d="M7 15l3-3 3 2 4-6"/><path d="M5 8a4 4 0 018 0"/><path d="M17 10a3 3 0 016 0"/>',group:'jx'},
   /* 培训管理 */
   xuexi:{label:'学习',bg:'var(--cy50)',stroke:'#06B6D4',action:'',svg:'<path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>',group:'xx'},
   kecheng:{label:'课程',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>',group:'xx'},
@@ -4751,7 +4763,8 @@ const QUICK_POOL = {
   gongzi:{label:'我的工资',bg:'var(--ac50)',stroke:'#B45309',action:"openDetail('dt-salary')",svg:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/>',group:'xc'},
   gongzitiao:{label:'工资条查询',bg:'var(--em50)',stroke:'#10B981',action:'',svg:'<path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4"/>',group:'xc'},
   xinchoutj:{label:'薪酬统计',bg:'var(--pr50)',stroke:'#2563EB',action:'',svg:'<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',group:'xc'},
-  geshui:{label:'个税查询',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M12 20V10M18 20V4M6 20v-4"/>',group:'xc'}
+  geshui:{label:'个税查询',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M12 20V10M18 20V4M6 20v-4"/>',group:'xc'},
+  tiaoxintz:{label:'调薪通知',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 000 7H14a3.5 3.5 0 010 7H6"/><path d="M18 9l3-3-3-3"/>',group:'xc'}
 };
 let quickList = ['xiujia','jiaban','chuchai','buqian','tuandui','dangank','gongzi','diaodong'];
 const QA_COMMON_MAX = 12;
@@ -5287,7 +5300,7 @@ function renderQuick(){
 /* ═══ 添加快捷面板（新页面版） ═══ */
 var qaActiveGroup='zp';
 var qaEditMode=false;
-var qaGroupOrder=['zp','rs','kq','jx','xx','xc'];
+var qaGroupOrder=['zp','rs','kq','jx','xc'];
 var qaCollapsedGroups={};
 function openQuickAdd(){
   qaActiveGroup='zp';
@@ -5353,12 +5366,19 @@ function qaMarkSvg(type){
     : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"></path></svg>';
 }
 function qaKeysByGroup(group,q){
-  return Object.keys(QUICK_POOL).filter(function(k){
+  var keys=Object.keys(QUICK_POOL).filter(function(k){
     var it=QUICK_POOL[k];
     if(!it||qaGroupOrder.indexOf(it.group)<0) return false;
+    if(QUICK_GROUP_APP_ORDER[it.group]&&QUICK_GROUP_APP_ORDER[it.group].indexOf(k)<0) return false;
     if(group&&it.group!==group) return false;
     if(q&&it.label.toLowerCase().indexOf(q)<0) return false;
     return true;
+  });
+  return keys.sort(function(a,b){
+    var ga=QUICK_POOL[a].group;
+    var gb=QUICK_POOL[b].group;
+    if(ga!==gb) return qaGroupOrder.indexOf(ga)-qaGroupOrder.indexOf(gb);
+    return QUICK_GROUP_APP_ORDER[ga].indexOf(a)-QUICK_GROUP_APP_ORDER[gb].indexOf(b);
   });
 }
 function qaIsCollapsed(group,total){
