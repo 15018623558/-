@@ -4,6 +4,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HR ONE · 移动端员工自助平台 · 设计规范原型</title>
+<link href="./HR ONE · 移动端员工自助平台 · 设计规范原型_files/css2" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -73,10 +74,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .home-greet{font-size:17px;font-weight:800;color:var(--c9);letter-spacing:0;line-height:1.14;margin-bottom:2px}
 .home-role{font-size:10px;font-weight:500;color:var(--c5);line-height:1.25}
 .home-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.home-notify{width:38px;height:38px;border-radius:50%;border:none;background:var(--sf);box-shadow:var(--sx);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:transform .12s var(--ease-out)}
-.home-notify:active,.home-avatar:active{transform:scale(.94)}
-.home-notify svg{width:18px;height:18px;color:var(--c5)}
-.home-notify-badge{position:absolute;top:-3px;right:-1px;min-width:16px;height:16px;border-radius:8px;background:var(--ro);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.home-avatar:active{transform:scale(.94)}
 .home-avatar{width:40px;height:40px;border-radius:50%;border:none;background:#3F7EE8;color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,99,235,.18);cursor:pointer;transition:transform .12s var(--ease-out)}
 
 /* ── Notification Center ── */
@@ -128,6 +126,15 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .msg-action-btn.primary{color:var(--pr)}
 .msg-action-btn.download{color:var(--pr)}
 .msg-empty{padding:40px 20px;text-align:center;color:var(--c5);font-size:11px;font-weight:500;line-height:1.6}
+.home-msg-card{margin-bottom:0}
+.home-msg-card .ap2-type.message{background:var(--ro50);color:var(--ro)}
+.home-msg-card .ap2-st.unread{color:var(--ro);background:var(--ro50);border-color:var(--ro100)}
+.home-msg-card .ap2-st.read{color:var(--c5);background:var(--s3);border-color:var(--c2)}
+.home-msg-card .ap2-avatar{background:var(--ro50);color:var(--ro)}
+.home-msg-card .ap2-avatar svg{width:15px;height:15px;stroke-width:2.2}
+.home-msg-card .ap2-subject{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-weight:700}
+.home-msg-card .ap2-bot{align-items:center}
+#pg-approve .home-msg-card{margin-bottom:8px}
 .msg-detail-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r3);box-shadow:var(--sx);padding:16px}
 .msg-detail-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .msg-detail-title{font-size:17px;font-weight:700;color:var(--c9);line-height:1.35}
@@ -2738,10 +2745,6 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
           <div class="home-role">产品设计部 · 高级设计师</div>
         </div>
         <div class="home-actions">
-          <button class="home-notify" onclick="openDetail(&#39;dt-message&#39;)" aria-label="消息通知">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg>
-            <span class="home-notify-badge">8</span>
-          </button>
           <button class="home-avatar" onclick="openDetail(&#39;dt-profile&#39;)" aria-label="查看个人信息">陈</button>
         </div>
       </div>
@@ -2749,7 +2752,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
       <!-- ═══ 待办模块 ═══ -->
       <div class="sec-card ani ani-d1 todo-card" id="home-todo-section">
         <div class="mod-hd" style="margin-bottom:4px">
-          <h3 style="display:flex;align-items:center;gap:5px">待办<span class="td-badge" id="todo-badge">0</span></h3>
+          <h3 style="display:flex;align-items:center;gap:5px">消息与待办<span class="td-badge" id="todo-badge">0</span></h3>
           <button type="button" class="more-ln-inline" onclick="goApTodo()" aria-label="更多待办">更多</button>
         </div>
         <div class="todo-list" id="home-todo"></div>
@@ -3058,7 +3061,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
       <div class="ap-filter-bar ani ani-d2" id="apFilterBar">
         <div class="ap-filter-chip" id="apFlowChip" onclick="openApFlowSheet()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon></svg>
-          <span id="apFlowLabel">流程类型</span>
+          <span id="apFlowLabel">待办类型</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
         </div>
         <div class="ap-filter-chip" id="apTimeChip" onclick="openApTimeSheet()">
@@ -4857,10 +4860,14 @@ function todoPersonInfoText(item){
   if(applicant&&role) return applicant+' · '+role;
   return applicant||role;
 }
-function homeTodoItems(){
+var _homeTodoFeedItems=[];
+function homeApprovalTodoItems(){
   return TODO_DATA.slice().sort(function(a,b){
     return todoParseTime(b.arriveAt||b.time)-todoParseTime(a.arriveAt||a.time);
   });
+}
+function homeTodoItems(){
+  return homeApprovalTodoItems();
 }
 function findHomeTodoApItem(todo){
   try{
@@ -4883,8 +4890,42 @@ function homeTodoCanOpen(todo){
   if(item) return apIsTransferFlow(item);
   return !!(todo && todo.flowKey === 'hr' && todo.processName === '调动申请' && todo.detail === 'dt-ap-transfer');
 }
+function homeMsgParseTime(msg){
+  if(msg && msg.demoAgeMinutes != null) return todoParseTime(apTimeFromNowMinutes(msg.demoAgeMinutes));
+  if(msg && msg.arriveAt) return todoParseTime(msg.arriveAt);
+  var text=String(msg && msg.time || '').trim();
+  var now=new Date();
+  var hm=text.match(/^(\d{1,2}):(\d{2})$/);
+  if(hm) return new Date(now.getFullYear(),now.getMonth(),now.getDate(),Number(hm[1]),Number(hm[2]),0).getTime();
+  var yd=text.match(/^昨天\s*(\d{1,2}):(\d{2})$/);
+  if(yd) return new Date(now.getFullYear(),now.getMonth(),now.getDate()-1,Number(yd[1]),Number(yd[2]),0).getTime();
+  var md=text.match(/^(\d{1,2})\/(\d{1,2})(?:\s+(\d{1,2}):(\d{2}))?$/);
+  if(md) return new Date(now.getFullYear(),Number(md[1])-1,Number(md[2]),Number(md[3]||0),Number(md[4]||0),0).getTime();
+  return todoParseTime(text);
+}
+function homeTodoSortTime(todo){
+  if(todo && todo.demoAgeMinutes != null) return todoParseTime(apTimeFromNowMinutes(todo.demoAgeMinutes));
+  return todoParseTime(todo && (todo.arriveAt || todo.time));
+}
+const HOME_TODO_MESSAGE_TYPES = ['approval','export'];
+function homeUnreadMessageItems(){
+  if(typeof MSG_DATA === 'undefined') return [];
+  return MSG_DATA.filter(function(msg){
+    return msg && msg.status==='unread' && HOME_TODO_MESSAGE_TYPES.indexOf(msg.type)>=0;
+  }).map(function(msg){
+    return {kind:'message',message:msg,sortTime:homeMsgParseTime(msg)};
+  });
+}
+function homeTodoFeedItems(){
+  return homeApprovalTodoItems().map(function(todo){
+    return {kind:'approval',todo:todo,sortTime:homeTodoSortTime(todo)};
+  }).concat(homeUnreadMessageItems()).sort(function(a,b){
+    return (b.sortTime||0)-(a.sortTime||0);
+  });
+}
 function openHomeTodoItem(index){
-  var todo = homeTodoItems()[index];
+  var entry = _homeTodoFeedItems[index];
+  var todo = entry && entry.todo;
   if(!todo) return;
   var item = findHomeTodoApItem(todo);
   if(item && apIsTransferFlow(item)){
@@ -4913,7 +4954,8 @@ function openHomeTodoItem(index){
 }
 function openHomeTodoAction(index, action, event){
   if(event) event.stopPropagation();
-  var todo = homeTodoItems()[index];
+  var entry = _homeTodoFeedItems[index];
+  var todo = entry && entry.todo;
   if(!todo) return;
   if(!homeTodoCanOpen(todo)) return;
   var item = findHomeTodoApItem(todo) || {
@@ -4933,39 +4975,73 @@ function openHomeTodoAction(index, action, event){
   _apCtx = {tab:item.tab,status:item.status};
   apRunApprovalAction(action);
 }
+function openHomeTodoMessage(index,event){
+  if(event) event.stopPropagation();
+  var entry=_homeTodoFeedItems[index];
+  var msg=entry && entry.message;
+  if(!msg) return;
+  if(msg.action==='detail' || msg.action==='download'){
+    openMsgAction(msg.id);
+    return;
+  }
+  openMsgDetail(msg.id);
+}
+function renderHomeTodoApproval(entry,index){
+  var t=entry.todo;
+  var canOpen = homeTodoCanOpen(t);
+  var icon = TODO_FLOW_ICONS[t.flowKey] || TODO_FLOW_ICONS.org;
+  var subject = todoSubjectText(t);
+  var applicant = String(t.applicant || t.name || '').trim();
+  var avatar = todoFirstChar(applicant || t.initiator || t.name || '');
+  var tone = todoAvatarTone(applicant || t.initiator || t.name || '');
+  var timeSource = t.demoAgeMinutes != null ? apTimeFromNowMinutes(t.demoAgeMinutes) : (t.arriveAt||t.time);
+  var displayTime = apFormatCardTime(timeSource);
+  var clickAttr = canOpen ? ' onclick="openHomeTodoItem('+index+')" role="button"' : '';
+  var actionHtml = canOpen ? '<div class="ap2-actions">'+
+            '<button class="ap2-btn danger" onclick="openHomeTodoAction('+index+',\'disagree\',event)">不同意</button>'+
+            '<button class="ap2-btn primary" onclick="openHomeTodoAction('+index+',\'agree\',event)">同意</button>'+
+          '</div>' : '';
+  return '<div class="ap-card2 home-ap-card'+(canOpen?'':' no-open')+'"'+clickAttr+'>'+
+    '<div class="ap2-head"><span class="ap2-type '+t.flowKey+'">'+icon+t.flowText+'</span><span class="ap2-st pd">审批中</span></div>'+
+    '<div class="ap2-content">'+
+      '<div class="ap2-avatar" style="background:'+tone.bg+';color:'+tone.fg+'">'+avatar+'</div>'+
+      '<div class="ap2-main">'+
+        '<div class="ap2-subject">'+subject+'</div>'+
+        '<div class="ap2-bot"><span class="ap2-tm">'+displayTime+'</span>'+actionHtml+'</div>'+
+      '</div>'+
+    '</div></div>';
+}
+function renderHomeTodoMessage(entry,index){
+  var m=entry.message;
+  var actionText=m.action==='download'?'下载':(m.action==='detail'?'查看详情':'查看');
+  var actionCls=m.action==='download'?'warn':'primary';
+  var actionHtml='<div class="ap2-actions"><button class="ap2-btn '+actionCls+'" onclick="openHomeTodoMessage('+index+',event)">'+actionText+'</button></div>';
+  var headline=getMsgHeadline(m);
+  var icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg>';
+  return '<div class="ap-card2 home-msg-card" onclick="openHomeTodoMessage('+index+',event)" role="button">'+
+    '<div class="ap2-head"><span class="ap2-type message">'+icon+msgTypeLabel(m.type)+'</span><span class="ap2-st unread">未读</span></div>'+
+    '<div class="ap2-content">'+
+      '<div class="ap2-avatar">'+icon+'</div>'+
+      '<div class="ap2-main">'+
+        '<div class="ap2-subject">'+headline+'</div>'+
+        '<div class="ap2-bot"><span class="ap2-tm">'+m.time+'</span>'+actionHtml+'</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
 function renderTodo(){
   var box=document.getElementById('home-todo');
   var section=document.getElementById('home-todo-section');
   if(!box) return;
-  var items=homeTodoItems();
+  var items=homeTodoFeedItems();
+  _homeTodoFeedItems=items.slice(0,2);
   if(section) section.classList.toggle('td-hidden',items.length===0);
   if(!items.length){
     box.innerHTML='';
     return;
   }
-  box.innerHTML = items.slice(0,2).map(function(t,index){
-    var canOpen = homeTodoCanOpen(t);
-    var icon = TODO_FLOW_ICONS[t.flowKey] || TODO_FLOW_ICONS.org;
-    var subject = todoSubjectText(t);
-    var applicant = String(t.applicant || t.name || '').trim();
-    var avatar = todoFirstChar(applicant || t.initiator || t.name || '');
-    var tone = todoAvatarTone(applicant || t.initiator || t.name || '');
-    var timeSource = t.demoAgeMinutes != null ? apTimeFromNowMinutes(t.demoAgeMinutes) : (t.arriveAt||t.time);
-    var displayTime = apFormatCardTime(timeSource);
-    var clickAttr = canOpen ? ' onclick="openHomeTodoItem('+index+')" role="button"' : '';
-    var actionHtml = canOpen ? '<div class="ap2-actions">'+
-              '<button class="ap2-btn danger" onclick="openHomeTodoAction('+index+',\'disagree\',event)">不同意</button>'+
-              '<button class="ap2-btn primary" onclick="openHomeTodoAction('+index+',\'agree\',event)">同意</button>'+
-            '</div>' : '';
-    return '<div class="ap-card2 home-ap-card'+(canOpen?'':' no-open')+'"'+clickAttr+'>'+
-      '<div class="ap2-head"><span class="ap2-type '+t.flowKey+'">'+icon+t.flowText+'</span><span class="ap2-st pd">审批中</span></div>'+
-      '<div class="ap2-content">'+
-        '<div class="ap2-avatar" style="background:'+tone.bg+';color:'+tone.fg+'">'+avatar+'</div>'+
-        '<div class="ap2-main">'+
-          '<div class="ap2-subject">'+subject+'</div>'+
-          '<div class="ap2-bot"><span class="ap2-tm">'+displayTime+'</span>'+actionHtml+'</div>'+
-        '</div>'+
-      '</div></div>';
+  box.innerHTML = _homeTodoFeedItems.map(function(entry,index){
+    return entry.kind==='message' ? renderHomeTodoMessage(entry,index) : renderHomeTodoApproval(entry,index);
   }).join('');
   var badge=document.getElementById('todo-badge');
   if(badge)badge.textContent=items.length>99?'99+':String(items.length);
@@ -5825,10 +5901,10 @@ var MSG_TYPES=[
   {key:'activity',label:'活动通知'}
 ];
 var MSG_DATA=[
-  {id:'m1',status:'unread',type:'approval',title:'李华的调动申请待审批',time:'09:24',desc:'申请已流转至你当前审批节点，请及时查看处理。',detail:'申请人：李华；流程类型：调动申请；当前节点：调出部门直接上级。请在审批详情中查看申请信息、附件与流程记录。',action:'detail',detailPage:'dt-ap-transfer'},
+  {id:'m1',status:'unread',type:'approval',title:'李华的调动申请待审批',time:'09:24',desc:'申请已流转至你当前审批节点，请及时查看处理。',detail:'申请人：李华；流程类型：调动申请；当前节点：调出部门直接上级。请在审批详情中查看申请信息、附件与流程记录。',action:'detail',detailPage:'dt-ap-transfer',demoAgeMinutes:45},
   {id:'m2',status:'unread',type:'system',title:'合同模板已更新',time:'08:55',desc:'您好，合同模板数据已更新，请前往查看。',detail:'您好，合同模板数据已更新，请前往查看。新版模板已同步至合同中心，新增电子签署字段与版本说明。',action:'none'},
   {id:'m3',status:'unread',type:'export',title:'员工花名册导出完成',time:'08:12',desc:'6月员工花名册已生成，可下载到手机本地。',detail:'导出文件：员工花名册_2026-06.xlsx。系统已完成导出，请点击下载按钮保存到本地。',action:'download',fileName:'员工花名册_2026-06.csv',fileMime:'text/csv;charset=utf-8',fileContent:'\ufeff姓名,部门,岗位\n陈思远,产品设计部,高级设计师\n刘观耀,人力资源部,产品经理\n李华,产品组,产品经理'},
-  {id:'m4',status:'unread',type:'approval',title:'周明的请假申请待审批',time:'昨天 18:30',desc:'审批已到达你的处理节点，等待你查看详情。',detail:'申请人：周明；流程类型：请假申请；请假时间：2026-06-29 至 2026-06-30。请前往审批详情查看原因与流程记录。',action:'detail',detailPage:'dt-ap-detail'},
+  {id:'m4',status:'unread',type:'approval',title:'周明的调动申请待审批',time:'昨天 18:30',desc:'审批已到达你的处理节点，等待你查看详情。',detail:'申请人：周明；流程类型：调动申请；当前节点：调出部门直接上级。请前往审批详情查看调动信息、附件与流程记录。',action:'detail',detailPage:'dt-ap-transfer'},
   {id:'m5',status:'read',type:'system',title:'合同模板数据已更新',time:'6/26',desc:'您好，合同模板数据已更新，请前往查看。',detail:'您好，合同模板数据已更新，请前往查看。更新内容包含试用期条款补充和模板编号规范化。',action:'none'},
   {id:'m6',status:'read',type:'approval',title:'张琳的调动申请已处理',time:'6/25',desc:'流程记录已同步，可点击查看审批详情。',detail:'申请人：张琳；流程类型：调动申请；处理结果：已完成当前节点审批。你可以进入流程审批详情查看完整记录。',action:'detail',detailPage:'dt-ap-transfer'},
   {id:'m7',status:'read',type:'export',title:'工资确认单导出完成',time:'6/24',desc:'工资确认单已生成，可下载到手机本地。',detail:'导出文件：工资确认单_2026-06.pdf。点击下载后将保存至手机本地文件目录。',action:'download',fileName:'工资确认单_2026-06.txt',fileMime:'text/plain;charset=utf-8',fileContent:'工资确认单 2026-06\n员工：陈思远\n状态：已确认'},
@@ -5902,10 +5978,12 @@ function renderMsgLists(){
   var readCount=MSG_DATA.filter(function(m){return m.status==='read'}).length;
   var tabUnread=document.getElementById('msg-tab-unread');
   var tabRead=document.getElementById('msg-tab-read');
-  var homeBadge=document.querySelector('.home-notify-badge');
   if(tabUnread) tabUnread.textContent='未读 '+formatMsgCount(unreadCount);
   if(tabRead) tabRead.textContent='已读 '+formatMsgCount(readCount);
-  if(homeBadge) homeBadge.textContent=formatMsgCount(unreadCount);
+  if(typeof renderTodo === 'function') renderTodo();
+  try{
+    if(typeof AP_DATA !== 'undefined' && typeof renderApList === 'function') renderApList();
+  }catch(e){}
   if(unread) unread.innerHTML=renderMsgCards('unread');
   if(read) read.innerHTML=renderMsgCards('read');
 }
@@ -7159,6 +7237,7 @@ function apSetPickError(fieldId,msg){
 }
 function completeApTodoAction(msg){
   if(_apActionItem){
+    var originalTab = _apActionItem.tab;
     if(msg && msg.indexOf('不同意') >= 0){
       _apActionItem.status = 'btg';
       _apActionItem.statusLabel = '不同意';
@@ -7179,6 +7258,7 @@ function completeApTodoAction(msg){
       _apActionItem.statusLabel = '同意';
     }
     _apActionItem.time = trNowMinuteText();
+    if(originalTab === 0) _apActionItem.tab = 1;
   }
   var targetTab = _apActionItem ? _apActionItem.tab : 0;
   closeDetail('dt-ap-transfer');
@@ -8562,7 +8642,9 @@ var _apRenderedItems = [];
 var _apActionItem = null;
 
 function openApListItem(index){
-  var d = _apRenderedItems[index];
+  var entry = _apRenderedItems[index];
+  if(entry && entry.kind === 'message') return openApMessageEntry(index);
+  var d = entry && entry.item ? entry.item : entry;
   if(!d) return;
   if(!apIsTransferFlow(d)) return;
   var tab = d.tab;
@@ -8572,7 +8654,9 @@ function openApListItem(index){
 
 function openApListItemAction(index, action, event){
   if(event) event.stopPropagation();
-  var d = _apRenderedItems[index];
+  var entry = _apRenderedItems[index];
+  if(entry && entry.kind === 'message') return openApMessageEntry(index, event);
+  var d = entry && entry.item ? entry.item : entry;
   if(!d) return;
   if(!apIsTransferFlow(d)) return;
   _apActionItem = d;
@@ -8583,6 +8667,23 @@ function openApListItemAction(index, action, event){
     apRunApprovalAction(action);
   }else{
     openApListItem(index);
+  }
+}
+
+function openApMessageEntry(index,event){
+  if(event) event.stopPropagation();
+  var entry = _apRenderedItems[index];
+  var msg = entry && entry.kind === 'message' ? entry.message : null;
+  if(!msg) return;
+  if(msg.type === 'export'){
+    if(event && event.target && event.target.closest && !event.target.closest('.msg-action-btn')) return;
+    openMsgAction(msg.id);
+    renderApList();
+    return;
+  }
+  if(msg.type === 'approval'){
+    openMsgDetail(msg.id);
+    renderApList();
   }
 }
 
@@ -8760,6 +8861,8 @@ function getApFlowOptions(){
   AP_FLOW_CATEGORIES.forEach(function(cat){
     opts.push({key:cat.key,label:cat.label});
   });
+  opts.push({key:'approval',label:'审批通知'});
+  opts.push({key:'export',label:'导出通知'});
   return opts;
 }
 
@@ -8853,6 +8956,12 @@ function openApTimeSheet(){
   }
 }
 
+function getApFlowPlaceholder(){
+  if(apActiveTab === 0) return '待办类型';
+  if(apActiveTab === 1) return '已办类型';
+  return '流程类型';
+}
+
 function updateApFilterUI(){
   var flowChip = document.getElementById('apFlowChip');
   var flowLabel = document.getElementById('apFlowLabel');
@@ -8865,12 +8974,12 @@ function updateApFilterUI(){
   if(apFilterFlow){
     flowChip.classList.add('active');
     var flowName = apFilterFlow;
-    var catMatch = AP_FLOW_CATEGORIES.find(function(c){return c.key===apFilterFlow;});
+    var catMatch = getApFlowOptions().find(function(c){return c.key===apFilterFlow;});
     if(catMatch){flowName = catMatch.label;}
     flowLabel.textContent = flowName;
   }else{
     flowChip.classList.remove('active');
-    flowLabel.textContent = '流程类型';
+    flowLabel.textContent = getApFlowPlaceholder();
   }
 
   // 时间排序
@@ -8897,6 +9006,95 @@ function updateApFilterUI(){
 
 }
 
+function apMessageEntriesForTab(tab){
+  if(tab !== 0 && tab !== 1) return [];
+  if(typeof MSG_DATA === 'undefined') return [];
+  var status = tab === 0 ? 'unread' : 'read';
+  return MSG_DATA.filter(function(msg){
+    return msg && msg.status === status && HOME_TODO_MESSAGE_TYPES.indexOf(msg.type) >= 0;
+  }).map(function(msg){
+    return {
+      kind:'message',
+      message:msg,
+      type:msg.type,
+      typeLabel:msgTypeLabel(msg.type),
+      status:msg.status,
+      statusLabel:msg.status === 'unread' ? '未读' : '已读',
+      time:msg.arriveAt || msg.time || '',
+      sortTime:homeMsgParseTime(msg),
+      searchText:[msg.title,msg.desc,msg.detail,msgTypeLabel(msg.type),msg.time].join(' ')
+    };
+  });
+}
+function apProcessEntriesForTab(tab){
+  return AP_DATA.filter(function(d){return d.tab === tab;}).map(function(item){
+    return {
+      kind:'process',
+      item:item,
+      type:item.type,
+      typeLabel:item.typeLabel,
+      status:item.status,
+      statusLabel:item.statusLabel,
+      time:item.time,
+      sortTime:todoParseTime(item.time),
+      searchText:[item.name,item.initiator,item.subject,item.typeLabel,item.personInfo].join(' ')
+    };
+  });
+}
+function apEntriesForActiveTab(){
+  return apProcessEntriesForTab(apActiveTab).concat(apMessageEntriesForTab(apActiveTab));
+}
+function apEntryTimeCompare(a,b){
+  var at=a && a.sortTime ? a.sortTime : todoParseTime(a && a.time);
+  var bt=b && b.sortTime ? b.sortTime : todoParseTime(b && b.time);
+  if(at !== bt) return apFilterTimeOrder==='desc' ? bt-at : at-bt;
+  return String(a && a.time || '').localeCompare(String(b && b.time || '')) * (apFilterTimeOrder==='desc' ? -1 : 1);
+}
+function apMessageCardHtml(entry,index){
+  var msg=entry.message;
+  var actionText=msg.action==='download'?'下载':(msg.action==='detail'?'查看详情':'查看');
+  var actionCls=msg.action==='download'?'warn':'primary';
+  var actionHtml='<div class="ap2-actions"><button class="ap2-btn '+actionCls+'" onclick="openApMessageEntry('+index+',event)">'+actionText+'</button></div>';
+  var headline=getMsgHeadline(msg);
+  var statusCls=msg.status==='unread'?'unread':'read';
+  var statusText=msg.status==='unread'?'未读':'已读';
+  var icon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M13.73 21a2 2 0 01-3.46 0"></path></svg>';
+  return '<div class="ap-card2 home-msg-card" onclick="openApMessageEntry('+index+',event)" role="button">'+
+    '<div class="ap2-head"><span class="ap2-type message">'+icon+msgTypeLabel(msg.type)+'</span><span class="ap2-st '+statusCls+'">'+statusText+'</span></div>'+
+    '<div class="ap2-content">'+
+      '<div class="ap2-avatar">'+icon+'</div>'+
+      '<div class="ap2-main">'+
+        '<div class="ap2-subject">'+headline+'</div>'+
+        '<div class="ap2-bot"><span class="ap2-tm">'+msg.time+'</span>'+actionHtml+'</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+function apProcessCardHtml(entry,index){
+  var d=entry.item;
+  var actions = getApCardActions(d);
+  var canOpen = apIsTransferFlow(d);
+  var click = canOpen ? 'onclick="openApListItem('+index+')" role="button"' : '';
+  var icon = TODO_FLOW_ICONS[d.type] || TODO_FLOW_ICONS.org;
+  var subject = apCardSubjectText(d);
+  var applicant = String(d.name || d.applicant || '').trim();
+  var avatar = todoFirstChar(applicant || d.initiator || d.name || '');
+  var tone = todoAvatarTone(applicant || d.initiator || d.name || '');
+  var displayTime = apCardTimeText(d);
+  var actionHtml = actions.length ? '<div class="ap2-actions">'+actions.map(function(a){
+    return '<button class="ap2-btn '+a.cls+'" onclick="openApListItemAction('+index+',\''+a.key+'\',event)">'+a.label+'</button>';
+  }).join('')+'</div>' : '';
+  return '<div class="ap-card2'+(canOpen?'':' no-open')+'" '+click+'>'+
+    '<div class="ap2-head"><span class="ap2-type '+d.type+'">'+icon+d.typeLabel+'</span><span class="ap2-st '+d.status+'">'+d.statusLabel+'</span></div>'+
+    '<div class="ap2-content">'+
+      '<div class="ap2-avatar" style="background:'+tone.bg+';color:'+tone.fg+'">'+avatar+'</div>'+
+      '<div class="ap2-main">'+
+        '<div class="ap2-subject">'+subject+'</div>'+
+        '<div class="ap2-bot"><span class="ap2-tm">'+displayTime+'</span>'+actionHtml+'</div>'+
+      '</div>'+
+    '</div></div>';
+}
+
 function renderApList(){
   apLoadActiveFilterState();
   var searchQ = (document.getElementById('apSearchInput').value || '').toLowerCase();
@@ -8906,70 +9104,43 @@ function renderApList(){
   var container = document.getElementById(listIds[apActiveTab]);
   if(!container) return;
 
-  // 筛选
-  var items = AP_DATA.filter(function(d){return d.tab === apActiveTab;});
+  var entries = apEntriesForActiveTab();
 
   // 搜索
   if(searchQ){
-    items = items.filter(function(d){
-      return String(d.name||'').toLowerCase().indexOf(searchQ)>=0 ||
-        String(d.initiator||'').toLowerCase().indexOf(searchQ)>=0 ||
-        String(d.subject||'').toLowerCase().indexOf(searchQ)>=0 ||
-        String(d.typeLabel||'').toLowerCase().indexOf(searchQ)>=0;
+    entries = entries.filter(function(entry){
+      return String(entry.searchText||'').toLowerCase().indexOf(searchQ)>=0;
     });
   }
 
   // 流程类型筛选
   if(apFilterFlow){
-    items = items.filter(function(d){return d.type===apFilterFlow;});
+    entries = entries.filter(function(entry){return entry.type===apFilterFlow;});
   }
 
   // 流程状态筛选
   if(apFilterStatus){
-    items = items.filter(function(d){return d.status===apFilterStatus;});
+    entries = entries.filter(function(entry){return entry.kind === 'process' && entry.status===apFilterStatus;});
   }
 
   // 时间排序
-  items.sort(function(a,b){
-    var cmp = a.time.localeCompare(b.time);
-    return apFilterTimeOrder==='desc' ? -cmp : cmp;
-  });
+  entries.sort(apEntryTimeCompare);
 
   // 更新待办角标
   var badgeEl = document.getElementById('ap-todo-count');
-  if(badgeEl && apActiveTab===0){
-    badgeEl.textContent = items.length;
+  if(badgeEl){
+    badgeEl.textContent = apProcessEntriesForTab(0).length + apMessageEntriesForTab(0).length;
   }
 
-  if(items.length===0){
+  if(entries.length===0){
     _apRenderedItems = [];
     container.innerHTML = '<div class="ap-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg><div class="em-tt">暂无审批记录</div><div class="em-ds">'+(searchQ||apFilterFlow||apFilterStatus?'可以尝试调整筛选条件':'暂无相关审批')+'</div></div>';
     return;
   }
 
-  _apRenderedItems = items;
-  container.innerHTML = items.map(function(d, index){
-    var actions = getApCardActions(d);
-    var canOpen = apIsTransferFlow(d);
-    var click = canOpen ? 'onclick="openApListItem('+index+')" role="button"' : '';
-    var icon = TODO_FLOW_ICONS[d.type] || TODO_FLOW_ICONS.org;
-    var subject = apCardSubjectText(d);
-    var applicant = String(d.name || d.applicant || '').trim();
-    var avatar = todoFirstChar(applicant || d.initiator || d.name || '');
-    var tone = todoAvatarTone(applicant || d.initiator || d.name || '');
-    var displayTime = apCardTimeText(d);
-    var actionHtml = actions.length ? '<div class="ap2-actions">'+actions.map(function(a){
-      return '<button class="ap2-btn '+a.cls+'" onclick="openApListItemAction('+index+',\''+a.key+'\',event)">'+a.label+'</button>';
-    }).join('')+'</div>' : '';
-    return '<div class="ap-card2'+(canOpen?'':' no-open')+'" '+click+'>'+
-      '<div class="ap2-head"><span class="ap2-type '+d.type+'">'+icon+d.typeLabel+'</span><span class="ap2-st '+d.status+'">'+d.statusLabel+'</span></div>'+
-      '<div class="ap2-content">'+
-        '<div class="ap2-avatar" style="background:'+tone.bg+';color:'+tone.fg+'">'+avatar+'</div>'+
-        '<div class="ap2-main">'+
-          '<div class="ap2-subject">'+subject+'</div>'+
-          '<div class="ap2-bot"><span class="ap2-tm">'+displayTime+'</span>'+actionHtml+'</div>'+
-        '</div>'+
-      '</div></div>';
+  _apRenderedItems = entries;
+  container.innerHTML = entries.map(function(entry, index){
+    return entry.kind === 'message' ? apMessageCardHtml(entry,index) : apProcessCardHtml(entry,index);
   }).join('');
 }
 
