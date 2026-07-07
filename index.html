@@ -49,6 +49,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .tab-bar .tb-it.act svg{color:var(--pr)}
 .tab-bar .tb-it.act span{color:var(--pr);font-weight:600}
 .tab-bar .badge{position:absolute;top:4px;right:50%;margin-right:-16px;min-width:16px;height:16px;border-radius:8px;background:var(--ro);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.tab-bar .badge.is-hidden{display:none}
 
 /* ── AI Robot Floating Button ── */
 .ai-fab{display:none!important}
@@ -624,6 +625,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .ap-seg .asg.act{color:var(--pr);font-weight:700}
 .ap-seg .asg.act::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:24px;height:3px;border-radius:2px;background:var(--pr)}
 .ap-seg .asg .sg-badge{position:relative;top:-6px;left:3px;min-width:16px;height:16px;border-radius:8px;background:var(--ro);color:#fff;font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;vertical-align:middle}
+.ap-seg .asg .sg-badge.is-hidden{display:none}
 
 /* ── Approval Detail ── */
 .ap-dt-info{background:var(--sf);border-radius:var(--r2);padding:14px;margin-bottom:10px;border:1px solid var(--bd);box-shadow:var(--sx)}
@@ -2248,6 +2250,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 /* ── 首页快捷「+」添加按钮 ── */
 /* ── 首页待办数量角标 ── */
 .td-badge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;border-radius:9px;background:var(--ro);color:#fff;font-size:10px;font-weight:700;padding:0 5px;line-height:1}
+.td-badge.is-hidden{display:none}
 .todo-card{padding:12px!important}
 .todo-card .mod-hd{margin-bottom:12px!important}
 .todo-list{display:flex;flex-direction:column;gap:9px}
@@ -3051,7 +3054,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
 
       <!-- Segmented -->
       <div class="ap-seg ani ani-d2" id="ap-seg">
-        <div class="asg act" data-ap-tab="0" onclick="switchApTab(0)">待处理的<span class="sg-badge" id="ap-todo-count">4</span></div>
+        <div class="asg act" data-ap-tab="0" onclick="switchApTab(0)">待处理的<span class="sg-badge" id="ap-todo-count">10</span></div>
         <div class="asg" data-ap-tab="1" onclick="switchApTab(1)">已处理的</div>
         <div class="asg" data-ap-tab="3" onclick="switchApTab(3)">我发起的</div>
         <div class="asg" data-ap-tab="2" onclick="switchApTab(2)">抄送我的</div>
@@ -3306,12 +3309,11 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
             <div class="pf-info">
               <div class="pf-nm">陈思远</div>
               <div class="pf-id">工号 9045</div>
-              <div class="pf-dept">产品设计部 · 高级设计师</div>
+              <div class="pf-dept">高级设计师</div>
             </div>
           </div>
           <div class="cd">
             <div class="fm-row"><span class="fm-lb">直接上级</span><span class="fm-vl">刘观耀</span></div>
-            <div class="fm-row"><span class="fm-lb">部门</span><span class="fm-vl">产品设计部</span></div>
             <div class="fm-row"><span class="fm-lb">入职日期</span><span class="fm-vl" style="font-family:var(--m)">2023-03-15</span></div>
             <div class="fm-row" onclick="openLanguageSettings()" style="cursor:pointer"><span class="fm-lb">多语言设置</span><span class="fm-vl" id="profileLanguageVal">简体中文</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span></div>
           </div>
@@ -4177,7 +4179,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
         <div class="drawer-avatar">陈</div>
         <div>
           <div class="drawer-name">陈思远</div>
-          <div class="drawer-meta">工号 9045<br>产品设计部 · 高级设计师</div>
+          <div class="drawer-meta">工号 9045<br>高级设计师</div>
         </div>
       </div>
       <div class="drawer-list">
@@ -4209,7 +4211,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
     <div class="tb-it" data-tab="2">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><path d="M22 4L12 14.01l-3-3"></path></svg>
       <span>审批</span>
-      <span class="badge">5</span>
+      <span class="badge" id="approval-tab-badge">10</span>
     </div>
   </div>
 
@@ -5029,13 +5031,28 @@ function renderHomeTodoMessage(entry,index){
     '</div>'+
   '</div>';
 }
+function apSafePendingTotal(fallbackCount){
+  try{
+    if(typeof apGetPendingTotal === 'function') return apGetPendingTotal();
+  }catch(e){}
+  return fallbackCount || 0;
+}
+function syncHomeTodoBadge(fallbackCount){
+  var badge=document.getElementById('todo-badge');
+  if(!badge) return;
+  var total=apSafePendingTotal(fallbackCount);
+  badge.textContent=formatMsgCount(total);
+  badge.classList.toggle('is-hidden',total===0);
+}
 function renderTodo(){
   var box=document.getElementById('home-todo');
   var section=document.getElementById('home-todo-section');
   if(!box) return;
   var items=homeTodoFeedItems();
+  var total=apSafePendingTotal(items.length);
   _homeTodoFeedItems=items.slice(0,2);
-  if(section) section.classList.toggle('td-hidden',items.length===0);
+  if(section) section.classList.toggle('td-hidden',total===0);
+  syncHomeTodoBadge(items.length);
   if(!items.length){
     box.innerHTML='';
     return;
@@ -5043,8 +5060,6 @@ function renderTodo(){
   box.innerHTML = _homeTodoFeedItems.map(function(entry,index){
     return entry.kind==='message' ? renderHomeTodoMessage(entry,index) : renderHomeTodoApproval(entry,index);
   }).join('');
-  var badge=document.getElementById('todo-badge');
-  if(badge)badge.textContent=items.length>99?'99+':String(items.length);
 }
 
 /* ═══ 我的申请（首页 + 详情页）═══ */
@@ -9041,6 +9056,19 @@ function apProcessEntriesForTab(tab){
     };
   });
 }
+function apGetPendingTotal(){
+  return apProcessEntriesForTab(0).length + apMessageEntriesForTab(0).length;
+}
+function apSyncPendingBadges(){
+  var total = apGetPendingTotal();
+  var text = formatMsgCount(total);
+  ['ap-todo-count','approval-tab-badge','todo-badge'].forEach(function(id){
+    var badge = document.getElementById(id);
+    if(!badge) return;
+    badge.textContent = text;
+    badge.classList.toggle('is-hidden', total === 0);
+  });
+}
 function apEntriesForActiveTab(){
   return apProcessEntriesForTab(apActiveTab).concat(apMessageEntriesForTab(apActiveTab));
 }
@@ -9127,10 +9155,7 @@ function renderApList(){
   entries.sort(apEntryTimeCompare);
 
   // 更新待办角标
-  var badgeEl = document.getElementById('ap-todo-count');
-  if(badgeEl){
-    badgeEl.textContent = apProcessEntriesForTab(0).length + apMessageEntriesForTab(0).length;
-  }
+  apSyncPendingBadges();
 
   if(entries.length===0){
     _apRenderedItems = [];
@@ -11286,6 +11311,8 @@ Object.assign(window,{
   openMyApplications,renderHomeMyApplications,renderMyApplications,switchMyAppTab,
   handleMyAppSearch,openMyAppFilter,handleMyAppScroll,openMyAppItem,openMyAppAction
 });
+
+try{apSyncPendingBadges();}catch(e){}
 
 document.addEventListener('click',function(e){
   if(e.target && e.target.closest('.tr-date-confirm')){
