@@ -238,6 +238,8 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .salary-notice-action svg{width:13px;height:13px}
 #dt-salary .dt-body{padding:16px 16px 82px;background:linear-gradient(180deg,#F7FAFC 0%,var(--bg) 160px)}
 #dt-salary .perf-bottom{grid-template-columns:1fr}
+#dt-salary.ap-handled-readonly .dt-body{padding-bottom:16px}
+#dt-salary.ap-handled-readonly .perf-bottom{display:none}
 #dt-salary .sec-t{margin-top:0;margin-bottom:10px;color:var(--c7);font-size:14px;font-weight:800;letter-spacing:0}
 .salary-hero{position:relative;min-height:136px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#047857 0%,var(--em) 54%,#34D399 100%);border-radius:22px;padding:18px 16px;box-shadow:0 10px 24px rgba(16,185,129,.22);color:#fff;margin:0 0 18px;text-align:center;overflow:hidden}
 .salary-hero::before{content:'';position:absolute;width:132px;height:132px;border-radius:50%;background:rgba(255,255,255,.06);left:-54px;bottom:-78px}
@@ -816,6 +818,11 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .ap-card2.transfer-flow .ap2-handler{height:16px;line-height:1.2}
 .ap-card2.transfer-flow .ap2-bot{margin-top:0}
 .ap-card2.transfer-flow .ap2-actions{transform:translateY(-3px)}
+.ap2-handler{height:auto;min-height:22px;gap:6px;align-items:center;line-height:1}
+.ap2-handler-label{display:inline-flex;align-items:center;min-height:22px;color:var(--c5);font-size:10px;font-weight:700}
+.ap2-handler-name{display:inline-flex;align-items:center;max-width:100%;min-height:22px;padding:0 9px;border-radius:8px;background:var(--pr50);color:var(--pr);font-size:10px;font-weight:850;line-height:1}
+.ap-card2.leave-flow .ap2-handler,.ap-card2.transfer-flow .ap2-handler{height:auto;min-height:22px;line-height:1}
+.ap-card2.leave-flow .ap2-handler-name,.ap-card2.transfer-flow .ap2-handler-name{min-height:22px;font-size:10px}
 /* ── 首页我的申请 ── */
 .my-app-card{padding:12px!important}
 .my-app-card .mod-hd{margin-bottom:10px!important}
@@ -884,6 +891,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 #dt-attend-exception .dt-hd{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(226,232,240,.72);box-shadow:none}
 #dt-attend-exception .dt-title{font-size:17px;font-weight:700;color:var(--c9)}
 #dt-attend-exception .dt-body{height:calc(100% - 52px);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--bg);padding:12px 16px 116px}
+#dt-attend-exception.ap-handled-readonly .dt-body{padding-bottom:16px}
 #dt-attend-exception .dt-body::-webkit-scrollbar{display:none}
 .ae-sheet{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);box-shadow:var(--sx);overflow:hidden;margin-bottom:10px}
 .ae-sheet+.ae-sheet{margin-top:0}
@@ -904,6 +912,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .ae-punch-row .ae-muted{color:var(--c4)}
 .ae-abnormal-tag{position:absolute;top:12px;right:12px;min-width:46px;height:22px;padding:0 10px;border-radius:999px;background:var(--ro50);color:var(--ro);font-size:11px;font-weight:700;line-height:22px;text-align:center}
 .ae-actions{position:absolute;left:0;right:0;bottom:0;z-index:36;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(226,232,240,.86);box-shadow:0 -6px 18px rgba(15,23,42,.035)}
+#dt-attend-exception.ap-handled-readonly .ae-actions{display:none}
 .ae-action{height:48px;border:1px solid var(--c2);border-radius:12px;background:var(--sf);color:var(--c7);font-family:var(--f);font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:transform .12s,background .12s,border-color .12s,color .12s;white-space:nowrap;min-width:0}
 .ae-action svg{width:16px;height:16px;stroke-width:2.4;flex:0 0 16px}
 .ae-action:active{transform:none}
@@ -1084,17 +1093,21 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .leave-policy-card.collapsed .leave-policy-ic{transform:rotate(180deg)}
 .leave-policy-card.collapsed .leave-policy-body{display:none}
 .leave-apply-form{background:var(--sf);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--sx);overflow:hidden}
-.leave-apply-field{width:100%;min-height:44px;padding:12px 14px;border:0;border-bottom:1px solid var(--dv);display:flex;align-items:center;gap:10px;text-align:left;background:var(--sf);font-family:var(--f)}
+.leave-apply-field{width:100%;min-height:44px;padding:12px 14px;border:0;border-bottom:1px solid var(--dv);display:flex;align-items:center;gap:2px;text-align:left;background:var(--sf);font-family:var(--f)}
 .leave-apply-field:last-of-type{border-bottom:1px solid var(--dv)}
 .leave-apply-field:active{background:var(--s2)}
+.leave-apply-field.static-readonly{cursor:default}
+.leave-apply-field.static-readonly:active{background:var(--sf);transform:none}
+.leave-apply-field.static-readonly .leave-apply-label{color:var(--c4);font-weight:600}
+.leave-apply-field.static-readonly .leave-apply-value{color:var(--c4);font-size:11px;font-weight:600}
 .leave-apply-main{flex:1;min-width:0;display:flex;align-items:center;gap:12px}
 .leave-apply-label{display:flex;align-items:center;flex:0 0 92px;min-width:0;font-size:11px;line-height:1.35;font-weight:600;color:var(--c5);white-space:nowrap}
 .leave-apply-label .req{width:8px;flex:0 0 8px;margin-right:1px;color:var(--ro);font-size:12px;font-weight:800}
 .leave-apply-label:not(:has(.req))::before{content:'';width:9px;flex:0 0 9px}
 .leave-apply-value{display:block;flex:1;min-width:0;margin-top:0;text-align:right;font-family:var(--f);font-size:12px;line-height:1.45;font-weight:600;color:var(--c9);font-variant-numeric:tabular-nums;word-break:break-word}
 .leave-apply-value.placeholder,.leave-apply-value.readonly{color:var(--c4);font-weight:500}
-.leave-apply-chev{width:18px;height:18px;display:grid;place-items:center;color:var(--c4);flex:0 0 18px}
-.leave-apply-chev svg{width:16px;height:16px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.leave-apply-chev{width:14px;height:18px;display:grid;place-items:center;color:var(--c4);flex:0 0 14px;margin-left:2px}
+.leave-apply-chev svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .leave-apply-attach{padding:12px 14px 14px 23px;background:var(--sf)}
 .leave-apply-attach-title{font-size:12px;font-weight:800;color:var(--c7);margin-bottom:10px}
 .leave-apply-add{width:84px;height:72px;border:1px dashed var(--c2);border-radius:8px;background:var(--s2);color:var(--c3);display:grid;place-items:center}
@@ -1767,18 +1780,34 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 #dt-ap-detail.ap-leave-detail .sec-t{margin:16px 0 8px;color:#52657D;font-size:13px;font-weight:800;letter-spacing:0}
 #dt-ap-detail.ap-leave-detail .sec-t:first-of-type{margin-top:14px}
 .leave-ap-person-card{min-height:64px;padding:13px 14px;background:var(--sf);border:1px solid rgba(226,232,240,.72);border-radius:14px;box-shadow:0 2px 10px rgba(15,23,42,.045);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#dt-ap-detail.ap-leave-no-person .leave-ap-person-card{display:none}
+#dt-ap-detail.ap-leave-no-person .leave-ap-form-shell{margin-top:0}
 .leave-ap-person-main{min-width:0;flex:1;padding-top:1px}
 .leave-ap-person-name{font-size:14px;font-weight:900;color:var(--c9);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .leave-ap-person-meta{margin-top:5px;font-size:11px;font-weight:600;color:#7C8BA1;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .leave-ap-type{height:22px;min-width:34px;display:inline-flex;align-items:center;justify-content:center;padding:0 8px;border-radius:7px;background:var(--pr50);color:var(--pr);font-size:10px;font-weight:800;line-height:1;flex-shrink:0}
-.leave-ap-info-card,.leave-ap-reason-card,.leave-ap-record-panel{background:var(--sf);border:0;border-radius:14px;box-shadow:none;overflow:hidden}
+.leave-ap-info-card,.leave-ap-reason-card,.leave-ap-record-panel,.leave-ap-readonly-card{background:var(--sf);border:0;border-radius:14px;box-shadow:none;overflow:hidden}
+.leave-ap-readonly-card{margin-top:14px}
+.leave-ap-card-title{height:43px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid var(--dv);font-size:12px;font-weight:800;color:var(--c9);line-height:1.25}
 .leave-ap-info-card{padding:10px 14px}
-.leave-ap-info-row{min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--dv)}
+.leave-ap-readonly-card .leave-ap-info-row{padding:0 14px}
+.leave-ap-info-row{min-height:40px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--dv)}
 .leave-ap-info-row:last-child{border-bottom:0}
-.leave-ap-info-row span{font-size:12px;font-weight:600;color:#52657D;line-height:1.3}
+.leave-ap-info-row span{flex:0 0 76px;font-size:12px;font-weight:600;color:#52657D;line-height:1.3;white-space:nowrap}
 .leave-ap-info-row b{min-width:0;text-align:right;font-size:13px;font-weight:800;color:var(--c9);line-height:1.35;word-break:break-word}
 .leave-ap-info-row b[id*="Time"],.leave-ap-info-row b[id*="Start"],.leave-ap-info-row b[id*="End"],.leave-ap-info-row b[id*="Duration"],.leave-ap-info-row b[id*="Remain"]{font-family:var(--m)}
+.leave-ap-info-row.note-row{align-items:flex-start;padding-top:11px;padding-bottom:11px}
+.leave-ap-info-row.note-row b{font-family:var(--f);font-size:13px;font-weight:700;line-height:1.5;white-space:normal}
 .leave-ap-reason-card{padding:15px 14px;font-size:13px;font-weight:500;color:var(--c7);line-height:1.62;word-break:break-word}
+.leave-ap-form-shell{margin-top:14px}
+#dt-ap-detail .leave-ap-form-shell .leave-apply-form{border-radius:14px;box-shadow:var(--sx)}
+#dt-ap-detail .leave-ap-form-shell .leave-apply-field{cursor:default}
+#dt-ap-detail .leave-ap-form-shell .leave-apply-field:active{background:var(--sf)}
+#dt-ap-detail .leave-ap-form-shell .leave-reason-inline{pointer-events:none;color:var(--c9);opacity:1}
+#dt-ap-detail .leave-ap-form-shell .leave-attach-remove,
+#dt-ap-detail .leave-ap-form-shell .leave-apply-add{display:none}
+#dt-ap-detail .leave-ap-form-shell .leave-attach-list:empty::before{content:'无';display:block;text-align:right;font-size:12px;font-weight:600;color:var(--c4);line-height:1.45}
+#dt-ap-detail .leave-ap-form-shell .leave-apply-attach{padding-left:23px}
 #dt-ap-detail.ap-leave-detail .leave-ap-record-panel{margin-bottom:10px;border-radius:14px}
 #dt-ap-detail.ap-leave-detail .tr-ap-timeline{position:relative;padding:16px 14px 18px;background:var(--sf)}
 #dt-ap-detail.ap-leave-detail .tr-ap-tl-item{position:relative;display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;padding-bottom:22px}
@@ -2451,6 +2480,7 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 #dt-transfer.transfer-style .tr-date-row .tr-fm-lb:not(:has(.req))::before,
 #dt-ap-transfer.transfer-style .tr-fm-lb:not(:has(.req))::before,
 #dt-ap-transfer.transfer-style .tr-date-row .tr-fm-lb:not(:has(.req))::before{content:'';width:9px;flex:0 0 9px}
+#dt-transfer.transfer-style .tr-attach-title{padding-left:9px}
 #dt-transfer.transfer-style .tr-compare-title,
 #dt-ap-transfer.transfer-style .tr-compare-title{display:inline-flex;align-items:center}
 #dt-transfer.transfer-style .tr-compare-title .req,
@@ -2701,12 +2731,13 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 #dt-transfer.transfer-style .tr-bool-row .tr-seg-opt{height:32px;min-width:46px;border-radius:9px;padding:0 13px;background:var(--sf);color:var(--c7);font-size:12px;font-weight:700;box-shadow:inset 0 0 0 1px var(--c2),var(--sx);line-height:32px;cursor:pointer}
 #dt-transfer.transfer-style .tr-bool-row .tr-seg-opt.on{background:var(--pr);color:#fff;box-shadow:0 3px 10px rgba(37,99,235,.22)}
 #dt-transfer.transfer-style .tr-bool-row .tr-seg-opt:active{transform:scale(.95)}
-#trDateSheet.tr-sheet{top:auto!important;bottom:0!important;height:auto!important;min-height:0!important;max-height:238px!important;flex:0 0 auto!important;border-radius:20px 20px 0 0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;box-shadow:0 -8px 24px rgba(15,23,42,.08)!important}
+#trDateSheet.tr-sheet{top:auto!important;bottom:0!important;height:auto!important;min-height:0!important;max-height:258px!important;flex:0 0 auto!important;border-radius:20px 20px 0 0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;box-shadow:0 -8px 24px rgba(15,23,42,.08)!important}
 #trDateSheet.tr-sheet.show{transform:translateY(0)!important}
-#trDateSheet .tr-wheel-wrap{flex:0 0 162px!important;height:162px!important;padding:0 16px 8px!important;gap:8px!important;align-items:flex-start!important;background:var(--sf)!important;box-sizing:border-box!important}
-#trDateSheet .tr-wheel-col{height:150px!important;max-height:150px!important;overflow-y:auto!important;overscroll-behavior:contain!important;touch-action:pan-y!important}
+#trDateSheet .tr-wheel-wrap{flex:0 0 182px!important;height:182px!important;padding:0 16px 10px!important;gap:8px!important;align-items:flex-start!important;background:var(--sf)!important;box-sizing:border-box!important}
+#trDateSheet .tr-wheel-col{height:170px!important;max-height:170px!important;overflow-y:auto!important;overscroll-behavior:contain!important;touch-action:pan-y!important;scroll-padding:56px 0!important}
 #trDateSheet .tr-wheel-hd{height:26px!important;padding:5px 0 3px!important;background:var(--sf)!important}
-#trDateSheet .tr-wheel-opt{height:38px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0 2px!important}
+#trDateSheet .tr-wheel-opt{height:42px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0 2px!important;line-height:1!important;box-sizing:border-box!important;overflow:visible!important}
+#trDateSheet .tr-wheel-opt.sel{height:44px!important;font-size:16px!important;line-height:1!important}
 #dt-transfer.transfer-style .tr-fm-vl.readonly{background:transparent!important;border:0!important;padding:0!important}
 #dt-transfer.transfer-style .tr-fm-row .tr-fm-vl.tr-placeholder,
 #dt-transfer.transfer-style .tr-date-row .tr-fm-vl.tr-placeholder,
@@ -2761,9 +2792,88 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 #dt-ap-transfer.transfer-style:not(.ap-transfer-readonly):not(.ap-transfer-summary) .tr-compare-after .tr-fm-vl:not(.readonly):not(.tr-placeholder),
 #dt-ap-transfer.transfer-style:not(.ap-transfer-readonly):not(.ap-transfer-summary) .tr-input-field{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c9)!important}
 #dt-transfer.transfer-style .tr-fm-row:has(#trStepVal) .tr-fm-vl,
-#dt-ap-transfer.transfer-style .tr-fm-row:has(#trStepVal) .tr-fm-vl{display:inline-flex;justify-content:flex-end;align-items:center}
+#dt-ap-transfer.transfer-style .tr-fm-row:has(#trStepVal) .tr-fm-vl,
+#dt-ap-transfer.transfer-style .tr-fm-row:has(#trApStepVal) .tr-fm-vl{display:inline-flex;justify-content:flex-end;align-items:center}
 #dt-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after,
-#dt-ap-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after{content:'自动带出';margin-left:6px;padding:2px 6px;border-radius:999px;background:var(--pr50);color:var(--pr);font-size:9px;font-weight:700}
+#dt-ap-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after,
+#dt-ap-transfer.transfer-style #trApStepVal:not(.tr-placeholder)::after{content:'自动带出';margin-left:6px;padding:2px 6px;border-radius:999px;background:var(--pr50);color:var(--pr);font-size:9px;font-weight:700}
+#dt-transfer.transfer-style .tr-fm-row:has(.tr-fm-vl.readonly) .tr-fm-lb{color:var(--c4)!important;font-weight:600!important}
+#dt-transfer.transfer-style .tr-fm-row:has(.tr-fm-vl.readonly) .tr-fm-vl.readonly:not(.tr-placeholder){color:var(--c5)!important;font-weight:500!important}
+#dt-transfer.transfer-style #trDeptFullVal.readonly:not(.tr-placeholder){color:var(--c5)!important;font-weight:500!important}
+#dt-transfer.transfer-style .tr-fm-row:has(.tr-fm-vl.readonly) .tr-fm-lb,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-fm-row:has(.tr-fm-vl.readonly) .tr-fm-lb{color:var(--c4)!important;font-weight:600!important}
+#dt-transfer.transfer-style .tr-fm-row:has(.tr-fm-vl.readonly) .tr-fm-vl.readonly:not(.tr-placeholder),
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-fm-row:has(.tr-fm-vl.readonly) .tr-fm-vl.readonly:not(.tr-placeholder){color:var(--c5)!important;font-weight:500!important}
+#dt-transfer.transfer-style #trDeptFullVal.readonly:not(.tr-placeholder),
+#dt-transfer.transfer-style #trJobFamilyVal.readonly:not(.tr-placeholder),
+#dt-transfer.transfer-style #trJobCategoryVal.readonly:not(.tr-placeholder),
+#dt-transfer.transfer-style #trStepVal.readonly:not(.tr-placeholder),
+#dt-transfer.transfer-style #trCostVal.readonly:not(.tr-placeholder),
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApDeptFullVal.readonly:not(.tr-placeholder),
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApJobFamilyVal.readonly:not(.tr-placeholder),
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApJobCategoryVal.readonly:not(.tr-placeholder),
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApStepVal.readonly:not(.tr-placeholder),
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApCostVal.readonly:not(.tr-placeholder){color:var(--c5)!important;font-weight:500!important}
+#dt-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after,
+#dt-ap-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after,
+#dt-ap-transfer.transfer-style #trApStepVal:not(.tr-placeholder)::after{background:var(--s2)!important;color:var(--c4)!important}
+#dt-transfer.transfer-style #trDeptFullVal.tr-placeholder,
+#dt-transfer.transfer-style #trJobFamilyVal.tr-placeholder,
+#dt-transfer.transfer-style #trJobCategoryVal.tr-placeholder,
+#dt-transfer.transfer-style #trStepVal.tr-placeholder,
+#dt-transfer.transfer-style #trCostVal.tr-placeholder{color:var(--c5)!important;font-size:11px!important;font-weight:500!important;font-family:var(--f)!important;line-height:1.45!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-transfer.transfer-style .tr-fm-row:has(#trDeptFullVal) .tr-fm-lb,
+#dt-transfer.transfer-style .tr-fm-row:has(#trJobFamilyVal) .tr-fm-lb,
+#dt-transfer.transfer-style .tr-fm-row:has(#trJobCategoryVal) .tr-fm-lb,
+#dt-transfer.transfer-style .tr-fm-row:has(#trStepVal) .tr-fm-lb,
+#dt-transfer.transfer-style .tr-fm-row:has(#trCostVal) .tr-fm-lb{color:var(--c4)!important;font-size:11px!important;font-weight:600!important;font-family:var(--f)!important;line-height:1.45!important}
+#dt-transfer.transfer-style #trMainContractVal,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApMainContractVal{color:var(--c4)!important;font-size:11px!important;font-weight:600!important;font-family:var(--f)!important;line-height:1.45!important}
+#dt-transfer.transfer-style #trDeptFullVal,
+#dt-transfer.transfer-style #trJobFamilyVal,
+#dt-transfer.transfer-style #trJobCategoryVal,
+#dt-transfer.transfer-style #trStepVal,
+#dt-transfer.transfer-style #trCostVal,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApDeptFullVal,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApJobFamilyVal,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApJobCategoryVal,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApStepVal,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) #trApCostVal{color:var(--c4)!important;font-size:11px!important;font-weight:600!important;font-family:var(--f)!important;line-height:1.45!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after,
+#dt-ap-transfer.transfer-style #trStepVal:not(.tr-placeholder)::after,
+#dt-ap-transfer.transfer-style #trApStepVal:not(.tr-placeholder)::after{content:none!important;display:none!important}
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="组织全称"] .tr-compare-title,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职族"] .tr-compare-title,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职类"] .tr-compare-title,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职序"] .tr-compare-title,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="成本中心"] .tr-compare-title{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important}
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="组织全称"] .tr-compare-after .tr-fm-vl,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职族"] .tr-compare-after .tr-fm-vl,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职类"] .tr-compare-after .tr-fm-vl,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职序"] .tr-compare-after .tr-fm-vl,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="成本中心"] .tr-compare-after .tr-fm-vl{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="组织全称"] #trDeptFullVal.readonly,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职族"] #trJobFamilyVal.readonly,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职类"] #trJobCategoryVal.readonly,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="职序"] #trStepVal.readonly,
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="成本中心"] #trCostVal.readonly{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-transfer.transfer-style .tr-compare-field[data-field-title="组织全称"]:has(#trDeptFullVal:not(.tr-placeholder)) .tr-compare-after #trDeptFullVal.readonly{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important;text-align:right!important;display:block!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;word-break:break-word!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="组织全称"] .tr-compare-title,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职族"] .tr-compare-title,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职类"] .tr-compare-title,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职序"] .tr-compare-title,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="成本中心"] .tr-compare-title{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important}
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="组织全称"] .tr-compare-after .tr-fm-vl,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职族"] .tr-compare-after .tr-fm-vl,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职类"] .tr-compare-after .tr-fm-vl,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职序"] .tr-compare-after .tr-fm-vl,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="成本中心"] .tr-compare-after .tr-fm-vl{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="组织全称"] #trApDeptFullVal.readonly,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职族"] #trApJobFamilyVal.readonly,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职类"] #trApJobCategoryVal.readonly,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="职序"] #trApStepVal.readonly,
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="成本中心"] #trApCostVal.readonly{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important;background:transparent!important;border:0!important;padding:0!important}
+#dt-ap-transfer.transfer-style:not(.ap-transfer-summary) .tr-compare-field[data-field-title="组织全称"]:has(#trApDeptFullVal:not(.tr-placeholder)) .tr-compare-after #trApDeptFullVal.readonly{font-family:var(--f)!important;font-size:11px!important;font-weight:600!important;line-height:1.45!important;color:var(--c4)!important;text-align:right!important;display:block!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;word-break:break-word!important;background:transparent!important;border:0!important;padding:0!important}
 #trAddressSheet.tr-cascade-sheet{height:min(78vh,620px)}
 #trAddressSheet .tr-cascade-actions{display:none}
 #trAddressSheet .tr-cascade-search input{height:40px;font-size:14px;font-weight:500}
@@ -3872,18 +3982,18 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
               </span>
               <span class="leave-apply-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg></span>
             </button>
-            <button class="leave-apply-field" type="button" onclick="openLeaveDurationSheet('used')">
+            <div class="leave-apply-field static-readonly">
               <span class="leave-apply-main">
                 <span class="leave-apply-label"><span class="req">*</span>已休时长</span>
                 <span class="leave-apply-value readonly" id="leaveUsedVal">-</span>
               </span>
-            </button>
-            <button class="leave-apply-field" type="button" onclick="openLeaveDurationSheet('remain')">
+            </div>
+            <div class="leave-apply-field static-readonly">
               <span class="leave-apply-main">
                 <span class="leave-apply-label"><span class="req">*</span>剩余时长</span>
                 <span class="leave-apply-value readonly" id="leaveRemainVal">-</span>
               </span>
-            </button>
+            </div>
             <div class="leave-apply-field leave-reason-field" onclick="focusLeaveReasonInline()">
               <span class="leave-apply-main">
                 <span class="leave-apply-label"><span class="req">*</span>休假说明</span>
@@ -4334,17 +4444,16 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
             </div>
             <span class="leave-ap-type" id="apLeaveTypeTag">请假</span>
           </div>
-          <div class="sec-t">申请信息</div>
-          <div class="leave-ap-info-card">
-            <div class="leave-ap-info-row"><span>假期类型</span><b id="apLeaveType">年假</b></div>
-            <div class="leave-ap-info-row"><span>开始时间</span><b id="apLeaveStart">2026-06-25 09:00</b></div>
-            <div class="leave-ap-info-row"><span>结束时间</span><b id="apLeaveEnd">2026-06-26 18:00</b></div>
-            <div class="leave-ap-info-row"><span>时长</span><b id="apLeaveDuration">16小时（2天）</b></div>
-            <div class="leave-ap-info-row"><span>剩余年假</span><b id="apLeaveRemain">32小时</b></div>
-          </div>
-          <div class="sec-t">请假事由</div>
-          <div class="leave-ap-reason-card" id="apLeaveReason">
-            外出旅游，需要提前一天出发做准备工作。已和同事张琳完成工作交接，紧急事项可电话联系。
+          <div id="apLeaveFormArea">
+            <div class="leave-ap-readonly-card">
+              <div class="leave-ap-card-title">申请信息</div>
+              <div class="leave-ap-info-row"><span>假期类型</span><b id="apLeaveType">年假</b></div>
+              <div class="leave-ap-info-row"><span>开始时间</span><b id="apLeaveStart">2026-06-25 09:00</b></div>
+              <div class="leave-ap-info-row"><span>结束时间</span><b id="apLeaveEnd">2026-06-26 18:00</b></div>
+              <div class="leave-ap-info-row"><span>时长</span><b id="apLeaveDuration">16小时（2天）</b></div>
+              <div class="leave-ap-info-row"><span>剩余年假</span><b id="apLeaveRemain">32小时</b></div>
+              <div class="leave-ap-info-row note-row"><span>请假事由</span><b id="apLeaveReason">外出旅游，需要提前一天出发做准备工作。已和同事张琳完成工作交接，紧急事项可电话联系。</b></div>
+            </div>
           </div>
           <div class="sec-t">审批流程</div>
           <div class="tr-ap-record-panel leave-ap-record-panel">
@@ -4485,13 +4594,13 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
             <div class="tr-sec">调动后任职信息</div>
             <div class="tr-fm-card">
               <div class="tr-fm-row clickable" onclick="openDetail(&#39;dt-dept-select&#39;)"><span class="tr-fm-lb"><span class="req">*</span>部门</span><span class="tr-fm-vl tr-placeholder" id="trDeptVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
-              <div class="tr-fm-row"><span class="tr-fm-lb">组织全称</span><span class="tr-fm-vl readonly tr-placeholder" id="trDeptFullVal">选择部门后自动带出</span></div>
+              <div class="tr-fm-row"><span class="tr-fm-lb">组织全称</span><span class="tr-fm-vl readonly tr-placeholder" id="trDeptFullVal">-</span></div>
               <div class="tr-fm-row clickable" onclick="trOpenPositionSelect()"><span class="tr-fm-lb"><span class="req">*</span>职位</span><span class="tr-fm-vl tr-placeholder" id="trPosVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
-              <div class="tr-fm-row clickable" onclick="trOpenJobFamilySelect()"><span class="tr-fm-lb">职族</span><span class="tr-fm-vl tr-placeholder" id="trJobFamilyVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
-              <div class="tr-fm-row"><span class="tr-fm-lb">职类</span><span class="tr-fm-vl readonly tr-placeholder" id="trJobCategoryVal">选中职族后自动带出</span></div>
+              <div class="tr-fm-row"><span class="tr-fm-lb">职族</span><span class="tr-fm-vl readonly tr-placeholder" id="trJobFamilyVal">-</span></div>
+              <div class="tr-fm-row"><span class="tr-fm-lb">职类</span><span class="tr-fm-vl readonly tr-placeholder" id="trJobCategoryVal">-</span></div>
               <div class="tr-fm-row clickable" onclick="trOpenLevelSelect()"><span class="tr-fm-lb"><span class="req">*</span>职级</span><span class="tr-fm-vl tr-placeholder" id="trLevelVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
-              <div class="tr-fm-row"><span class="tr-fm-lb">职序</span><span class="tr-fm-vl readonly tr-placeholder" id="trStepVal">选中职级后自动带出</span></div>
-              <div class="tr-fm-row"><span class="tr-fm-lb">成本中心</span><span class="tr-fm-vl readonly tr-placeholder" id="trCostVal">选中部门后自动带出</span></div>
+              <div class="tr-fm-row"><span class="tr-fm-lb">职序</span><span class="tr-fm-vl readonly tr-placeholder" id="trStepVal">-</span></div>
+              <div class="tr-fm-row"><span class="tr-fm-lb">成本中心</span><span class="tr-fm-vl readonly tr-placeholder" id="trCostVal">-</span></div>
               <div class="tr-fm-row"><span class="tr-fm-lb">是否部门负责人</span><span class="tr-fm-vl" style="display:flex;align-items:center;justify-content:flex-end"><div class="tr-seg-toggle" id="trManagerSeg"><span class="tr-seg-opt" data-val="是" onclick="trSegToggle(this)">是</span><span class="tr-seg-opt" data-val="否" onclick="trSegToggle(this)">否</span></div></span></div>
               <div class="tr-fm-row clickable" onclick="openGenericSelect({title:'选择直接上级',fieldName:'选择直接上级',targetId:'trMgrVal',searchPlaceholder:'搜索工号或姓名',allowClear:true,isPerson:true,searchFields:['gs-person-nm','gs-person-meta'],options:[{label:'孙八',value:'孙八（4023）',avatar:'孙',meta:'4023 · 人力资源部 · HRBP'},{label:'王小红',value:'王小红（4056）',avatar:'王',meta:'4056 · 人力资源部 · HRBP'},{label:'钱七',value:'钱七（5008）',avatar:'钱',meta:'5008 · 客户成功部 · 客户成功总监'},{label:'赵六',value:'赵六（6012）',avatar:'赵',meta:'6012 · 销售管理部 · 销售经理'},{label:'王五',value:'王五（7001）',avatar:'王',meta:'7001 · 市场营销部 · 市场总监'}]})"><span class="tr-fm-lb"><span class="req">*</span>直接上级</span><span class="tr-fm-vl tr-placeholder" id="trMgrVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row clickable" onclick="openGenericSelect({title:'直接下级转交给',fieldName:'直接下级转交给',targetId:'trHandoverVal',searchPlaceholder:'搜索工号或姓名',allowClear:true,isPerson:true,searchFields:['gs-person-nm','gs-person-meta'],options:[{label:'周九',value:'周九（9102）',avatar:'周',meta:'9102 · 产品研发部 · 产品经理'},{label:'王小红',value:'王小红（9188）',avatar:'王',meta:'9188 · 产品研发部 · 产品助理'},{label:'吴十',value:'吴十（9205）',avatar:'吴',meta:'9205 · 产品研发部 · 前端工程师'},{label:'郑一一',value:'郑一一（9310）',avatar:'郑',meta:'9310 · 产品研发部 · 设计师'}]})"><span class="tr-fm-lb">直接下级转交给</span><span class="tr-fm-vl tr-placeholder" id="trHandoverVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
@@ -7157,6 +7266,9 @@ function trCloseApTransferSubpage(){
   var stillOpen = !!((dept && dept.classList.contains('show')) || (generic && generic.classList.contains('show')));
   if(!stillOpen) trSetApTransferSheetOpen(false);
 }
+function apShouldHideHandledDetailActions(id, tab, status){
+  return (id === 'dt-attend-exception' || id === 'dt-salary') && Number(tab) === 1 && status === 'ok';
+}
 
 function openDetail(id, tab, status){
   closeProfileDrawer();
@@ -7167,6 +7279,9 @@ function openDetail(id, tab, status){
   }
   const el = document.getElementById(id);
   if(el){el.classList.add('show'); el.scrollTop=0;}
+  if(el && (id === 'dt-attend-exception' || id === 'dt-salary')){
+    el.classList.toggle('ap-handled-readonly', apShouldHideHandledDetailActions(id, tab, status));
+  }
   if(id==='dt-message'){
     el.classList.remove('detail-child-open');
     var msgDetail=document.getElementById('dt-message-detail');
@@ -7422,7 +7537,8 @@ function leaveDatePartsFromText(text,target){
     return {y:m[1],m:trPad2(m[2]),d:trPad2(m[3]),h:trPad2(m[4]),min:trPad2(m[5])};
   }
   var today=typeof trTodayParts==='function' ? trTodayParts() : {y:'2026',m:'07',d:'08'};
-  return {y:today.y,m:today.m,d:today.d,h:target==='end'?'18':'09',min:'00'};
+  var now=new Date();
+  return {y:today.y,m:today.m,d:today.d,h:trPad2(now.getHours()),min:trPad2(now.getMinutes())};
 }
 function renderLeaveDateTimeWheel(){
   var box=document.getElementById('leaveDateTimeWheel');
@@ -7445,6 +7561,12 @@ function renderLeaveDateTimeWheel(){
       return '<div class="tr-dt-opt '+(leaveDateTimeWheel[col.key]===item?'sel':'')+'" onclick="pickLeaveDateTime(\''+col.key+'\',\''+item+'\')">'+item+'</div>';
     }).join('')+'</div>';
   }).join('');
+  setTimeout(function(){
+    box.querySelectorAll('.tr-dt-col').forEach(function(col){
+      var sel=col.querySelector('.tr-dt-opt.sel');
+      if(sel) col.scrollTop=Math.max(0,sel.offsetTop-(col.clientHeight-sel.offsetHeight)/2);
+    });
+  },0);
 }
 function pickLeaveDateTime(key,val){
   leaveDateTimeWheel[key]=val;
@@ -7781,6 +7903,10 @@ function apLeaveDetailItem(){
   }
   return merged;
 }
+function apLeaveShouldHidePersonCard(item){
+  var status=String((item && item.status) || '');
+  return Number(item && item.tab) === 3 && (status === 'bh' || status === 'rj');
+}
 function apLeaveCleanMeta(name,meta){
   var text=String(meta || '').trim();
   var nm=String(name || '').trim();
@@ -7833,6 +7959,61 @@ function apLeaveRemainText(item,type){
   var text=String(item.leaveRemain || item.leaveRemainText || '').trim();
   if(text) return text;
   return String(type || '').indexOf('年') >= 0 ? '32小时' : '-';
+}
+function apLeaveAttachmentItems(item){
+  var src = item && (item.leaveAttachments || item.attachments);
+  if(!src) return [];
+  if(typeof src === 'string'){
+    return src.split(/[,，、]/).map(function(name){return {name:name.trim()};}).filter(function(it){return it.name;});
+  }
+  if(Array.isArray(src)){
+    return src.map(function(it){
+      return typeof it === 'string' ? {name:it} : {name:(it && it.name) || '休假附件.pdf'};
+    }).filter(function(it){return it.name;});
+  }
+  return [];
+}
+function apLeaveFieldValueHtml(text, placeholder, extraCls){
+  var hasValue = String(text || '').trim() !== '';
+  return '<span class="leave-apply-value '+(hasValue ? '' : 'placeholder ')+(extraCls || '')+'">'+apSafeText(hasValue ? text : (placeholder || '请选择'))+'</span>';
+}
+function apLeaveReadonlyFormHtml(item,type,times,duration,remain,reason){
+  return '<div class="leave-ap-readonly-card">'+
+    '<div class="leave-ap-card-title">申请信息</div>'+
+    '<div class="leave-ap-info-row"><span>休假类别</span><b id="apLeaveType">'+apSafeText(type)+'</b></div>'+
+    '<div class="leave-ap-info-row"><span>开始时间</span><b id="apLeaveStart">'+apSafeText(times[0] || '2026-06-25 09:00')+'</b></div>'+
+    '<div class="leave-ap-info-row"><span>结束时间</span><b id="apLeaveEnd">'+apSafeText(times[1] || '2026-06-26 18:00')+'</b></div>'+
+    '<div class="leave-ap-info-row"><span>时长</span><b id="apLeaveDuration">'+apSafeText(duration)+'</b></div>'+
+    '<div class="leave-ap-info-row"><span>剩余年假</span><b id="apLeaveRemain">'+apSafeText(remain)+'</b></div>'+
+    '<div class="leave-ap-info-row note-row"><span>请假事由</span><b id="apLeaveReason">'+apSafeText(reason)+'</b></div>'+
+  '</div>';
+}
+function apLeaveEditableFormHtml(item,type,times,duration,remain,reason){
+  var attachments=apLeaveAttachmentItems(item);
+  var attachHtml=attachments.map(function(file){
+    return '<div class="leave-attach-item"><span class="leave-attach-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><path d="M14 2v6h6"></path></svg></span><span class="leave-attach-name">'+apSafeText(file.name)+'</span></div>';
+  }).join('');
+  return '<div class="leave-ap-form-shell">'+
+    '<div class="leave-apply-form">'+
+      '<button class="leave-apply-field" type="button" aria-disabled="true"><span class="leave-apply-main"><span class="leave-apply-label"><span class="req">*</span>休假类别</span>'+apLeaveFieldValueHtml(type,'请选择')+'</span><span class="leave-apply-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg></span></button>'+
+      '<button class="leave-apply-field" type="button" aria-disabled="true"><span class="leave-apply-main"><span class="leave-apply-label"><span class="req">*</span>开始时间</span>'+apLeaveFieldValueHtml(times[0],'请选择')+'</span><span class="leave-apply-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg></span></button>'+
+      '<button class="leave-apply-field" type="button" aria-disabled="true"><span class="leave-apply-main"><span class="leave-apply-label"><span class="req">*</span>结束时间</span>'+apLeaveFieldValueHtml(times[1],'请选择')+'</span><span class="leave-apply-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg></span></button>'+
+      '<div class="leave-apply-field static-readonly"><span class="leave-apply-main"><span class="leave-apply-label"><span class="req">*</span>已休时长</span>'+apLeaveFieldValueHtml(duration,'-','readonly')+'</span></div>'+
+      '<div class="leave-apply-field static-readonly"><span class="leave-apply-main"><span class="leave-apply-label"><span class="req">*</span>剩余时长</span>'+apLeaveFieldValueHtml(remain,'-','readonly')+'</span></div>'+
+      '<div class="leave-apply-field leave-reason-field"><span class="leave-apply-main"><span class="leave-apply-label"><span class="req">*</span>休假说明</span><input class="leave-reason-inline" type="text" readonly value="'+apSafeText(reason)+'" placeholder="请输入"></span></div>'+
+      '<div class="leave-apply-attach"><div class="leave-apply-attach-title">休假附件</div><div class="leave-attach-actions"><button class="leave-apply-add" type="button" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button><div class="leave-attach-list">'+attachHtml+'</div></div></div>'+
+    '</div>'+
+  '</div>';
+}
+function renderApLeaveFormArea(item,type,times){
+  var area=document.getElementById('apLeaveFormArea');
+  if(!area) return;
+  var status=String((item && item.status) || 'pd');
+  var editable=status==='bh' || status==='rj';
+  var duration=apLeaveDurationText(item);
+  var remain=apLeaveRemainText(item,type);
+  var reason=item.leaveReason || item.reason || '外出旅游，需要提前一天出发做准备工作。已和同事张琳完成工作交接，紧急事项可电话联系。';
+  area.innerHTML = editable ? apLeaveEditableFormHtml(item,type,times,duration,remain,reason) : apLeaveReadonlyFormHtml(item,type,times,duration,remain,reason);
 }
 function apLeaveFlowHtml(item){
   var status=item.status || 'pd';
@@ -7983,9 +8164,11 @@ function renderApLeaveDetail(){
   var applicant=String(item.name || '李华').trim();
   var type=String(item.leaveType || '年假').trim();
   var times=apLeaveTimeParts(item);
+  page.classList.toggle('ap-leave-no-person', apLeaveShouldHidePersonCard(item));
   apSetText('apLeaveApplicantName',applicant);
   apSetText('apLeaveApplicantMeta',apLeaveCleanMeta(applicant,item.personInfo));
   apSetText('apLeaveTypeTag','请假');
+  renderApLeaveFormArea(item,type,times);
   apSetText('apLeaveType',type);
   apSetText('apLeaveStart',times[0] || '2026-06-25 09:00');
   apSetText('apLeaveEnd',times[1] || '2026-06-26 18:00');
@@ -8322,7 +8505,7 @@ var trApFormIdMap = ['trCtArea','trSection0','trSection1','trSection2','trSectio
   'trEmailVal','trDateVal','trTimeVal','trReasonVal','trTypeVal','trMainContractVal','trUploadBox','trFileRow','trFileName',
   'trAttachGrid','trFileRow2','trScrollArea','trTabScroll',
   'trPreInfoSheet','trPreInfoAvatar','trPreInfoName','trPreInfoMeta','trPreInfoList',
-  'trDeptVal','trPosVal','trJobFamilyVal','trJobCategoryVal','trLevelVal','trStepVal','trStepList','trCostVal',
+  'trDeptVal','trDeptFullVal','trPosVal','trJobFamilyVal','trJobCategoryVal','trLevelVal','trStepVal','trStepList','trCostVal',
   'trManagerSeg','trMgrVal','trRegionVal','trAreaVal','trEmpType1Val','trEmpType2Val','trHeadcountVal',
   'trWorkLocVal','trOfficeAddrVal','trPersonTypeVal','trWorkRegionVal','trMultiVal',
   'trContractSeg','trContractVal','trContractRow','trRemarkCount','trRemarkVal','trSubmitBtn','trSuccessOverlay',
@@ -8486,6 +8669,7 @@ var trApSubmittedTransferData = {
   trPrePersonTypeVal:'正式员工',
   trPreWorkRegionVal:'中国大陆',
   trDeptVal:'支持服务组',
+  trDeptFullVal:'深圳闽星科技有限公司 / 人力资源中心 / 支持服务组',
   trPosVal:'员工支持专员',
   trJobFamilyVal:'职能族',
   trJobCategoryVal:'员工服务',
@@ -9586,14 +9770,16 @@ function trSetDeptFullName(name){
   var text = trCurrentDeptFullName(name) || name || '';
   var el = document.getElementById(_resolveApId('trDeptFullVal'));
   if(el){
-    el.textContent = text || '选择部门后自动带出';
+    el.textContent = text || '-';
     el.classList.toggle('tr-placeholder', !text);
   }
 }
 function trResetAfterDeptChange(){
   trSetValue('trPosVal','请选择',true);
+  trSetValue('trJobFamilyVal','-',true);
+  trSetValue('trJobCategoryVal','-',true);
   trSetValue('trLevelVal','请选择',true);
-  trSetValue('trStepVal','选中职级后自动带出',true);
+  trSetValue('trStepVal','-',true);
 }
 
 /* ═══ Generic Select Page (for dropdown fields) ═══ */
@@ -9719,7 +9905,10 @@ function gsClearSelection(){
   if(target){ target.textContent = '请选择'; target.classList.add('tr-placeholder'); }
   _gsState.selectedValue = '';
   if(_gsState.targetId==='trMoverVal'){ trSyncMoverPreEntry(); }
+  if(_gsState.targetId==='trPosVal'){ trResetAfterDeptChange(); }
   if(_gsState.targetId==='trJobFamilyVal'){ trCascadeJobFamily(''); }
+  trUpdateDependentFieldStates();
+  trRefreshCompareStates();
   var list = document.getElementById('gsList');
   if(list){ list.querySelectorAll('.gs-item, .gs-person-item').forEach(function(i){ i.classList.remove('sel'); }); }
   showTrToast('已清空选择');
@@ -10278,7 +10467,9 @@ function openApListItem(index){
   var d = _apRenderedItems[index];
   if(!d) return;
   if(isNoticeItem(d)){
-    openDetail(d.detail || 'dt-attend-exception');
+    _apActionItem = d;
+    _apCtx = {tab:d.tab, status:d.status};
+    openDetail(d.detail || 'dt-attend-exception', d.tab, d.status);
     return;
   }
   if(!(apShouldShowFlow(d) || isApprovalActionable(d) || d.tab === 3)) return;
@@ -10311,6 +10502,9 @@ function openApListItemAction(index, action, event){
 
 function apIsTransferFlow(item){
   return !!(item && item.type==='hr' && item.subject==='调动申请' && item.detail==='dt-ap-transfer');
+}
+function apIsPrimaryProcessFlow(item){
+  return apIsLeaveFlow(item) || apIsTransferFlow(item);
 }
 function apCardSubjectText(item){
   if(isNoticeItem(item)) return String(item.subject || '公告通知').trim();
@@ -10429,11 +10623,11 @@ const AP_DATA = [
   {initiator:'我',name:'自己',subject:'请假申请',personInfo:'年假 · 2026-07-10 至 2026-07-11',type:'attend',typeLabel:'考勤',time:'2026-06-24 15:28:26',status:'pd',statusLabel:'审批中',tab:3,detail:'dt-ap-detail',leaveType:'年假',leaveTime:'07/10 09:00 - 07/11 18:00',leaveDuration:'2天',demoAgeMinutes:240},
   {initiator:'我',name:'周明',subject:'调动申请',personInfo:'周明 · 美东3号仓',type:'hr',typeLabel:'人事',time:'2026-06-23 18:21:37',status:'bh',statusLabel:'已驳回',tab:3,detail:'dt-ap-transfer'},
   {initiator:'我',name:'张琳',subject:'调动申请',personInfo:'张琳 · HRBP',type:'hr',typeLabel:'人事',time:'2026-06-23 15:18:20',status:'rj',statusLabel:'已撤回',tab:3,detail:'dt-ap-transfer'},
-  {initiator:'我',name:'自己',subject:'请假申请',personInfo:'事假 · 2026-07-08',type:'attend',typeLabel:'考勤',time:'2026-06-23 14:05:12',status:'bh',statusLabel:'已驳回',tab:3,detail:'dt-ap-detail',leaveType:'事假',leaveTime:'07/08 09:00 - 07/08 18:00',leaveDuration:'1天'},
+  {initiator:'我',name:'自己',subject:'请假申请',personInfo:'事假 · 2026-07-08',type:'attend',typeLabel:'考勤',time:'2026-06-23 14:05:12',status:'bh',statusLabel:'已驳回',tab:3,detail:'dt-ap-detail',leaveType:'事假',leaveTime:'07/08 09:00 - 07/08 18:00',leaveDuration:'1天',leaveRemain:'-',leaveReason:'家中临时有事需请假处理，已提前同步当天工作安排。',leaveAttachments:'请假说明.pdf'},
   {initiator:'我',name:'林浩',subject:'调动申请',personInfo:'林浩 · 物流运营部',type:'hr',typeLabel:'人事',time:'2026-06-23 11:22:44',status:'ok',statusLabel:'同意',tab:3,detail:'dt-ap-transfer'},
   {initiator:'我',name:'孙丽',subject:'调动申请',personInfo:'孙丽 · 共享服务中心',type:'hr',typeLabel:'人事',time:'2026-06-22 18:03:10',status:'btg',statusLabel:'不同意',tab:3,detail:'dt-ap-transfer'},
   {initiator:'我',name:'何敏',subject:'调动申请',personInfo:'何敏 · 招聘运营组',type:'hr',typeLabel:'人事',time:'2026-06-22 16:42:36',status:'zz',statusLabel:'已作废',tab:3,detail:'dt-ap-transfer'},
-  {initiator:'我',name:'自己',subject:'年假申请',personInfo:'2026-07-04 至 2026-07-05',type:'attend',typeLabel:'考勤',time:'2026-06-23 09:12:18',status:'rj',statusLabel:'已撤回',tab:3,detail:'dt-ap-detail'},
+  {initiator:'我',name:'自己',subject:'年假申请',personInfo:'2026-07-04 至 2026-07-05',type:'attend',typeLabel:'考勤',time:'2026-06-23 09:12:18',status:'rj',statusLabel:'已撤回',tab:3,detail:'dt-ap-detail',leaveType:'年假',leaveTime:'07/04 09:00 - 07/05 18:00',leaveDuration:'2天',leaveRemain:'31.5小时',leaveReason:'原计划外出休假，因行程调整先撤回申请，待确认后重新提交。'},
   {initiator:'我',name:'自己',subject:'绩效目标提交',personInfo:'2026年七月目标',type:'performance',typeLabel:'绩效',time:'2026-06-22 14:46:25',status:'btg',statusLabel:'不同意',tab:3,detail:'dt-ap-detail'},
   {initiator:'薪酬组',name:'刘观耀',subject:'6 月薪资确认单',personInfo:'2026 年 6 月工资已发放，请点击「去处理」核对并确认工资单',type:'payroll',typeLabel:'薪酬',time:'2026-06-21 16:30:00',status:'ok',statusLabel:'已处理',tab:3,detail:'dt-salary',todoAction:'open',todoDesc:'2026 年 6 月工资已发放，请点击「去处理」核对并确认工资单'},
 
@@ -10731,7 +10925,9 @@ function renderApList(){
 
   // 筛选
   var items = AP_DATA.filter(function(d){
-    return d.tab === apActiveTab && !apIsTodoRejected(d) && apShouldShowFlow(d);
+    if(d.tab !== apActiveTab || apIsTodoRejected(d) || !apShouldShowFlow(d)) return false;
+    if(apActiveTab === 2 || apActiveTab === 3) return apIsPrimaryProcessFlow(d);
+    return true;
   });
 
   // 搜索
@@ -10808,6 +11004,7 @@ function trPrepareTransferFormStyle(){
   var dt=document.getElementById('dt-transfer');
   if(!dt) return;
   dt.classList.add('transfer-style');
+  trRunTransferStyleStep('init transfer defaults', trInitTransferDefaults);
   trRunTransferStyleStep('build layout', trBuildFocusedTransferLayout);
   trRunTransferStyleStep('refresh compare state', trRefreshCompareStates);
   setTimeout(function(){ trRunTransferStyleStep('refresh compare state (delayed)', trRefreshCompareStates); },80);
@@ -11801,15 +11998,15 @@ function trTodayDateStr(){
 function trInitTransferDefaults(){
   var dateEl=document.getElementById(_resolveApId('trDateVal'));
   var timeEl=document.getElementById(_resolveApId('trTimeVal'));
-  if(dateEl && !dateEl.textContent.trim()){
-    dateEl.textContent='请选择';
-    dateEl.classList.add('tr-placeholder');
+  var p=trTodayParts();
+  if(dateEl && (!dateEl.textContent.trim() || dateEl.classList.contains('tr-placeholder') || dateEl.textContent.trim()==='请选择')){
+    dateEl.textContent=p.y+'-'+p.m+'-'+p.d;
+    dateEl.classList.remove('tr-placeholder');
   }
   if(timeEl && !timeEl.textContent.trim()){
     timeEl.textContent='请选择';
     timeEl.classList.add('tr-placeholder');
   }
-  var p=trTodayParts();
   trDateWheel={y:p.y,m:p.m,d:p.d};
   trDateTimeWheel={y:p.y,m:p.m,d:p.d,h:'00',min:'00'};
   trApplyMoverReadonlyRule();
@@ -12674,18 +12871,24 @@ function trCascadeDept(dept){
   trSetValue('trCostVal',d.cost,false);
   trSetDefaultMgrByDept(dept,true);
   trWireDynamicMgrSelect();
-  trSetValue('trJobFamilyVal','请选择',true);
-  trSetValue('trJobCategoryVal','选中职族后自动带出',true);
+  trSetValue('trJobFamilyVal','-',true);
+  trSetValue('trJobCategoryVal','-',true);
   trUpdateDependentFieldStates();
   trRefreshCompareStates();
 }
 /* ── Cascade: 职位 → 职族/职类 ── */
 function trCascadePosition(pos){
+  if(!pos || pos==='请选择'){
+    trResetAfterDeptChange();
+    trUpdateDependentFieldStates();
+    trRefreshCompareStates();
+    return;
+  }
   var d=trJobFamilyDataForPosition(pos);
   trSetValue('trJobFamilyVal',d.family,false);
   trSetValue('trJobCategoryVal',d.category,false);
   trSetValue('trLevelVal','请选择',true);
-  trSetValue('trStepVal','选中职级后自动带出',true);
+  trSetValue('trStepVal','-',true);
   trUpdateDependentFieldStates();
   trRefreshCompareStates();
 }
@@ -12699,14 +12902,14 @@ function trCascadeJobFamily(family){
     '操作族':'操作类'
   };
   if(!family){
-    trSetValue('trJobCategoryVal','选中职族后自动带出',true);
+    trSetValue('trJobCategoryVal','-',true);
   }else{
     var pos=trGetText('trPosVal');
     var posData=trJobFamilyDataForPosition(pos);
     trSetValue('trJobCategoryVal',posData.family===family ? posData.category : (categoryMap[family]||'职能类'),false);
   }
   trSetValue('trLevelVal','请选择',true);
-  trSetValue('trStepVal','选中职级后自动带出',true);
+  trSetValue('trStepVal','-',true);
   trUpdateDependentFieldStates();
   trRefreshCompareStates();
 }
