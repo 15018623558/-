@@ -773,44 +773,49 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .ap2-summary-main{display:flex;align-items:center;gap:6px;min-width:0;font-size:10px;font-weight:600;line-height:1.35;color:var(--c7)}
 .ap2-summary-main .tag{height:19px;display:inline-flex;align-items:center;padding:0 7px;border-radius:999px;background:var(--pr50);color:var(--pr);border:1px solid var(--pr100);font-size:9px;font-weight:700;flex-shrink:0}
 .ap2-summary-main .txt{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ap2-handler{height:22px;display:inline-flex;align-items:center;gap:5px;align-self:flex-start;max-width:100%;padding:0 8px;border-radius:11px;background:var(--pr50);border:1px solid var(--pr100);color:var(--pr);font-size:10px;font-weight:700;line-height:1}
+.ap2-handler{height:22px;display:inline-flex;align-items:center;gap:4px;align-self:flex-start;max-width:100%;padding:0 7px;border-radius:11px;background:var(--pr50);border:1px solid var(--pr100);color:var(--pr);font-size:10px;font-weight:700;line-height:1}
 .ap2-handler svg{width:12px;height:12px;stroke-width:2.4;flex:0 0 12px}
 .ap2-handler span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ap2-handler-label{color:var(--c5);font-weight:700}
+.ap2-handler-name{color:var(--pr);font-weight:850}
 .ap2-note{font-size:10px;font-weight:500;line-height:1.45;color:var(--c5);background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:7px 8px}
 .ap2-notice .ap2-subject{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .ap2-type.notice{background:var(--ac50);color:#92400E}
 
 /* 审批中卡片：清爽任务卡样式 */
-.ap-card2{border-color:rgba(226,232,240,.72);border-radius:16px;padding:14px;box-shadow:0 1px 2px rgba(15,23,42,.04);margin-bottom:10px}
-.ap2-head{margin-bottom:10px}
+.ap-card2{border-color:rgba(226,232,240,.72);border-radius:16px;padding:12px 14px;box-shadow:0 1px 2px rgba(15,23,42,.04);margin-bottom:9px}
+.ap2-head{margin-bottom:8px}
 .ap2-type{height:18px;padding:0;background:transparent!important;color:var(--c5)!important;border:0;font-size:10px;font-weight:800}
 .ap2-type svg{width:12px;height:12px;color:var(--pr)}
 .ap2-st{height:22px;padding:0 9px;border:0;font-size:10px;font-weight:800}
 .ap2-subject{font-size:13px;font-weight:850;line-height:1.42;color:var(--c9);white-space:normal;overflow:visible;text-overflow:clip}
-.ap2-main{gap:7px}
+.ap2-main{gap:5px}
 .ap2-summary{margin-top:0}
-.ap2-summary-main{font-size:11px;font-weight:700;color:var(--c7);gap:6px}
+.ap2-summary-main{font-size:11px;font-weight:700;color:var(--c7);gap:4px}
 .ap2-summary-main .tag{height:18px;padding:0 7px;border:0;border-radius:999px;font-size:10px}
 .ap2-handler{height:18px;padding:0;border:0;background:transparent;color:var(--pr);font-size:10px;font-weight:800}
 .ap2-handler svg{display:none}
-.ap2-bot{margin-top:2px;align-items:center}
+.ap2-bot{margin-top:0;align-items:center}
 .ap2-tm{font-family:var(--f);font-size:11px;color:var(--c4)}
-.ap2-actions{gap:8px}
-.ap2-btn{height:30px;min-width:52px;border:0;border-radius:10px;background:var(--s2);font-size:11px;font-weight:800;padding:0 10px}
+.ap2-actions{gap:6px}
+.ap2-btn{height:26px;min-width:46px;border:0;border-radius:9px;background:var(--s2);font-size:10px;font-weight:800;padding:0 8px}
 .ap2-btn.primary{box-shadow:none}
 .ap2-btn.danger{background:var(--ro50);border:0;color:var(--ro)}
-.ap-card2.leave-flow{padding:10px 12px;border-radius:14px;margin-bottom:8px}
+.ap-card2.leave-flow{padding:9px 12px;border-radius:14px;margin-bottom:8px}
 .ap-card2.leave-flow .ap2-head{margin-bottom:7px}
-.ap-card2.leave-flow .ap2-main{gap:5px}
+.ap-card2.leave-flow .ap2-main{gap:3px}
 .ap-card2.leave-flow .ap2-subject{font-size:12px;line-height:1.32;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ap-card2.leave-flow .ap2-summary-main{font-size:10px;line-height:1.25;gap:5px}
 .ap-card2.leave-flow .ap2-summary-main .tag{height:17px;padding:0 6px;font-size:9px}
 .ap-card2.leave-flow .ap2-handler{height:16px;font-size:9px;line-height:1.2}
 .ap-card2.leave-flow .ap2-bot{margin-top:0}
 .ap-card2.leave-flow .ap2-tm{font-size:10px}
-.ap-card2.leave-flow .ap2-actions{gap:6px}
-.ap-card2.leave-flow .ap2-btn{height:28px;min-width:48px;border-radius:9px;font-size:10px;padding:0 9px}
-
+.ap-card2.leave-flow .ap2-actions{gap:5px;transform:translateY(-3px)}
+.ap-card2.leave-flow .ap2-btn{height:26px;min-width:44px;border-radius:8px;font-size:10px;padding:0 8px}
+.ap-card2.transfer-flow .ap2-main{gap:3px}
+.ap-card2.transfer-flow .ap2-handler{height:16px;line-height:1.2}
+.ap-card2.transfer-flow .ap2-bot{margin-top:0}
+.ap-card2.transfer-flow .ap2-actions{transform:translateY(-3px)}
 /* ── 首页我的申请 ── */
 .my-app-card{padding:12px!important}
 .my-app-card .mod-hd{margin-bottom:10px!important}
@@ -821,35 +826,38 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .my-app-home-item .ap2-bot{align-items:flex-start}
 .my-app-home-item .ap2-tm{white-space:normal;line-height:1.35}
 .my-app-detail{background:var(--bg)}
-.my-app-detail .dt-hd{background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(15,23,42,.06)}
-.my-app-detail .dt-body{position:relative;padding:10px 12px 28px}
-.my-app-detail.detail-child-open .my-app-search,.my-app-detail.detail-child-open .my-app-filters,.my-app-detail.detail-child-open .my-app-panel,.my-app-detail.detail-child-open .my-app-filter-mask,.my-app-detail.detail-child-open .my-app-tabs,.my-app-detail.detail-child-open #myAppList{display:none!important}
-.my-app-tabs{display:flex;gap:0;border-bottom:1px solid var(--c2);margin:2px 0 8px;padding:0 4px;background:var(--bg)}
-.my-app-tab{flex:1;height:38px;border:0;background:transparent;color:var(--c5);font-family:var(--f);font-size:13px;font-weight:700;position:relative;cursor:pointer}
-.my-app-tab.act{color:var(--pr)}
+.my-app-detail .dt-hd{background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:0;box-shadow:none;z-index:61}
+.my-app-detail .dt-body{position:relative;padding:0 16px 28px}
+.my-app-control-panel{position:sticky;top:52px;z-index:50;margin:0 -16px 12px;padding:8px 16px 10px;border-radius:0 0 18px 18px;background:rgba(255,255,255,.96);border-bottom:1px solid rgba(226,232,240,.88);box-shadow:0 4px 14px rgba(15,23,42,.04);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.my-app-detail.detail-child-open .my-app-control-panel,.my-app-detail.detail-child-open #myAppList{display:none!important}
+.my-app-tabs{display:flex;gap:0;border-bottom:1px solid var(--c2);margin:0 0 9px;padding:0 0 8px;background:transparent}
+.my-app-tab{flex:1;height:38px;border:0;background:transparent;color:var(--c5);font-family:var(--f);font-size:13px;font-weight:500;position:relative;cursor:pointer}
+.my-app-tab.act{color:var(--pr);font-weight:700}
 .my-app-tab.act::after{content:'';position:absolute;left:50%;bottom:-1px;width:24px;height:3px;border-radius:999px;background:var(--pr);transform:translateX(-50%)}
-.my-app-search{position:relative;margin-bottom:8px}
+.my-app-search{position:relative;margin-bottom:9px}
 .my-app-search svg{position:absolute;left:12px;top:50%;width:15px;height:15px;color:var(--c4);transform:translateY(-50%)}
-.my-app-search input{width:100%;height:38px;border:1px solid var(--bd);border-radius:12px;background:var(--sf);box-shadow:var(--sx);padding:0 12px 0 35px;font-family:var(--f);font-size:12px;font-weight:600;color:var(--c9);outline:none}
+.my-app-search input{width:100%;height:42px;border:1px solid var(--c2);border-radius:var(--r1);background:var(--sf);box-shadow:var(--sx);padding:0 42px 0 36px;font-family:var(--f);font-size:13px;font-weight:500;color:var(--c9);outline:none;transition:border-color .15s,box-shadow .15s}
+.my-app-search input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--pr50)}
 .my-app-search input::placeholder{color:var(--c4);font-weight:500}
-.my-app-filters{display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -4px 10px;padding:0 4px;white-space:nowrap;position:relative;z-index:25}
+.my-app-filters{display:flex;align-items:center;gap:8px;overflow:visible;scrollbar-width:none;margin:0 0 10px;padding:0;white-space:nowrap;position:relative;z-index:25}
 .my-app-filters::-webkit-scrollbar{display:none}
-.my-app-filter{height:34px;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:0;padding:0 14px;border:none;border-radius:18px;background:var(--s3);box-shadow:none;font-size:13px;font-weight:500;color:var(--c5);white-space:nowrap;cursor:pointer;transition:background .12s,color .12s,transform .12s;font-family:var(--f)}
+.my-app-filter{flex:1 1 0;height:36px;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:0;padding:0 12px;border:1px solid var(--dv);border-radius:18px;background:transparent;box-shadow:none;font-size:13px;font-weight:500;line-height:1;color:var(--c5);white-space:nowrap;cursor:pointer;transition:background .12s,color .12s,transform .12s,border-color .12s;font-family:var(--f)}
+#myAppTimeChip{flex:1.45 1 0}
 .my-app-filter:active{transform:scale(.97);background:var(--pr50)}
-.my-app-filter.active{color:var(--pr);background:var(--pr50);font-weight:600}
-.my-app-filter.open{color:var(--pr);background:var(--pr50);font-weight:600}
+.my-app-filter.active,.my-app-filter.open{color:var(--pr);background:var(--pr50);border-color:var(--pr100);font-weight:700}
+.my-app-filter span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .my-app-filter svg{width:13px;height:13px;color:currentColor;stroke-width:2;transition:transform .18s}
 .my-app-filter.open svg{transform:rotate(180deg)}
-.my-app-panel{display:none;position:absolute;left:-12px;right:-12px;z-index:20;background:var(--sf);border-top:1px solid var(--dv);border-bottom:1px solid var(--dv);box-shadow:0 8px 18px rgba(15,23,42,.06);overflow:hidden}
+.my-app-panel{display:none;position:absolute;left:0;right:0;z-index:35;background:var(--sf);border:1px solid var(--dv);border-top:0;border-radius:0 0 18px 18px;box-shadow:0 10px 24px rgba(15,23,42,.1);overflow:hidden}
 .my-app-panel.show{display:block;animation:apPanelIn .16s ease}
-.my-app-option{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;border-bottom:1px solid var(--dv);font-size:13px;font-weight:500;color:var(--c9);cursor:pointer;transition:background .12s}
+.my-app-option{height:50px;display:flex;align-items:center;justify-content:flex-start;padding:0 18px;border-bottom:1px solid var(--dv);font-size:13px;font-weight:500;line-height:1;color:var(--c9);cursor:pointer;transition:background .12s,color .12s}
 .my-app-option:last-child{border-bottom:none}
 .my-app-option:active{background:var(--pr50)}
-.my-app-option.sel{font-weight:600}
-.my-app-check{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:transparent;flex-shrink:0}
+.my-app-option.sel{font-weight:700;color:var(--pr);background:var(--pr50)}
+.my-app-check{display:none}
 .my-app-option.sel .my-app-check{background:var(--pr);color:#fff}
 .my-app-check svg{width:17px;height:17px}
-.my-app-filter-mask{display:none;position:absolute;left:-12px;right:-12px;bottom:-28px;z-index:15;background:rgba(0,0,0,.28)}
+.my-app-filter-mask{display:none;position:absolute;left:-16px;right:-16px;bottom:-28px;z-index:20;background:rgba(15,23,42,.18)}
 .my-app-filter-mask.show{display:block}
 .my-app-scroll-list{display:flex;flex-direction:column;gap:8px;min-height:180px}
 .my-app-detail-item{margin-bottom:0}
@@ -960,9 +968,9 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .leave-row-title{font-size:19px;font-weight:800;color:#111827;line-height:1.2;margin-bottom:10px;letter-spacing:0}
 .leave-row-valid{font-size:14px;font-weight:500;color:#BEC3C9;line-height:1.35;margin-bottom:10px}
 .leave-row-used{font-size:14px;font-weight:500;color:#5F6368;line-height:1.45}
-.leave-row-note{display:flex;align-items:center;max-width:100%;min-height:28px;margin-top:24px;padding:5px 10px;background:#FAFAFA;color:#5F6368;font-size:12px;font-weight:500;line-height:1.35;white-space:normal}
-.leave-row-note a{color:#4B5563;text-decoration:none;margin-left:8px;display:inline-flex;align-items:center;gap:4px}
-.leave-row-note a::after{content:'›';font-size:20px;line-height:1;color:#111827;margin-top:-1px}
+.leave-row-note{display:flex;align-items:center;box-sizing:border-box;width:100%;max-width:100%;min-height:30px;margin-top:24px;padding:7px 11px;border-radius:7px;background:var(--ac50);color:#B45309;font-size:12px;font-weight:600;line-height:1.35;white-space:normal}
+.leave-row-note a{color:var(--pr);text-decoration:none;margin-left:8px;display:inline-flex;align-items:center;gap:4px;font-weight:700}
+.leave-row-note a::after{content:'›';font-size:20px;line-height:1;color:var(--pr);margin-top:-1px}
 .leave-row-side{position:absolute;right:18px;top:24px;min-width:74px;min-height:58px;border-radius:0;background:transparent;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;text-align:right;padding:0}
 .leave-row-balance{font-family:var(--f);font-variant-numeric:tabular-nums;font-size:33px;font-weight:800;line-height:.95;color:#20C3C2;letter-spacing:-1px}
 .leave-row-unit{margin-top:8px;font-size:11px;color:#A7ADB4;font-weight:500;line-height:1.25}
@@ -973,8 +981,8 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 
 .leave-card{padding:12px;margin-bottom:10px}
 .leave-card .mod-hd{margin-bottom:10px}
-.lv-home-ticket{position:relative;border-radius:14px;background:#fff;box-shadow:0 8px 22px rgba(15,23,42,.07);border:1px solid rgba(15,23,42,.04);overflow:hidden}
-.lv-home-summary{position:relative;display:flex;align-items:flex-start;justify-content:flex-start;min-height:104px;padding:16px 16px 30px;background:#22C6C5;color:#fff;overflow:hidden;cursor:pointer;transition:transform .12s var(--ease-out)}
+.lv-home-ticket{position:relative;border-radius:0;background:transparent;box-shadow:none;border:0;overflow:visible}
+.lv-home-summary{position:relative;display:flex;align-items:flex-start;justify-content:flex-start;min-height:100px;padding:16px 16px 28px;border-radius:14px;background:#22C6C5;color:#fff;overflow:hidden;cursor:pointer;transition:transform .12s var(--ease-out)}
 .lv-home-summary:active{transform:scale(.98)}
 .lv-home-summary::before{content:'';position:absolute;left:-22px;right:-22px;bottom:-56px;height:70px;background:#fff;border-radius:50% 48% 0 0/58% 52% 0 0;transform:rotate(-2deg);z-index:1}
 .lv-home-summary::after{content:'';position:absolute;right:16px;top:16px;width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.18)}
@@ -983,18 +991,18 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .lv-home-total{font-family:var(--f);font-variant-numeric:tabular-nums;font-size:38px;font-weight:800;line-height:.95;letter-spacing:-1.2px;color:#fff}
 .lv-home-total span{font-family:var(--f);font-size:13px;font-weight:600;margin-left:3px;color:#fff;letter-spacing:0}
 .lv-home-record{display:none}
-.lv-home-list{position:relative;display:block;margin:0 12px 12px;padding-top:7px;border-top:7px solid #20C3C2;background:#fff}
-.lv-home-item{position:relative;width:100%;min-height:94px;display:block;padding:17px 44px 13px 14px;border:0;border-bottom:1px dashed rgba(148,163,184,.35);background:#fff;font-family:var(--f);text-align:left;cursor:pointer;transition:transform .12s var(--ease-out),background .12s}
-.lv-home-item:active{transform:scale(.985);background:#FAFAFA}
+.lv-home-list{position:relative;display:block;margin:8px 0 0;padding-top:0;border-top:0;background:transparent}
+.lv-home-item{position:relative;width:100%;min-height:86px;display:block;padding:14px 42px 12px 14px;border:0;border-bottom:1px dashed rgba(148,163,184,.32);background:transparent;font-family:var(--f);text-align:left;cursor:pointer;transition:transform .12s var(--ease-out),background .12s}
+.lv-home-item:active{transform:scale(.985);background:var(--s2)}
 .lv-home-item:last-child{border-bottom:0}
 .lv-home-name{display:block;max-width:calc(100% - 92px);font-size:15px;font-weight:900;color:#111827;line-height:1.2;margin-bottom:8px}
 .lv-home-meta,.lv-home-used{display:block;font-size:11px;font-weight:700;line-height:1.35;color:#BEC3C9;margin-bottom:7px}
 .lv-home-used{color:#5F6368;margin-bottom:0}
 .lv-home-num{position:absolute;right:40px;top:16px;font-family:var(--f);font-variant-numeric:tabular-nums;font-size:28px;font-weight:900;line-height:1;color:#20C3C2;letter-spacing:-.6px;text-align:right;white-space:nowrap}
 .lv-home-unit{position:absolute;right:40px;top:47px;font-size:9px;font-weight:600;color:#8F98A3;line-height:1.2;text-align:right}
-.lv-home-warn{display:inline-flex;align-items:center;min-height:24px;margin-top:12px;padding:0 9px;background:#FAFAFA;color:#5F6368;font-size:10px;font-weight:700;line-height:1.35;white-space:normal}
+.lv-home-warn{display:flex;align-items:center;box-sizing:border-box;width:100%;min-height:30px;margin-top:9px;padding:7px 11px;border-radius:7px;background:var(--ac50);color:#B45309;font-size:10px;font-weight:700;line-height:1.35;white-space:normal}
 .lv-home-warn.muted{display:none}
-.lv-home-chev{display:inline-flex;align-items:center;justify-content:center;margin-left:4px;color:#111827;vertical-align:-2px}
+.lv-home-chev{display:inline-flex;align-items:center;justify-content:center;margin-left:4px;color:var(--pr);vertical-align:-2px;font-weight:800}
 .lv-home-chev svg{width:12px;height:12px;stroke-width:3}
 .lv-home-apply-chev{position:absolute;right:11px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#20C3C2;background:rgba(32,195,194,.08)}
 .lv-home-apply-chev svg{width:14px;height:14px;stroke-width:2.8}
@@ -1035,9 +1043,9 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .leave-row-title{font-size:15px;font-weight:900;color:#111827;line-height:1.2;margin-bottom:8px;letter-spacing:0}
 .leave-row-valid{font-size:11px;font-weight:700;color:#BEC3C9;line-height:1.35;margin-bottom:7px}
 .leave-row-used{font-size:11px;font-weight:700;color:#5F6368;line-height:1.35}
-.leave-row-note{display:inline-flex;align-items:center;max-width:100%;min-height:24px;margin-top:12px;padding:0 9px;background:#FAFAFA;color:#5F6368;font-size:10px;font-weight:700;line-height:1.35;white-space:normal}
-.leave-row-note a,.leave-row-note span{color:#111827;text-decoration:none;margin-left:8px;display:inline-flex;align-items:center;gap:4px;font-weight:800}
-.leave-row-note a::after,.leave-row-note span::after{content:'›';font-size:20px;line-height:1;color:#111827;margin-top:-1px}
+.leave-row-note{display:flex;align-items:center;box-sizing:border-box;width:100%;max-width:100%;min-height:30px;margin-top:12px;padding:7px 11px;border-radius:7px;background:var(--ac50);color:#B45309;font-size:10px;font-weight:700;line-height:1.35;white-space:normal}
+.leave-row-note a,.leave-row-note span{color:var(--pr);text-decoration:none;margin-left:8px;display:inline-flex;align-items:center;gap:4px;font-weight:800}
+.leave-row-note a::after,.leave-row-note span::after{content:'›';font-size:20px;line-height:1;color:var(--pr);margin-top:-1px}
 .leave-row-side{position:absolute;right:40px;top:16px;min-width:64px;min-height:46px;border-radius:0;background:transparent;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;text-align:right;padding:0}
 .leave-row-balance{font-family:var(--f);font-variant-numeric:tabular-nums;font-size:28px;font-weight:900;line-height:1;color:#20C3C2;letter-spacing:-.6px}
 .leave-row-unit{margin-top:4px;font-size:9px;color:#8F98A3;font-weight:600;line-height:1.2}
@@ -2910,33 +2918,42 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .qa-empty{padding:24px 0;text-align:center;font-size:13px;color:var(--c4)}
 
 /* ── 审批搜索 ── */
+.todo-control-panel{position:sticky;top:0;z-index:60;margin:0 -16px 12px;padding:8px 16px 10px;border-radius:0 0 18px 18px;background:rgba(255,255,255,.96);border-bottom:1px solid rgba(226,232,240,.88);box-shadow:0 4px 14px rgba(15,23,42,.04);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.todo-control-title{display:flex;align-items:center;justify-content:flex-start;height:34px;margin-bottom:6px;text-align:left}
+.todo-control-title h1{font-size:18px;font-weight:850;line-height:1;color:var(--c9);letter-spacing:0;text-align:left}
 .ap-search-wrap{position:relative;margin-bottom:10px}
-.ap-search-wrap input{width:100%;height:38px;border:1px solid var(--c2);border-radius:var(--r1);padding:0 14px 0 36px;font-size:13px;font-family:var(--f);color:var(--c9);background:var(--sf);outline:none;transition:border-color .15s,box-shadow .15s;box-shadow:var(--sx)}
+.todo-control-panel .ap-search-wrap{margin-bottom:9px}
+.ap-search-wrap input{width:100%;height:42px;border:1px solid var(--c2);border-radius:var(--r1);padding:0 42px 0 36px;font-size:13px;font-family:var(--f);color:var(--c9);background:var(--sf);outline:none;transition:border-color .15s,box-shadow .15s;box-shadow:var(--sx)}
 .ap-search-wrap input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--pr50)}
 .ap-search-wrap input::placeholder{color:var(--c4)}
 .ap-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--c4);pointer-events:none}
 .ap-search-icon svg{width:15px;height:15px}
 /* ── 审批筛选栏 ── */
 .ap-filter-bar{display:flex;align-items:center;gap:8px;margin:0 -4px 10px;padding:0 4px;white-space:nowrap;position:relative;z-index:25}
-.ap-filter-chip{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:34px;min-width:0;padding:0 14px;background:var(--s3);border:none;border-radius:18px;font-size:13px;font-weight:500;color:var(--c5);cursor:pointer;transition:background .12s,color .12s,transform .12s;box-shadow:none;white-space:nowrap}
+.todo-control-panel .ap-seg{margin:0 0 9px;padding:0 0 8px}
+.todo-control-panel .ap-filter-bar{margin:0;padding:0;gap:8px}
+.todo-control-panel .ap-filter-bar .ap-filter-chip{flex:1 1 0}
+.todo-control-panel .ap-filter-bar #apTimeChip{flex:1.45 1 0}
+.ap-filter-chip{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:36px;min-width:0;padding:0 12px;background:transparent;border:1px solid var(--dv);border-radius:18px;font-size:13px;font-weight:500;color:var(--c5);line-height:1;cursor:pointer;transition:background .12s,color .12s,transform .12s,border-color .12s;box-shadow:none;white-space:nowrap}
 .ap-filter-chip:active{transform:scale(.97);background:var(--pr50)}
-.ap-filter-chip.active{background:var(--pr50);color:var(--pr);font-weight:600}
+.ap-filter-chip.active,.ap-filter-chip.open{background:var(--pr50);border-color:var(--pr100);color:var(--pr);font-weight:700}
 .ap-filter-chip.is-hidden{display:none}
+.ap-filter-chip span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ap-filter-chip svg:first-child{display:none}
 .ap-filter-chip svg:last-child{width:13px;height:13px;color:currentColor;transition:transform .18s}
 .ap-filter-chip.open svg:last-child{transform:rotate(180deg)}
-.ap-filter-panel{display:none;position:absolute;left:-16px;right:-16px;z-index:20;background:var(--sf);border-top:1px solid var(--dv);border-bottom:1px solid var(--dv);box-shadow:0 8px 18px rgba(15,23,42,.06);overflow:hidden}
+.ap-filter-panel{display:none;position:absolute;left:0;right:0;top:100%;z-index:35;background:var(--sf);border:1px solid var(--dv);border-top:0;border-radius:0 0 18px 18px;box-shadow:0 10px 24px rgba(15,23,42,.1);overflow:hidden}
 .ap-filter-panel.show{display:block;animation:apPanelIn .16s ease}
-.ap-filter-option{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:13px;font-weight:500;color:var(--c9);cursor:pointer;border-bottom:1px solid var(--dv);transition:background .12s}
+.ap-filter-option{height:50px;display:flex;align-items:center;justify-content:flex-start;padding:0 18px;font-size:13px;font-weight:500;line-height:1;color:var(--c9);cursor:pointer;border-bottom:1px solid var(--dv);transition:background .12s,color .12s}
 .ap-filter-option:last-child{border-bottom:none}
 .ap-filter-option:active{background:var(--pr50)}
-.ap-filter-option.sel{font-weight:600}
-.ap-filter-check{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:transparent;flex-shrink:0}
+.ap-filter-option.sel{font-weight:700;color:var(--pr);background:var(--pr50)}
+.ap-filter-check{display:none}
 .ap-filter-option.sel .ap-filter-check{background:var(--pr);color:#fff}
 .ap-filter-check svg{width:17px;height:17px}
 @keyframes apPanelIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 /* ── 筛选遮罩 ── */
-.ap-filter-mask{display:none;position:absolute;left:-16px;right:-16px;bottom:-16px;z-index:15;background:rgba(0,0,0,.28);transition:opacity .16s ease}
+.ap-filter-mask{display:none;position:absolute;left:-16px;right:-16px;bottom:-16px;z-index:20;background:rgba(15,23,42,.18);transition:opacity .16s ease}
 .ap-filter-mask.show{display:block}
 /* ── 审批通用详情页动态操作栏（移动端单行优化）── */
 .ap-detail-bar{position:sticky;bottom:0;left:0;right:0;display:flex;flex-wrap:nowrap;gap:8px;overflow-x:hidden;overflow-y:hidden;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--bd);z-index:10;scrollbar-width:none;-ms-overflow-style:none}
@@ -3300,7 +3317,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
       <!-- ═══ 待办模块 ═══ -->
       <div class="sec-card ani ani-d1 todo-card" id="home-todo-section">
         <div class="mod-hd" style="margin-bottom:4px">
-          <h3 style="display:flex;align-items:center;gap:5px">待办<span class="td-badge" id="todo-badge">0</span></h3>
+          <h3 style="display:flex;align-items:center;gap:5px">待办<span class="td-badge" id="todo-badge">5</span></h3>
           <button type="button" class="more-ln-inline" onclick="goApTodo()" aria-label="更多待办">更多</button>
         </div>
         <div class="todo-list" id="home-todo"></div>
@@ -3591,55 +3608,54 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
         <div class="ai-chat" id="aiChat">
           <div class="ai-msg ai"><div class="ai-mini">AI</div><div class="ai-bubble">你好，我是 AI 人事助手。你可以问我调动、考勤、薪资、审批相关问题，也可以让我带你去对应功能。</div></div>
           <div class="ai-msg user"><div class="ai-bubble">帮我看看有哪些审批待处理</div></div>
-          <div class="ai-msg ai"><div class="ai-mini">AI</div><div class="ai-bubble">你当前有 2 条调动申请待处理，均停留在待处理列表。<div class="ai-chips"><button class="ai-chip" onclick="switchTab(2);setTimeout(function(){switchApTab(0)},50)">去审批中心</button><button class="ai-chip" onclick="openDetail('dt-ap-transfer',0,'pd')">查看调动申请</button></div></div></div>
+          <div class="ai-msg ai"><div class="ai-mini">AI</div><div class="ai-bubble">你当前有 2 条调动申请待处理，均停留在待处理列表。<div class="ai-chips"><button class="ai-chip" onclick="switchTab(2);setTimeout(function(){switchApTab(0)},50)">去待办中心</button><button class="ai-chip" onclick="openDetail('dt-ap-transfer',0,'pd')">查看调动申请</button></div></div></div>
         </div>
       </section>
     </div>
 
-    <!-- ══════ TAB 3: 审批 ══════ -->
+    <!-- ══════ TAB 3: 待办 ══════ -->
     <div class="pg" id="pg-approve">
-      <div style="padding:14px 0 4px">
-        <h1 style="font-size:22px;font-weight:800;color:var(--c9);letter-spacing:-.3px">审批中心</h1>
-        <p style="font-size:12px;color:var(--c5);margin-top:2px">管理和处理审批请求</p>
-      </div>
+      <div class="todo-control-panel ani ani-d1">
+        <div class="todo-control-title"><h1>待办/审批中心</h1></div>
 
-      <!-- 搜索 -->
-      <div class="ap-search-wrap ani ani-d1">
-        <span class="ap-search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg></span>
-        <input type="text" placeholder="搜索姓名、审批主题" id="apSearchInput" oninput="apHandleSearchInput()">
-      </div>
-
-      <!-- Segmented -->
-      <div class="ap-seg ani ani-d2" id="ap-seg">
-        <div class="asg act" data-ap-tab="0" onclick="switchApTab(0)">待处理的<span class="sg-badge" id="ap-todo-count">4</span></div>
-        <div class="asg" data-ap-tab="1" onclick="switchApTab(1)">已处理的</div>
-        <div class="asg" data-ap-tab="3" onclick="switchApTab(3)">我发起的</div>
-        <div class="asg" data-ap-tab="2" onclick="switchApTab(2)">抄送我的</div>
-      </div>
-
-      <!-- 筛选条件栏 -->
-      <div class="ap-filter-bar ani ani-d2" id="apFilterBar">
-        <div class="ap-filter-chip" id="apFlowChip" onclick="openApFlowSheet()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon></svg>
-          <span id="apFlowLabel">类型</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
+        <!-- 搜索 -->
+        <div class="ap-search-wrap">
+          <span class="ap-search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg></span>
+          <input type="text" placeholder="搜索姓名、待办主题" id="apSearchInput" oninput="apHandleSearchInput()">
         </div>
-        <div class="ap-filter-chip" id="apTimeChip" onclick="openApTimeSheet()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
-          <span id="apTimeLabel">时间排序</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
-        </div>
-        <div class="ap-filter-chip" id="apStatusChip" onclick="openApStatusSheet()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><path d="M22 4L12 14.01l-3-3"></path></svg>
-          <span id="apStatusLabel">状态</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
-        </div>
-      </div>
-      <div class="ap-filter-panel" id="apFilterPanel"></div>
-      <div class="ap-filter-mask" id="apFilterMask" onclick="closeApFilterPanel()"></div>
 
-      <!-- 审批列表容器 -->
-      <div id="ap-list-todo" class="ani ani-d3"></div>
+        <!-- Segmented -->
+        <div class="ap-seg" id="ap-seg">
+          <div class="asg act" data-ap-tab="0" onclick="switchApTab(0)">待办<span class="sg-badge" id="ap-todo-count">5</span></div>
+          <div class="asg" data-ap-tab="1" onclick="switchApTab(1)">已办</div>
+          <div class="asg" data-ap-tab="3" onclick="switchApTab(3)">已发起</div>
+          <div class="asg" data-ap-tab="2" onclick="switchApTab(2)">抄送我</div>
+        </div>
+
+        <!-- 筛选条件栏 -->
+        <div class="ap-filter-bar" id="apFilterBar">
+          <div class="ap-filter-chip" id="apFlowChip" onclick="openApFlowSheet()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon></svg>
+            <span id="apFlowLabel">类型</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div class="ap-filter-chip" id="apTimeChip" onclick="openApTimeSheet()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+            <span id="apTimeLabel">时间排序</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+          <div class="ap-filter-chip" id="apStatusChip" onclick="openApStatusSheet()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><path d="M22 4L12 14.01l-3-3"></path></svg>
+            <span id="apStatusLabel">状态</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M6 9l6 6 6-6"></path></svg>
+          </div>
+        </div>
+        <div class="ap-filter-panel" id="apFilterPanel"></div>
+        <div class="ap-filter-mask" id="apFilterMask" onclick="closeApFilterPanel()"></div>
+      </div>
+
+      <!-- 待办列表容器 -->
+      <div id="ap-list-todo" class="ani ani-d2"></div>
       <div id="ap-list-done" style="display:none"></div>
       <div id="ap-list-cc" style="display:none"></div>
       <div id="ap-list-init" style="display:none"></div>
@@ -4274,30 +4290,32 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
           <span class="dt-title">我的申请</span>
         </div>
         <div class="dt-body">
-          <div class="my-app-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-            <input type="text" id="myAppSearchInput" placeholder="搜索姓名、审批主题" oninput="handleMyAppSearch()">
+          <div class="my-app-control-panel">
+            <div class="my-app-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+              <input type="text" id="myAppSearchInput" placeholder="搜索姓名、审批主题" oninput="handleMyAppSearch()">
+            </div>
+            <div class="my-app-tabs">
+              <button type="button" class="my-app-tab act" id="myAppTabOngoing" onclick="switchMyAppTab('ongoing')">进行中(0)</button>
+              <button type="button" class="my-app-tab" id="myAppTabDone" onclick="switchMyAppTab('done')">已办结</button>
+            </div>
+            <div class="my-app-filters" id="myAppFilterBar">
+              <button type="button" class="my-app-filter" id="myAppFlowChip" onclick="openMyAppFilter('flow')">
+                <span id="myAppFlowLabel">流程类型</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <button type="button" class="my-app-filter active" id="myAppTimeChip" onclick="openMyAppFilter('time')">
+                <span id="myAppTimeLabel">最新提交优先</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+              <button type="button" class="my-app-filter" id="myAppStatusChip" onclick="openMyAppFilter('status')">
+                <span id="myAppStatusLabel">审批状态</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"></path></svg>
+              </button>
+            </div>
+            <div class="my-app-panel" id="myAppFilterPanel"></div>
+            <div class="my-app-filter-mask" id="myAppFilterMask" onclick="closeMyAppFilter()"></div>
           </div>
-          <div class="my-app-tabs">
-            <button type="button" class="my-app-tab act" id="myAppTabOngoing" onclick="switchMyAppTab('ongoing')">进行中(0)</button>
-            <button type="button" class="my-app-tab" id="myAppTabDone" onclick="switchMyAppTab('done')">已办结</button>
-          </div>
-          <div class="my-app-filters" id="myAppFilterBar">
-            <button type="button" class="my-app-filter" id="myAppFlowChip" onclick="openMyAppFilter('flow')">
-              <span id="myAppFlowLabel">流程类型</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"></path></svg>
-            </button>
-            <button type="button" class="my-app-filter active" id="myAppTimeChip" onclick="openMyAppFilter('time')">
-              <span id="myAppTimeLabel">最新提交优先</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"></path></svg>
-            </button>
-            <button type="button" class="my-app-filter" id="myAppStatusChip" onclick="openMyAppFilter('status')">
-              <span id="myAppStatusLabel">审批状态</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9l6 6 6-6"></path></svg>
-            </button>
-          </div>
-          <div class="my-app-panel" id="myAppFilterPanel"></div>
-          <div class="my-app-filter-mask" id="myAppFilterMask" onclick="closeMyAppFilter()"></div>
           <div class="my-app-scroll-list" id="myAppList"></div>
         </div>
       </div>
@@ -4877,8 +4895,8 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
       <span>HRONE</span>
     </div>
     <div class="tb-it" data-tab="2">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><path d="M22 4L12 14.01l-3-3"></path></svg>
-      <span>审批</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l2 2 4-4"></path><path d="M9 17h6"></path><rect x="5" y="3" width="14" height="18" rx="2"></rect></svg>
+      <span>待办</span>
       <span class="badge">5</span>
     </div>
   </div>
@@ -5629,6 +5647,32 @@ function apIsLeaveFlow(item){
 function apShouldShowFlow(item){
   return apIsTransferFlow(item) || apIsLeaveFlow(item) || isNoticeItem(item) || !!(item && item.todoAction === 'open');
 }
+function apIsTodoRejected(item){
+  return !!(item && item.tab === 0 && item.status === 'bh');
+}
+function getApprovalPendingTodoItems(){
+  try{
+    if(!Array.isArray(AP_DATA)) return null;
+    return AP_DATA.filter(function(item){
+      return item && item.tab === 0 && !apIsTodoRejected(item) && apShouldShowFlow(item);
+    });
+  }catch(e){
+    return null;
+  }
+}
+function getApprovalPendingTodoCount(fallbackCount){
+  var items = getApprovalPendingTodoItems();
+  if(items) return items.length;
+  return typeof fallbackCount === 'number' ? fallbackCount : 0;
+}
+function updateTodoBadges(count){
+  var total = typeof count === 'number' ? count : getApprovalPendingTodoCount(0);
+  var text = total > 99 ? '99+' : String(total);
+  var homeBadge = document.getElementById('todo-badge');
+  if(homeBadge) homeBadge.textContent = text;
+  var apBadge = document.getElementById('ap-todo-count');
+  if(apBadge) apBadge.textContent = text;
+}
 function openAttendExceptionFromTodo(){
   openDetail('dt-attend-exception');
 }
@@ -5681,10 +5725,40 @@ function apCurrentHandlerName(item){
   if(type === 'attend' && (subject === '请假申请' || /假申请$/.test(subject) || item.leaveType || item.leaveTime || item.leaveDuration)) return '刘观耀';
   return tab === 0 ? '刘观福' : '刘观耀';
 }
-function apCurrentHandlerHtml(item){
+function apPersonNameAndNo(text){
+  var raw = String(text || '').trim();
+  var m = raw.match(/^(.+?)[（(]([^）)]+)[）)]$/);
+  return {
+    name: m ? m[1].trim() : raw,
+    workNo: m ? m[2].trim() : ''
+  };
+}
+function apCurrentHandlerInfo(item){
   var handler = apCurrentHandlerName(item);
-  if(!handler) return '';
-  return '<div class="ap2-handler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>当前处理人：'+apSafeText(handler)+'</span></div>';
+  if(!handler) return null;
+  var parsed = apPersonNameAndNo(handler);
+  var directNo = String(
+    (item && (item.currentHandlerNo || item.currentApproverNo || item.processorNo || item.approverNo || item.handlerNo || item.workNo)) || ''
+  ).trim();
+  var fallbackNo = {
+    '刘观福':'zt29334',
+    '刘观耀':'zt23432',
+    '黄东升':'WX21197'
+  };
+  return {
+    name: parsed.name,
+    workNo: directNo || parsed.workNo || fallbackNo[parsed.name] || ''
+  };
+}
+function apFormatPersonWithNo(info){
+  if(!info || !info.name) return '';
+  return info.workNo ? info.name+'（'+info.workNo+'）' : info.name;
+}
+function apCurrentHandlerHtml(item){
+  var info = apCurrentHandlerInfo(item);
+  var text = apFormatPersonWithNo(info);
+  if(!text) return '';
+  return '<div class="ap2-handler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="ap2-handler-label">当前处理人</span><span class="ap2-handler-name">'+apSafeText(text)+'</span></div>';
 }
 function noticeAvatarHtml(){
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5h16v12H7l-3 3V5z"></path><path d="M8 9h8M8 13h5"></path></svg>';
@@ -5775,7 +5849,8 @@ function renderTodo(){
   var box=document.getElementById('home-todo');
   var section=document.getElementById('home-todo-section');
   if(!box) return;
-  var items=homeTodoItems().filter(function(item){
+  var allHomeTodoItems = homeTodoItems();
+  var items=allHomeTodoItems.filter(function(item){
     return apIsLeaveFlow({
       type:item.flowKey,
       subject:item.processName,
@@ -5784,6 +5859,8 @@ function renderTodo(){
       leaveDuration:item.leaveDuration
     });
   }).slice(0,1);
+  updateTodoBadges(getApprovalPendingTodoCount(allHomeTodoItems.length));
+  setTimeout(function(){updateTodoBadges();},0);
   if(section) section.classList.toggle('td-hidden',items.length===0);
   if(!items.length){
     box.innerHTML='';
@@ -5809,7 +5886,7 @@ function renderTodo(){
               '<button class="ap2-btn danger" onclick="openHomeTodoAction('+index+',\'disagree\',event)">不同意</button>'+
               '<button class="ap2-btn primary" onclick="openHomeTodoAction('+index+',\'agree\',event)">同意</button>'+
             '</div>' : '')));
-    var flowClass = !isNotice && apIsLeaveFlow({type:t.flowKey,subject:t.processName,leaveType:t.leaveType,leaveTime:t.leaveTime,leaveDuration:t.leaveDuration}) ? ' leave-flow' : '';
+    var flowClass = !isNotice && apIsLeaveFlow({type:t.flowKey,subject:t.processName,leaveType:t.leaveType,leaveTime:t.leaveTime,leaveDuration:t.leaveDuration}) ? ' leave-flow' : (isTransferTodo ? ' transfer-flow' : '');
     return '<div class="ap-card2 home-ap-card'+flowClass+(isNotice?' ap2-notice':'')+(canOpen?'':' no-open')+'"'+clickAttr+'>'+
       '<div class="ap2-head"><span class="ap2-type '+t.flowKey+'">'+icon+t.flowText+'</span><span class="ap2-st pd">'+statusText+'</span></div>'+
       '<div class="ap2-content">'+
@@ -5820,8 +5897,7 @@ function renderTodo(){
         '</div>'+
       '</div></div>';
   }).join('');
-  var badge=document.getElementById('todo-badge');
-  if(badge)badge.textContent=items.length>99?'99+':String(items.length);
+  updateTodoBadges(getApprovalPendingTodoCount(allHomeTodoItems.length));
 }
 
 /* ═══ 我的申请（首页 + 详情页）═══ */
@@ -5914,7 +5990,7 @@ function myAppCardHtml(item, index, source){
     return '<button class="ap2-btn '+a.cls+'" onclick="openMyAppAction('+index+',\''+source+'\',\''+a.key+'\',event)">'+a.label+'</button>';
   }).join('')+'</div>' : '';
   var clickAttr = canOpen ? ' onclick="openMyAppItem('+index+',\''+source+'\')" role="button"' : '';
-  var flowClass = apIsLeaveFlow(item) ? ' leave-flow' : '';
+  var flowClass = apIsLeaveFlow(item) ? ' leave-flow' : (apIsTransferFlow(item) ? ' transfer-flow' : '');
   return '<div class="ap-card2 '+(source==='home'?'my-app-home-item':'my-app-detail-item')+flowClass+(canOpen?'':' no-open')+'"'+clickAttr+'>'+
     '<div class="ap2-head"><span class="ap2-type '+item.type+'">'+icon+item.typeLabel+'</span><span class="ap2-st '+myAppStatusClass(item)+'">'+statusText+'</span></div>'+
     '<div class="ap2-content">'+
@@ -6063,7 +6139,7 @@ function openMyAppFilter(kind){
   if(mask){
     var filterBar=document.getElementById('myAppFilterBar');
     if(filterBar){
-      var top=filterBar.offsetTop + filterBar.offsetHeight + 4;
+      var top=filterBar.offsetTop + filterBar.offsetHeight;
       panel.style.top=top+'px';
       mask.style.top=top+'px';
     }
@@ -6558,7 +6634,7 @@ function switchTab(idx){
       if(p) p.classList.toggle('act', k===key);
     });
     /* 切换到审批Tab时刷新列表 */
-    if(idx===2){apActiveTab=0;renderApList();updateApFilterUI();}
+    if(idx===2){apActiveTab=0;updateApFilterUI();renderApList();}
     var fab=document.querySelector('.ai-fab');
     if(fab){
       fab.classList.add('ai-fab-hidden');
@@ -6572,7 +6648,7 @@ function aiAnswerText(question){
     return '调动申请需要先确认调动人、调动类型、调动日期、调入任职信息等内容。当前示例按申请信息、调动后任职信息、调动前任职信息依次展示，变更项会以标签提醒。';
   }
   if(question.indexOf('审批')>-1 || question.indexOf('进度')>-1){
-    return '你当前有 2 条调动申请待处理，可进入审批中心查看申请内容、审批记录和当前处理节点。';
+    return '你当前有 2 条调动申请待处理，可进入待办中心查看申请内容、审批记录和当前处理节点。';
   }
   if(question.indexOf('考勤')>-1 || question.indexOf('异常')>-1 || question.indexOf('缺卡')>-1){
     return '考勤异常可先查看当天打卡记录，确认缺卡、迟到或早退原因后再发起补签或相关考勤申请。';
@@ -6588,7 +6664,7 @@ function aiActionChips(question){
     return "<button class=\"ai-chip\" onclick=\"openDetail('dt-transfer')\">发起调动申请</button><button class=\"ai-chip\" onclick=\"switchTab(2);setTimeout(function(){switchApTab(3)},50)\">我的申请</button>";
   }
   if(question.indexOf('审批')>-1 || question.indexOf('进度')>-1){
-    return "<button class=\"ai-chip\" onclick=\"switchTab(2);setTimeout(function(){switchApTab(0)},50)\">去审批中心</button><button class=\"ai-chip\" onclick=\"openDetail('dt-ap-transfer',0,'pd')\">查看调动申请</button>";
+    return "<button class=\"ai-chip\" onclick=\"switchTab(2);setTimeout(function(){switchApTab(0)},50)\">去待办中心</button><button class=\"ai-chip\" onclick=\"openDetail('dt-ap-transfer',0,'pd')\">查看调动申请</button>";
   }
   if(question.indexOf('考勤')>-1 || question.indexOf('异常')>-1 || question.indexOf('缺卡')>-1){
     return "<button class=\"ai-chip\" onclick=\"switchTab(1)\">查看考勤</button><button class=\"ai-chip\" onclick=\"openDetail('dt-attend-day')\">查看当天记录</button>";
@@ -6596,7 +6672,7 @@ function aiActionChips(question){
   if(question.indexOf('工资')>-1 || question.indexOf('薪资')>-1){
     return "<button class=\"ai-chip\" onclick=\"openDetail('dt-salary')\">查看工资条</button>";
   }
-  return '<button class="ai-chip" onclick="switchTab(2)">审批中心</button><button class="ai-chip" onclick="switchTab(1)">考勤</button>';
+  return '<button class="ai-chip" onclick="switchTab(2)">待办中心</button><button class="ai-chip" onclick="switchTab(1)">考勤</button>';
 }
 
 function aiAppendMessage(role, text, chips){
@@ -10304,8 +10380,6 @@ function switchApTab(idx){
   });
   apLists.forEach((l,i)=>{if(l) l.style.display = i===idx ? 'block' : 'none'});
   closeApFilterPanel();
-  var statusChip = document.getElementById('apStatusChip');
-  if(statusChip) statusChip.style.display = 'inline-flex';
   updateApFilterUI();
   renderApList();
 }
@@ -10440,6 +10514,10 @@ function apLoadActiveFilterState(){
   apFilterFlow = state.flow || null;
   apFilterTimeOrder = state.timeOrder || 'desc';
   apFilterStatus = state.status || null;
+  if(apUsePrimaryFilterOptions()){
+    apFilterStatus = null;
+    state.status = null;
+  }
   var input = document.getElementById('apSearchInput');
   if(input && input.value !== (state.search || '')) input.value = state.search || '';
 }
@@ -10449,7 +10527,7 @@ function apSaveActiveFilterState(){
   state.search = input ? (input.value || '') : (state.search || '');
   state.flow = apFilterFlow || null;
   state.timeOrder = apFilterTimeOrder || 'desc';
-  state.status = apFilterStatus || null;
+  state.status = apUsePrimaryFilterOptions() ? null : (apFilterStatus || null);
 }
 function apHandleSearchInput(){
   apSaveActiveFilterState();
@@ -10461,7 +10539,7 @@ function apUsePrimaryFilterOptions(){
   return apActiveTab === 0 || apActiveTab === 1;
 }
 function apFlowPlaceholder(){
-  return apUsePrimaryFilterOptions() ? '类型' : '流程类型';
+  return apUsePrimaryFilterOptions() ? '待办类型' : '流程类型';
 }
 function apStatusPlaceholder(){
   return apUsePrimaryFilterOptions() ? '状态' : '审批状态';
@@ -10496,7 +10574,7 @@ function apStatusMatches(item, key){
 
 function closeApFilterPanel(){
   var panel = document.getElementById('apFilterPanel');
-  if(panel){panel.classList.remove('show');panel.innerHTML='';panel.removeAttribute('data-kind');}
+  if(panel){panel.classList.remove('show');panel.innerHTML='';panel.removeAttribute('data-kind');panel.style.top='';}
   var mask = document.getElementById('apFilterMask');
   if(mask){mask.classList.remove('show');mask.style.top='';}
   ['apFlowChip','apStatusChip','apTimeChip'].forEach(function(id){
@@ -10544,12 +10622,15 @@ function renderApFilterPanel(kind){
     };
   });
   panel.classList.add('show');
+  var filterBar = document.getElementById('apFilterBar');
+  if(filterBar){
+    panel.style.top = (filterBar.offsetTop + filterBar.offsetHeight) + 'px';
+  }
   var mask = document.getElementById('apFilterMask');
   if(mask){
     /* 遮罩从筛选栏下方开始覆盖（相对于滚动容器定位）*/
-    var filterBar = document.getElementById('apFilterBar');
     if(filterBar){
-      mask.style.top = (filterBar.offsetTop + filterBar.offsetHeight + 4) + 'px';
+      mask.style.top = (filterBar.offsetTop + filterBar.offsetHeight) + 'px';
     }
     mask.classList.add('show');
   }
@@ -10568,6 +10649,7 @@ function openApFlowSheet(){
 }
 
 function openApStatusSheet(){
+  if(apUsePrimaryFilterOptions()) return;
   var panel = document.getElementById('apFilterPanel');
   if(panel && panel.classList.contains('show') && panel.getAttribute('data-kind') === 'status'){
     closeApFilterPanel();
@@ -10585,12 +10667,20 @@ function openApTimeSheet(){
 }
 
 function updateApFilterUI(){
+  var filterBar = document.getElementById('apFilterBar');
   var flowChip = document.getElementById('apFlowChip');
   var flowLabel = document.getElementById('apFlowLabel');
   var timeChip = document.getElementById('apTimeChip');
   var timeLabel = document.getElementById('apTimeLabel');
   var statusChip = document.getElementById('apStatusChip');
   var statusLabel = document.getElementById('apStatusLabel');
+  var usePrimaryFilters = apUsePrimaryFilterOptions();
+
+  if(filterBar) filterBar.classList.toggle('primary-only', usePrimaryFilters);
+  if(statusChip){
+    statusChip.classList.toggle('is-hidden', usePrimaryFilters);
+    if(usePrimaryFilters) statusChip.classList.remove('active','open');
+  }
 
   // 流程类型
   if(apFilterFlow){
@@ -10614,6 +10704,11 @@ function updateApFilterUI(){
   }
 
   // 流程状态
+  if(usePrimaryFilters){
+    apFilterStatus = null;
+    if(statusLabel) statusLabel.textContent = apStatusPlaceholder();
+    return;
+  }
   if(apFilterStatus){
     statusChip.classList.add('active');
     var statusName = apFindOptionLabel(getApStatusOptions(), apFilterStatus, apStatusPlaceholder());
@@ -10636,7 +10731,7 @@ function renderApList(){
 
   // 筛选
   var items = AP_DATA.filter(function(d){
-    return d.tab === apActiveTab && apShouldShowFlow(d);
+    return d.tab === apActiveTab && !apIsTodoRejected(d) && apShouldShowFlow(d);
   });
 
   // 搜索
@@ -10665,15 +10760,12 @@ function renderApList(){
     return apFilterTimeOrder==='desc' ? -cmp : cmp;
   });
 
-  // 更新待办角标
-  var badgeEl = document.getElementById('ap-todo-count');
-  if(badgeEl && apActiveTab===0){
-    badgeEl.textContent = items.length;
-  }
+  // 待办角标始终展示待处理页完整数据量，不随当前筛选结果变化。
+  updateTodoBadges(getApprovalPendingTodoCount(items.length));
 
   if(items.length===0){
     _apRenderedItems = [];
-    container.innerHTML = '<div class="ap-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg><div class="em-tt">暂无审批记录</div><div class="em-ds">'+(searchQ||apFilterFlow||apFilterStatus?'可以尝试调整筛选条件':'暂无相关审批')+'</div></div>';
+    container.innerHTML = '<div class="ap-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg><div class="em-tt">暂无待办记录</div><div class="em-ds">'+(searchQ||apFilterFlow||apFilterStatus?'可以尝试调整筛选条件':'暂无相关事项')+'</div></div>';
     return;
   }
 
@@ -10689,7 +10781,7 @@ function renderApList(){
     var actionHtml = actions.length ? '<div class="ap2-actions">'+actions.map(function(a){
       return '<button class="ap2-btn '+a.cls+'" onclick="openApListItemAction('+index+',\''+a.key+'\',event)">'+a.label+'</button>';
     }).join('')+'</div>' : '';
-    var flowClass = apIsLeaveFlow(d) ? ' leave-flow' : '';
+    var flowClass = apIsLeaveFlow(d) ? ' leave-flow' : (apIsTransferFlow(d) ? ' transfer-flow' : '');
     return '<div class="ap-card2'+flowClass+(isNoticeItem(d)?' ap2-notice':'')+(canOpen?'':' no-open')+'" '+click+'>'+
       '<div class="ap2-head"><span class="ap2-type '+d.type+'">'+icon+d.typeLabel+'</span><span class="ap2-st '+d.status+'">'+d.statusLabel+'</span></div>'+
       '<div class="ap2-content">'+
