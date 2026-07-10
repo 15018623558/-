@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>审批通过提醒-员工</title>
+  <style>
+    :root{
+      --pr50:#EFF6FF;--pr100:#DBEAFE;--pr200:#BFDBFE;--pr:#2563EB;--pr700:#1D4ED8;
+      --em50:#ECFDF5;--em100:#D1FAE5;--em:#10B981;--em700:#047857;
+      --ac50:#FFFBEB;--ac100:#FDE68A;--ac:#F59E0B;
+      --ro50:#FFF1F2;--ro100:#FFE4E6;--ro:#F43F5E;
+      --cy50:#ECFEFF;--cy:#06B6D4;--vi50:#F5F3FF;--vi:#8B5CF6;--or50:rgba(249,115,22,.1);--or:#F97316;
+      --c9:#0F172A;--c7:#334155;--c5:#64748B;--c4:#94A3B8;--c3:#CBD5E1;--c2:#E2E8F0;--c1:#F1F5F8;
+      --sf:#FFF;--s2:#F7F9FC;--s3:#EEF2F7;--bg:#F0F4F8;--bd:rgba(15,23,42,.06);--dv:#F1F5F9;
+      --sx:0 1px 3px rgba(0,0,0,.05);--sm:0 2px 8px rgba(0,0,0,.06);--md:0 4px 16px rgba(0,0,0,.08);
+      --f:'Inter','Noto Sans SC','PingFang SC',system-ui,sans-serif;--m:'JetBrains Mono','SF Mono',monospace;
+      --r1:10px;--r2:14px;--r3:18px;--r4:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:var(--f);color:var(--c9);background:var(--bg);letter-spacing:0}
+    body{display:flex;justify-content:center}
+    button{font-family:inherit;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .phone{width:min(100vw,430px);min-height:100vh;background:var(--bg);position:relative;overflow:hidden}
+    @media (min-width:520px){
+      body{padding:18px 0}
+      .phone{width:393px;min-height:852px;max-height:852px;border:1px solid rgba(15,23,42,.08);border-radius:34px;box-shadow:0 25px 60px rgba(15,23,42,.18);overflow:hidden}
+    }
+    .page{height:100vh;max-height:inherit;display:flex;flex-direction:column;background:var(--bg)}
+    .status{height:42px;display:flex;align-items:end;justify-content:space-between;padding:0 18px 8px;font:600 14px/1 var(--m);color:var(--c9);background:rgba(255,255,255,.88)}
+    .sig{display:flex;align-items:center;gap:6px;color:var(--c7);font-family:var(--f);font-size:11px}
+    .battery{width:24px;height:12px;border:1.5px solid var(--c7);border-radius:4px;position:relative}
+    .battery:before{content:'';position:absolute;right:-4px;top:3px;width:2px;height:5px;border-radius:1px;background:var(--c7)}
+    .battery:after{content:'';position:absolute;left:2px;top:2px;width:15px;height:6px;border-radius:2px;background:var(--em)}
+    .topbar{height:54px;display:flex;align-items:center;gap:12px;padding:0 16px;background:rgba(255,255,255,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+    .back,.more,.send{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;color:var(--c7);flex:0 0 44px}
+    .back:active,.more:active,.send:active,.app:active,.notice:active,.chip:active,.chip-arrow:active,.sheet-item:active{transform:scale(.96)}
+    .title{flex:1;min-width:0;text-align:center}
+    .title b{display:block;font-size:17px;line-height:1.2;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .title span{display:block;margin-top:2px;font-size:11px;color:var(--c5);font-weight:600}
+    .content{flex:1;overflow:auto;padding:12px 16px 118px}
+    .bot-card{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;animation:fadeUp .22s ease both}
+    .bot-avatar{width:34px;height:34px;border-radius:12px;background:var(--pr);display:grid;place-items:center;color:#fff;box-shadow:var(--sm);flex:0 0 34px}
+    .bubble{background:var(--sf);border:1px solid var(--bd);border-radius:6px 18px 18px 18px;box-shadow:var(--sx);padding:12px;min-width:0;flex:1}
+    .bubble h1{font-size:16px;line-height:1.32;margin:0 0 7px;font-weight:800;color:var(--c9)}
+    .bubble p{margin:0;font-size:12px;line-height:1.6;color:var(--c7);font-weight:500}
+    .section{margin-top:12px;animation:fadeUp .22s ease both}
+    .section-hd{display:flex;align-items:center;justify-content:space-between;margin:0 2px 8px}
+    .section-hd h2{margin:0;font-size:14px;line-height:1.2;font-weight:800;color:var(--c9)}
+    .section-hd span{font-size:11px;color:var(--c5);font-weight:600}
+    .app-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);padding:12px;box-shadow:var(--sx)}
+    .app{min-height:78px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;transition:transform .12s ease,background .12s ease;position:relative}
+    .app:focus-visible,.notice-btn:focus-visible,.chip:focus-visible,.chip-arrow:focus-visible{outline:2px solid var(--pr200);outline-offset:2px}
+    .app-icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;border:1px solid rgba(0,0,0,.03);box-shadow:var(--sx)}
+    .app-icon svg{width:21px;height:21px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .app-name{font-size:11px;line-height:1.2;font-weight:700;color:var(--c7);white-space:nowrap}
+    .badge{position:absolute;right:8px;top:5px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--ro);color:#fff;font:800 9px/18px var(--m);box-shadow:0 0 0 2px var(--sf);text-align:center}
+    .mini-menu{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:8px}
+    .mini-menu button{height:38px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);box-shadow:var(--sx);color:var(--c7);font-size:11px;font-weight:800}
+    .mini-menu button.act{background:var(--pr50);color:var(--pr);border-color:var(--pr100)}
+    .notice-list{display:flex;flex-direction:column;gap:8px}
+    .notice{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);box-shadow:var(--sx);padding:12px;display:flex;gap:10px;align-items:flex-start;transition:transform .12s ease}
+    .notice-ic{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;flex:0 0 36px}
+    .notice-ic svg{width:19px;height:19px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .notice-main{flex:1;min-width:0}
+    .notice-top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+    .notice-top b{font-size:13px;line-height:1.25;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .tag{height:18px;display:inline-flex;align-items:center;border-radius:999px;padding:0 7px;font-size:9px;font-weight:800;flex:0 0 auto}
+    .tag.pending{background:var(--pr50);color:var(--pr)}
+    .tag.ok{background:var(--em50);color:var(--em700)}
+    .tag.warn{background:var(--ac50);color:#92400E}
+    .notice-main p{margin:0;font-size:11px;line-height:1.45;color:var(--c5);font-weight:600}
+    .notice-btn{align-self:center;height:32px;min-width:58px;border-radius:9px;padding:0 10px;background:var(--pr);color:#fff;font-size:11px;font-weight:800;box-shadow:0 4px 12px rgba(37,99,235,.18)}
+    .notice-btn.light{background:var(--pr50);color:var(--pr);box-shadow:none}
+    .composer{position:absolute;left:0;right:0;bottom:0;z-index:20;padding:8px 12px max(12px,env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--bd);pointer-events:auto}
+    .chip-nav{position:relative;margin:0 -2px;padding:0 38px 8px}
+    .chips{display:flex;gap:8px;overflow:auto;padding:0 2px;scrollbar-width:none;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;touch-action:pan-x;cursor:grab;user-select:none}
+    .chips.dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{height:34px;min-width:62px;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 12px;border-radius:10px;background:var(--sf);border:1px solid var(--bd);box-shadow:var(--sx);font-size:12px;font-weight:700;color:var(--c7);white-space:nowrap;flex:0 0 auto;scroll-snap-align:start;transition:transform .12s ease}
+    .chip.act{background:var(--pr50);color:var(--pr);border-color:var(--pr100)}
+    .chip-arrow{position:absolute;top:0;width:34px;height:34px;border-radius:12px;background:transparent;border:0;box-shadow:none;display:grid;place-items:center;color:var(--c5);z-index:2;transition:transform .12s ease,opacity .12s ease,background .12s ease,color .12s ease}
+    .chip-arrow.left{left:0}
+    .chip-arrow.right{right:0}
+    .chip-arrow svg{width:17px;height:17px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .chip-arrow:disabled{opacity:.35;color:var(--c3);pointer-events:none}
+    .chip-arrow:not(:disabled):active{background:var(--pr50);color:var(--pr)}
+    .input-row{display:flex;align-items:center;gap:8px}
+    .input{height:44px;flex:1;display:flex;align-items:center;padding:0 14px;border-radius:18px;background:var(--s2);color:var(--c4);font-size:13px;font-weight:600}
+    .send{background:var(--pr);color:#fff;border-radius:16px}
+    .sheet-mask{position:absolute;inset:0;background:rgba(15,23,42,.36);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:30}
+    .sheet{position:absolute;left:0;right:0;bottom:0;z-index:31;background:var(--sf);border-radius:20px 20px 0 0;box-shadow:0 -12px 32px rgba(15,23,42,.14);transform:translateY(102%);transition:transform .28s ease;padding-bottom:max(14px,env(safe-area-inset-bottom))}
+    .sheet.show{transform:translateY(0)}
+    .sheet-mask.show{opacity:1;pointer-events:auto}
+    .handle{width:36px;height:4px;border-radius:2px;background:var(--c3);margin:10px auto 0}
+    .sheet-hd{display:flex;align-items:center;justify-content:space-between;padding:13px 18px 8px}
+    .sheet-hd b{font-size:15px;font-weight:800}
+    .sheet-hd span{font-size:11px;color:var(--c5);font-weight:600}
+    .sheet-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:0 16px 10px;max-height:42vh;overflow:auto}
+    .sheet-item{min-height:48px;border-radius:12px;background:var(--s2);border:1px solid var(--bd);padding:9px 10px;text-align:left;display:flex;align-items:center;gap:8px;transition:transform .12s ease,background .12s ease}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--pr);flex:0 0 8px}
+    .sheet-item strong{display:block;font-size:12px;line-height:1.25;font-weight:800;color:var(--c9)}
+    .sheet-item small{display:block;margin-top:2px;font-size:9px;line-height:1.2;color:var(--c5);font-weight:600}
+    .sheet-close{height:42px;margin:2px 16px 0;border-radius:13px;background:var(--s3);color:var(--pr);font-size:13px;font-weight:800;width:calc(100% - 32px)}
+    .local-panel{position:absolute;inset:0;background:var(--bg);z-index:40;transform:translateX(105%);transition:transform .28s ease;display:flex;flex-direction:column}
+    .local-panel.show{transform:translateX(0)}
+    .panel-body{padding:12px 16px 100px;overflow:auto}
+    .form-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r2);box-shadow:var(--sx);overflow:hidden}
+    .form-row{min-height:48px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--dv);gap:14px}
+    .form-row:last-child{border-bottom:0}
+    .form-row span{font-size:12px;color:var(--c5);font-weight:600}
+    .form-row b{font-size:13px;color:var(--c9);font-weight:700;text-align:right}
+    .primary-wide{height:46px;width:100%;border-radius:14px;background:var(--pr);color:#fff;font-size:13px;font-weight:800;margin-top:12px;box-shadow:0 4px 14px rgba(37,99,235,.22)}
+    .leave-apply{background:#fff;color:#111827}
+    .leave-apply .status{background:#fff;color:#111827}
+    .leave-hd{height:54px;display:flex;align-items:center;position:sticky;top:0;z-index:2;padding:0 16px;background:#fff}
+    .leave-hd .back{margin-left:-8px;color:#111827;background:transparent;box-shadow:none}
+    .leave-hd-title{position:absolute;left:94px;right:94px;text-align:center;font-size:18px;line-height:1.2;font-weight:800;color:#111827}
+    .leave-record-link{margin-left:auto;height:44px;display:inline-flex;align-items:center;justify-content:flex-end;color:#20C3C2;font-size:16px;font-weight:800;white-space:nowrap}
+    .leave-body{flex:1;overflow:auto;padding:20px 32px 110px;background:#fff}
+    .leave-form-card{background:#fff;border:0;border-radius:0;box-shadow:none;overflow:visible}
+    .leave-field{width:100%;min-height:82px;padding:14px 0 13px;border-bottom:1px solid rgba(226,232,240,.86);display:flex;align-items:center;gap:12px;text-align:left;background:#fff}
+    .leave-field:active{background:#FAFCFD}
+    .leave-field-main{flex:1;min-width:0}
+    .leave-label{display:block;font-size:13px;line-height:1.25;font-weight:700;color:#8A8F98}
+    .leave-label .req{color:#F05252;margin-left:2px;font-weight:900}
+    .leave-value{display:block;margin-top:12px;font-size:21px;line-height:1.2;font-weight:500;color:#1F2329;font-variant-numeric:tabular-nums}
+    .leave-value.placeholder{color:#C4C8CE}
+    .leave-value.readonly{color:#C4C8CE}
+    .leave-chev{width:20px;height:20px;display:grid;place-items:center;color:#B8BDC5;flex:0 0 20px}
+    .leave-chev svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .leave-attach{padding:28px 0 4px}
+    .leave-attach-title{font-size:13px;font-weight:700;color:#8A8F98;margin-bottom:24px}
+    .leave-add{width:68px;height:68px;border:1px dashed #CCD3DC;border-radius:7px;background:#fff;color:#CDD2D8;display:grid;place-items:center}
+    .leave-add svg{width:34px;height:34px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round}
+    .leave-footer{position:absolute;left:0;right:0;bottom:0;padding:12px 32px max(28px,env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(255,255,255,.78),#fff 24%)}
+    .leave-submit{height:50px;width:100%;border-radius:7px;background:#22C6C5;color:#fff;font-size:16px;font-weight:800;box-shadow:0 8px 18px rgba(34,198,197,.22)}
+    .leave-submit:active{transform:scale(.98);background:#20B9B8}
+    .approval-time{margin:2px 0 5px 45px;font:600 12px/1 var(--f);color:var(--c4)}
+    .approval-chat{display:flex;gap:10px;align-items:flex-start;animation:fadeUp .22s ease both}
+    .approval-logo{width:35px;height:35px;border-radius:50%;background:var(--sf);display:grid;place-items:center;box-shadow:var(--sm);flex:0 0 35px}
+    .approval-logo svg{width:31px;height:31px;display:block}
+    .approval-card{position:relative;min-width:0;flex:1;background:var(--sf);border:1px solid var(--c2);border-radius:6px 14px 14px 14px;box-shadow:var(--sx);padding:14px 13px 13px;overflow:hidden}
+    .approval-card:before{content:'';position:absolute;inset:0;background:linear-gradient(150deg,transparent 0 42%,rgba(148,163,184,.06) 42% 53%,transparent 53% 100%);pointer-events:none}
+    .approval-wm{position:absolute;color:rgba(148,163,184,.14);font-size:11px;font-weight:800;transform:rotate(-18deg);white-space:nowrap;pointer-events:none;user-select:none}
+    .approval-wm.w1{right:12px;top:56px}.approval-wm.w2{left:92px;bottom:25px}
+    .approval-content{position:relative;z-index:1}
+    .approval-title{margin:0 0 10px;font-size:16px;line-height:1.3;font-weight:800;color:var(--c9)}
+    .approval-body{margin:0 0 16px;font-size:14px;line-height:1.55;font-weight:600;color:var(--c9)}
+    .approval-action{height:36px;min-width:88px;border-radius:9px;border:1px solid var(--c3);background:var(--sf);color:var(--c9);font-size:13px;font-weight:800;padding:0 14px;transition:transform .12s ease,background .12s ease,border-color .12s ease}
+    .approval-action:active{transform:scale(.96);background:var(--s2);border-color:var(--c4)}
+    .toast{position:absolute;left:50%;top:78px;transform:translateX(-50%) translateY(-8px);background:var(--c9);color:#fff;border-radius:999px;padding:9px 15px;font-size:11px;font-weight:700;box-shadow:var(--md);opacity:0;pointer-events:none;transition:opacity .24s ease,transform .24s ease;z-index:80;white-space:nowrap}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <main class="phone" id="phone">
+    <section class="page">
+      <div class="status"><span>14:22</span><div class="sig"><span>5G</span><span>4G</span><i class="battery"></i></div></div>
+      <header class="topbar">
+        <button class="back" type="button" aria-label="返回" onclick="history.length>1?history.back():toast('当前为服务台首页')">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="title"><b>刘观福的HRONE</b><span>员工自助 · 快捷办理</span></div>
+        <button class="more" type="button" aria-label="更多" onclick="toast('更多服务配置演示中')">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg>
+        </button>
+      </header>
+
+      <div class="content">
+        <div class="approval-time">6月24日 20:10</div>
+        <div class="approval-chat">
+          <div class="approval-logo" aria-label="HRONE Logo">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <defs>
+                <linearGradient id="hroneA" x1="15" y1="8" x2="51" y2="56" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#6D5BFF"/>
+                  <stop offset=".38" stop-color="#1BB7D8"/>
+                  <stop offset=".72" stop-color="#123A9E"/>
+                  <stop offset="1" stop-color="#7C3AED"/>
+                </linearGradient>
+                <linearGradient id="hroneB" x1="45" y1="9" x2="17" y2="52" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#A855F7"/>
+                  <stop offset=".44" stop-color="#2563EB"/>
+                  <stop offset="1" stop-color="#0EA5E9"/>
+                </linearGradient>
+              </defs>
+              <circle cx="32" cy="32" r="29" fill="#fff"/>
+              <path d="M48 15c-8-8-22-7-31 2-9 9-10 23-2 31 4 4 10 6 16 6-5-2-8-6-9-11-2-8 2-18 10-24 6-5 12-6 16-4z" fill="url(#hroneA)"/>
+              <path d="M16 49c8 8 23 7 32-2 8-8 10-21 3-29-2-3-6-5-10-6 5 3 8 8 8 14 0 8-5 17-13 22-7 4-15 5-20 1z" fill="url(#hroneB)"/>
+              <circle cx="33" cy="32" r="10" fill="#fff"/>
+            </svg>
+          </div>
+          <article class="approval-card" aria-label="调动流程审批通过提醒">
+            <span class="approval-wm w1">刘观福 9045</span>
+            <span class="approval-wm w2">刘观福 9045</span>
+            <div class="approval-content">
+              <h1 class="approval-title">审批办结通知</h1>
+              <p class="approval-body">
+                您提交的调动申请审批已通过，可点击查看详情。
+              </p>
+              <button class="approval-action" type="button" onclick="jump('ap-transfer-approved')">查看详情</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <footer class="composer">
+        <div class="chip-nav" id="chipNav">
+          <button class="chip-arrow left" type="button" aria-label="向左查看更多应用" onclick="scrollChipNav(-1)"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="chips" id="chips" aria-label="常用应用横向列表"></div>
+          <button class="chip-arrow right" type="button" aria-label="向右查看更多应用" onclick="scrollChipNav(1)"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+        <div class="input-row">
+          <div class="input">发送给 刘观福的HRONE</div>
+          <button class="send" type="button" aria-label="发送" onclick="toast('可以直接点击应用栏入口办理')">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </footer>
+    </section>
+
+    <section class="local-panel leave-apply" id="leavePanel">
+      <div class="status"><span>14:22</span><div class="sig"><span>5G</span><span>4G</span><i class="battery"></i></div></div>
+      <header class="leave-hd">
+        <button class="back" type="button" aria-label="返回" onclick="closeLeave()"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="leave-hd-title">请假</div>
+        <button class="leave-record-link" type="button" onclick="toast('休假记录演示中')">休假记录</button>
+      </header>
+      <div class="leave-body">
+        <div class="leave-form-card">
+          <button class="leave-field" type="button" onclick="toast('休假类别选择演示')">
+            <span class="leave-field-main">
+              <span class="leave-label">休假类别 <span class="req">*</span></span>
+              <span class="leave-value">年假</span>
+            </span>
+            <span class="leave-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+          </button>
+          <button class="leave-field" type="button" onclick="toast('开始时间选择演示')">
+            <span class="leave-field-main">
+              <span class="leave-label">开始时间 <span class="req">*</span></span>
+              <span class="leave-value">2026-07-08 08:58</span>
+            </span>
+            <span class="leave-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+          </button>
+          <button class="leave-field" type="button" onclick="toast('结束时间选择演示')">
+            <span class="leave-field-main">
+              <span class="leave-label">结束时间 <span class="req">*</span></span>
+              <span class="leave-value">2026-07-08 17:58</span>
+            </span>
+            <span class="leave-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+          </button>
+          <div class="leave-field">
+            <span class="leave-field-main">
+              <span class="leave-label">已休时长 <span class="req">*</span></span>
+              <span class="leave-value readonly">不可输入</span>
+            </span>
+          </div>
+          <div class="leave-field">
+            <span class="leave-field-main">
+              <span class="leave-label">剩余时长 <span class="req">*</span></span>
+              <span class="leave-value readonly">不可输入</span>
+            </span>
+          </div>
+          <button class="leave-field" type="button" onclick="toast('休假说明输入演示')">
+            <span class="leave-field-main">
+              <span class="leave-label">休假说明 <span class="req">*</span></span>
+              <span class="leave-value placeholder">请输入</span>
+            </span>
+            <span class="leave-chev"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+          </button>
+          <div class="leave-attach">
+            <div class="leave-attach-title">休假附件</div>
+            <button class="leave-add" type="button" aria-label="添加附件" onclick="toast('附件上传演示')">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="leave-footer">
+        <button class="leave-submit" type="button" onclick="submitLeave()">确定</button>
+      </div>
+    </section>
+
+    <section class="local-panel" id="overtimePanel">
+      <div class="status"><span>14:22</span><div class="sig"><span>5G</span><span>4G</span><i class="battery"></i></div></div>
+      <header class="topbar">
+        <button class="back" type="button" aria-label="返回" onclick="closeOvertime()"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="title"><b>加班申请</b><span>服务台快捷入口</span></div>
+        <button class="more" type="button" aria-label="更多" onclick="toast('加班规则以公司制度为准')"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg></button>
+      </header>
+      <div class="panel-body">
+        <div class="bot-card">
+          <div class="bot-avatar"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <div class="bubble"><h1>加班申请示例</h1><p>用于演示“加班”入口进入独立页面后的办理状态，后续可接入正式表单。</p></div>
+        </div>
+        <div class="section-hd"><h2>申请信息</h2><span>待提交</span></div>
+        <div class="form-card">
+          <div class="form-row"><span>申请人</span><b>刘观福</b></div>
+          <div class="form-row"><span>加班日期</span><b>2026-07-08</b></div>
+          <div class="form-row"><span>加班时段</span><b>19:00 - 21:00</b></div>
+          <div class="form-row"><span>预计时长</span><b>2 小时</b></div>
+          <div class="form-row"><span>加班原因</span><b>项目上线支持</b></div>
+        </div>
+        <button class="primary-wide" type="button" onclick="toast('加班申请已保存为演示草稿')">保存草稿</button>
+      </div>
+    </section>
+
+    <div class="sheet-mask" id="sheetMask" onclick="closeSheet()"></div>
+    <aside class="sheet" id="sheet" aria-hidden="true">
+      <div class="handle"></div>
+      <div class="sheet-hd"><b id="sheetTitle">人事</b><span id="sheetSub">更多选项</span></div>
+      <div class="sheet-grid" id="sheetGrid"></div>
+      <button class="sheet-close" type="button" onclick="closeSheet()">取消</button>
+    </aside>
+    <div class="toast" id="toast">已打开</div>
+  </main>
+
+  <script>
+    var MAIN_FILE='HRONE移动端首页规划 0706.html';
+    var categories={
+      recruit:['筛选','面试'],
+      hr:['我的档案','团队档案','入职','转正','调动','晋升见习转正','离职','员工信息变更申请','组织架构调整申请'],
+      attend:['销假','出差','公出','调班','居家办公','考勤申诉'],
+      performance:['我的绩效','团队绩效'],
+      salary:['我的工资','调薪通知']
+    };
+    var categoryNames={recruit:'招聘',hr:'人事',attend:'考勤',performance:'绩效',salary:'薪酬'};
+    var appItems=[
+      {name:'请假',key:'leave',tone:'em',icon:'calendar-check',action:function(){jump('leave')}},
+      {name:'补签',key:'buqian',tone:'or',icon:'clock',action:function(){jump('buqian')}},
+      {name:'加班',key:'overtime',tone:'vi',icon:'moon',action:openOvertime},
+      {name:'考勤',key:'calendar',tone:'pr',icon:'calendar',badge:'6',action:function(){jump('attend-calendar')}},
+      {name:'招聘',key:'recruit',tone:'cy',icon:'search',action:function(){openSheet('recruit')}},
+      {name:'人事',key:'hr',tone:'pr',icon:'users',action:function(){openSheet('hr')}},
+      {name:'考勤',key:'attend',tone:'ac',icon:'map-pin',action:function(){openSheet('attend')}},
+      {name:'绩效',key:'performance',tone:'em',icon:'chart',action:function(){openSheet('performance')}},
+      {name:'薪酬',key:'salary',tone:'or',icon:'wallet',action:function(){openSheet('salary')}}
+    ];
+    var noticeItems=[
+      {title:'周明提交的陈思远的调动申请',tag:'待我处理',tagClass:'pending',desc:'当前节点：调出部门直接上级，请及时查看并处理。',btn:'去处理',tone:'pr',jump:'ap-transfer-pending'},
+      {title:'审批办结通知',tag:'已通过',tagClass:'ok',desc:'您提交的调动申请审批已通过，可点击查看详情。',btn:'查看',tone:'em',jump:'ap-transfer-approved'},
+      {title:'考勤异常确认通知',tag:'需确认',tagClass:'warn',desc:'本月存在 6 次出勤异常，请进入考勤记录确认。',btn:'去查看',tone:'ac',jump:'attend-exception'}
+    ];
+    var activeCategory='hr';
+    var activeAppKey='hr';
+
+    function icon(name){
+      var paths={
+        'calendar-check':'<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 5-5"/>',
+        clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>',
+        moon:'<path d="M21 14.5A8.5 8.5 0 119.5 3a6.6 6.6 0 0011.5 11.5z"/>',
+        calendar:'<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/>',
+        search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
+        users:'<path d="M16 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
+        'map-pin':'<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/>',
+        chart:'<path d="M4 19V5"/><path d="M4 19h16"/><rect x="7" y="11" width="3" height="5" rx="1"/><rect x="12" y="8" width="3" height="8" rx="1"/><rect x="17" y="5" width="3" height="11" rx="1"/>',
+        wallet:'<path d="M4 7h16a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2h13"/><path d="M18 12h4v4h-4a2 2 0 010-4z"/>',
+        bell:'<path d="M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/>',
+        check:'<path d="M20 6L9 17l-5-5"/>'
+      };
+      return '<svg viewBox="0 0 24 24">'+(paths[name]||paths.bell)+'</svg>';
+    }
+    function toneStyle(tone){
+      var map={
+        pr:['var(--pr50)','var(--pr)'],em:['var(--em50)','var(--em700)'],ac:['var(--ac50)','#92400E'],
+        ro:['var(--ro50)','var(--ro)'],cy:['var(--cy50)','#0E7490'],vi:['var(--vi50)','var(--vi)'],or:['var(--or50)','var(--or)']
+      };
+      var c=map[tone]||map.pr;
+      return 'background:'+c[0]+';color:'+c[1];
+    }
+    function renderApps(){
+      var grid=document.getElementById('appGrid');
+      if(!grid){return}
+      grid.innerHTML=appItems.map(function(item,i){
+        return '<button class="app" type="button" data-idx="'+i+'"><span class="app-icon" style="'+toneStyle(item.tone)+'">'+icon(item.icon)+'</span><span class="app-name">'+item.name+'</span>'+(item.badge?'<span class="badge">'+item.badge+'</span>':'')+'</button>';
+      }).join('');
+      grid.querySelectorAll('.app').forEach(function(btn){
+        btn.onclick=function(){appItems[Number(btn.dataset.idx)].action()};
+      });
+      var row=document.getElementById('categoryRow');
+      if(!row){return}
+      row.innerHTML=['recruit','hr','attend','performance','salary'].map(function(key){
+        return '<button type="button" class="'+(key===activeCategory?'act':'')+'" onclick="openSheet(\''+key+'\')">'+categoryNames[key]+'</button>';
+      }).join('');
+    }
+    function renderNotices(){
+      var list=document.getElementById('noticeList');
+      if(!list){return}
+      list.innerHTML=noticeItems.map(function(item){
+        return '<article class="notice" onclick="jump(\''+item.jump+'\')"><div class="notice-ic" style="'+toneStyle(item.tone)+'">'+icon(item.tagClass==='ok'?'check':'bell')+'</div><div class="notice-main"><div class="notice-top"><b>'+item.title+'</b><span class="tag '+item.tagClass+'">'+item.tag+'</span></div><p>'+item.desc+'</p></div><button class="notice-btn '+(item.tagClass==='ok'?'light':'')+'" type="button" onclick="event.stopPropagation();jump(\''+item.jump+'\')">'+item.btn+'</button></article>';
+      }).join('');
+    }
+    function renderChips(){
+      var rail=document.getElementById('chips');
+      var lastLeft=rail.scrollLeft;
+      rail.innerHTML=appItems.map(function(item,i){
+        return '<button class="chip '+(item.key===activeAppKey?'act':'')+'" type="button" data-idx="'+i+'"><span>'+item.name+'</span></button>';
+      }).join('');
+      requestAnimationFrame(function(){
+        rail.scrollLeft=Math.min(lastLeft,rail.scrollWidth-rail.clientWidth);
+        updateChipArrowState();
+      });
+    }
+    function updateChipArrowState(){
+      var rail=document.getElementById('chips');
+      var nav=document.getElementById('chipNav');
+      if(!rail||!nav){return}
+      var left=nav.querySelector('.chip-arrow.left');
+      var right=nav.querySelector('.chip-arrow.right');
+      var max=Math.max(0,rail.scrollWidth-rail.clientWidth);
+      var atStart=rail.scrollLeft<=2;
+      var atEnd=rail.scrollLeft>=max-2;
+      nav.classList.toggle('no-overflow',max<=2);
+      if(left){left.disabled=atStart||max<=2}
+      if(right){right.disabled=atEnd||max<=2}
+    }
+    function scrollChipNav(direction){
+      var rail=document.getElementById('chips');
+      if(!rail){return}
+      var distance=Math.max(150,Math.floor(rail.clientWidth*.72));
+      rail.scrollBy({left:direction*distance,behavior:'smooth'});
+      setTimeout(updateChipArrowState,260);
+    }
+    function handleApp(index){
+      var item=appItems[index];
+      activeAppKey=item.key;
+      item.action();
+      renderChips();
+    }
+    function bindChipManualScroll(){
+      var rail=document.getElementById('chips');
+      var drag={active:false,startX:0,left:0,moved:false,button:null,suppressClick:false};
+      var lastRun={idx:-1,time:0};
+      function runChip(btn){
+        if(!btn||!rail.contains(btn)){return}
+        var idx=Number(btn.dataset.idx);
+        if(isNaN(idx)){return}
+        var now=Date.now();
+        if(lastRun.idx===idx&&now-lastRun.time<320){return}
+        lastRun={idx:idx,time:now};
+        handleApp(idx);
+      }
+      rail.addEventListener('pointerdown',function(e){
+        if(e.button!==undefined&&e.button!==0){return}
+        drag.active=true;
+        drag.startX=e.clientX;
+        drag.left=rail.scrollLeft;
+        drag.moved=false;
+        drag.button=e.target.closest&&e.target.closest('.chip');
+        rail.classList.add('dragging');
+        if(rail.setPointerCapture){
+          try{rail.setPointerCapture(e.pointerId)}catch(err){}
+        }
+      });
+      rail.addEventListener('pointermove',function(e){
+        if(!drag.active){return}
+        var delta=e.clientX-drag.startX;
+        if(Math.abs(delta)>10){
+          drag.moved=true;
+          rail.scrollLeft=drag.left-delta;
+          e.preventDefault();
+        }
+      });
+      function endDrag(e){
+        if(!drag.active){return}
+        drag.active=false;
+        rail.classList.remove('dragging');
+        if(rail.releasePointerCapture){
+          try{rail.releasePointerCapture(e.pointerId)}catch(err){}
+        }
+        if(e.type!=='pointerup'){return}
+        if(drag.moved){
+          drag.suppressClick=true;
+          setTimeout(function(){drag.suppressClick=false},260);
+          return;
+        }
+        if(drag.button){
+          e.preventDefault();
+          runChip(drag.button);
+        }
+      }
+      rail.addEventListener('pointerup',endDrag);
+      rail.addEventListener('pointercancel',endDrag);
+      rail.addEventListener('pointerleave',endDrag);
+      rail.addEventListener('scroll',updateChipArrowState,{passive:true});
+      window.addEventListener('resize',updateChipArrowState);
+      rail.addEventListener('click',function(e){
+        var btn=e.target.closest&&e.target.closest('.chip');
+        if(!btn||!rail.contains(btn)){return}
+        e.preventDefault();
+        e.stopPropagation();
+        if(drag.suppressClick){
+          if(e.stopImmediatePropagation){e.stopImmediatePropagation()}
+          return;
+        }
+        runChip(btn);
+        if(e.stopImmediatePropagation){e.stopImmediatePropagation()}
+      },true);
+      rail.addEventListener('touchend',function(e){
+        if(drag.moved||drag.suppressClick){return}
+        var touch=e.changedTouches&&e.changedTouches[0];
+        if(!touch){return}
+        var el=document.elementFromPoint(touch.clientX,touch.clientY);
+        var btn=el&&el.closest&&el.closest('.chip');
+        if(btn&&rail.contains(btn)){
+          e.preventDefault();
+          runChip(btn);
+        }
+      },{passive:false});
+    }
+    function openSheet(key){
+      activeCategory=key;
+      activeAppKey=key;
+      renderApps();
+      renderChips();
+      document.getElementById('sheetTitle').textContent=categoryNames[key]+'服务';
+      document.getElementById('sheetSub').textContent=categories[key].length+' 个入口';
+      document.getElementById('sheetGrid').innerHTML=categories[key].map(function(name){
+        var note=name==='组织架构调整申请'?'仅 HR 可见':'';
+        return '<button class="sheet-item" type="button" onclick="handleChip(\''+name+'\')"><i class="dot"></i><span><strong>'+name+'</strong>'+(note?'<small>'+note+'</small>':'')+'</span></button>';
+      }).join('');
+      document.getElementById('sheetMask').classList.add('show');
+      document.getElementById('sheet').classList.add('show');
+      document.getElementById('sheet').setAttribute('aria-hidden','false');
+    }
+    function closeSheet(){
+      document.getElementById('sheetMask').classList.remove('show');
+      document.getElementById('sheet').classList.remove('show');
+      document.getElementById('sheet').setAttribute('aria-hidden','true');
+    }
+    function handleChip(name){
+      if(name==='调动'){jump('ap-transfer-approved');return}
+      if(name==='考勤申诉'||name==='销假'){jump('attend-exception');return}
+      closeSheet();
+      toast(name+'入口已选中');
+    }
+    function jump(key){
+      var labels={
+        leave:'请假',
+        'leave-apply':'请假',
+        buqian:'补签',
+        'attend-calendar':'考勤',
+        'attend-exception':'考勤异常',
+        'ap-transfer-pending':'调动审批',
+        'ap-transfer-approved':'调动流程'
+      };
+      toast('正在打开'+(labels[key]||'服务'));
+      var url=encodeURI(MAIN_FILE)+'?jump='+encodeURIComponent(key);
+      setTimeout(function(){window.location.href=url},120);
+    }
+    function openLeave(){document.getElementById('leavePanel').classList.add('show')}
+    function closeLeave(){document.getElementById('leavePanel').classList.remove('show')}
+    function submitLeave(){toast('请假申请已提交')}
+    function openOvertime(){document.getElementById('overtimePanel').classList.add('show')}
+    function closeOvertime(){document.getElementById('overtimePanel').classList.remove('show')}
+    var toastTimer=null;
+    function toast(text){
+      var el=document.getElementById('toast');
+      el.textContent=text;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer=setTimeout(function(){el.classList.remove('show')},1800);
+    }
+    renderApps();
+    renderNotices();
+    bindChipManualScroll();
+    renderChips();
+  </script>
+</body>
+</html>

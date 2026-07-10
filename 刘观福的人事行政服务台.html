@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>刘观福的人事行政服务台</title>
+  <style>
+    :root{
+      --pr50:#EFF6FF;--pr100:#DBEAFE;--pr200:#BFDBFE;--pr:#2563EB;--pr700:#1D4ED8;--pr900:#1E40AF;
+      --em50:#ECFDF5;--em100:#D1FAE5;--em:#10B981;--em700:#047857;
+      --ac50:#FFFBEB;--ac100:#FDE68A;--ac:#F59E0B;
+      --ro50:#FFF1F2;--ro100:#FFE4E6;--ro:#F43F5E;
+      --cy50:#ECFEFF;--cy:#06B6D4;--vi50:#F5F3FF;--vi:#8B5CF6;--or50:rgba(249,115,22,.1);--or:#F97316;
+      --c9:#0F172A;--c7:#334155;--c5:#64748B;--c4:#94A3B8;--c3:#CBD5E1;--c2:#E2E8F0;--c1:#F1F5F8;
+      --sf:#FFF;--s2:#F7F9FC;--s3:#EEF2F7;--bg:#F0F4F8;--bd:rgba(15,23,42,.06);--dv:#F1F5F9;
+      --sx:0 1px 3px rgba(0,0,0,.05);--sm:0 2px 8px rgba(0,0,0,.06);--md:0 4px 16px rgba(0,0,0,.08);
+      --f:'Inter','Noto Sans SC','PingFang SC',system-ui,sans-serif;--m:'JetBrains Mono','SF Mono',monospace;
+      --r1:10px;--r2:14px;--r3:18px;--r4:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:var(--f);color:var(--c9);background:var(--bg);letter-spacing:0}
+    body{display:flex;justify-content:center}
+    button{font:inherit;border:0;background:none;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .phone{position:relative;width:min(100vw,430px);min-height:100vh;background:#fbfdff;overflow:hidden}
+    @media (min-width:520px){
+      body{padding:18px 0}
+      .phone{width:393px;min-height:852px;max-height:852px;border:1px solid rgba(15,23,42,.08);border-radius:34px;box-shadow:0 25px 60px rgba(15,23,42,.18)}
+    }
+    .page{height:100vh;max-height:inherit;display:flex;flex-direction:column;background:#fbfdff}
+    .topbar{height:76px;display:flex;align-items:center;gap:8px;padding:10px 12px 8px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--bd);backdrop-filter:blur(18px);z-index:5}
+    .nav-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:var(--c7);flex:0 0 44px;transition:transform .12s ease,background .12s ease}
+    .nav-btn:active,.cat-btn:active,.composer-btn:active,.hrone-entry:active{transform:scale(.96)}
+    .title-wrap{flex:1;min-width:0;text-align:center;align-self:center}
+    .title-row{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0}
+    .title-row h1{margin:0;min-width:0;font-size:17px;line-height:1.25;font-weight:800;color:#232a35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .title-tools{display:inline-flex;align-items:center;gap:4px;flex:0 0 auto}
+    .headset{width:24px;height:24px;border-radius:7px;background:var(--pr50);color:var(--pr);display:grid;place-items:center}
+    .play{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:8px solid var(--c7)}
+    .subtitle{margin-top:1px;font-size:12px;line-height:1.2;font-weight:600;color:var(--c5)}
+    .chat{position:relative;flex:1;overflow:auto;padding:12px 14px 132px}
+    .chat:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;background-image:repeating-linear-gradient(-18deg,transparent 0 48px,rgba(37,99,235,.7) 49px 50px,transparent 51px 96px)}
+    .watermark{position:absolute;inset:0;pointer-events:none;color:var(--c4);opacity:.16;font-size:16px;font-weight:700;line-height:72px;transform:rotate(-18deg);white-space:pre;letter-spacing:0}
+    .message{position:relative;z-index:1;margin:0 0 12px 26px;background:rgba(255,255,255,.96);border:1px solid var(--bd);border-radius:4px 18px 18px 18px;box-shadow:var(--sx);padding:12px 12px 14px;animation:fadeUp .22s ease both}
+    .message:before{content:"";position:absolute;left:-10px;top:14px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:10px solid rgba(255,255,255,.96)}
+    .bot-line{display:flex;gap:7px;align-items:flex-start;margin:0 0 7px}
+    .line-ic{width:18px;height:18px;border-radius:6px;display:grid;place-items:center;flex:0 0 18px;margin-top:2px}
+    .line-ic svg{width:15px;height:15px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .line-ic.star{color:var(--ac);background:var(--ac50)}
+    .line-ic.pin{color:var(--ro);background:var(--ro50)}
+    .line-ic.service{color:var(--pr);background:var(--pr50)}
+    .bot-line p{margin:0;font-size:13px;line-height:1.55;font-weight:600;color:#303642}
+    .service-map{margin:12px 0 14px;border:1px solid var(--c2);background:#fff;border-radius:8px;padding:10px 9px 9px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+    .service-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding:0 4px;color:var(--c7)}
+    .service-hd b{font-size:9px;line-height:1.2;font-weight:800}
+    .service-hd span{font-size:8px;font-weight:800;color:var(--pr700)}
+    .service-body{display:grid;grid-template-columns:1fr 76px 1fr;align-items:center;gap:7px}
+    .svc-col{display:flex;flex-direction:column;gap:6px}
+    .svc-item{min-height:32px;border-radius:8px;background:var(--s2);border:1px solid var(--bd);padding:5px 6px}
+    .svc-item strong{display:block;font-size:8px;line-height:1.1;font-weight:800;color:var(--c9)}
+    .svc-item span{display:block;margin-top:2px;font-size:6px;line-height:1.15;color:var(--c5);font-weight:600}
+    .svc-center{height:76px;border-radius:50%;position:relative;display:grid;place-items:center;background:conic-gradient(from 18deg,var(--or) 0 25%,transparent 25% 36%,#8BC5FF 36% 62%,transparent 62% 73%,var(--or) 73% 100%)}
+    .svc-center:before{content:"";position:absolute;inset:15px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--bd)}
+    .svc-core{position:relative;width:36px;height:36px;border-radius:11px;background:var(--or);color:#fff;display:grid;place-items:center;box-shadow:var(--sm)}
+    .svc-core svg{width:19px;height:19px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .service-foot{margin-top:8px;padding-top:6px;border-top:3px solid var(--pr900);font-size:8px;font-weight:800;color:var(--c9);text-align:center}
+    .category-card{position:relative;z-index:1;margin-left:26px;background:rgba(255,255,255,.96);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--sx);padding:14px 12px 16px;animation:fadeUp .22s .05s ease both}
+    .category-card h2{margin:0 0 12px;font-size:14px;line-height:1.3;font-weight:800;color:#303642}
+    .cat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .cat-btn{min-height:44px;border:1.5px solid var(--pr);border-radius:8px;background:#fff;color:var(--pr);font-size:15px;line-height:1.2;font-weight:700;transition:transform .12s ease,background .12s ease}
+    .cat-btn:hover{background:var(--pr50)}
+    .cat-btn:last-child{grid-column:1/2}
+    .composer{position:absolute;left:0;right:0;bottom:0;z-index:10;padding:8px 0 max(10px,env(safe-area-inset-bottom));background:rgba(255,255,255,.98);border-top:1px solid var(--bd);backdrop-filter:blur(18px)}
+    .composer-input{height:48px;margin:0 4px 8px;border-radius:22px;background:#fff;box-shadow:var(--sx);border:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px;color:var(--c4);font-size:14px;font-weight:600}
+    .composer-tools{height:44px;display:flex;align-items:center;justify-content:space-around;color:#6b7280}
+    .composer-btn{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;transition:transform .12s ease,background .12s ease}
+    .composer-btn svg{width:26px;height:26px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .send-plane{color:var(--c3)}
+    .hrone-entry{position:absolute;right:28px;bottom:158px;z-index:30;width:48px;height:48px;padding:6px;border-radius:999px;background:#fff;border:1px solid var(--bd);box-shadow:0 8px 20px rgba(15,23,42,.16);display:grid;place-items:center;transition:transform .12s ease}
+    .hrone-logo-img{width:36px;height:36px;object-fit:contain;object-position:center;display:block}
+    .toast{position:fixed;left:50%;top:82px;z-index:60;transform:translateX(-50%) translateY(-8px);padding:9px 15px;border-radius:999px;background:var(--c9);color:#fff;font-size:12px;font-weight:700;white-space:nowrap;opacity:0;pointer-events:none;box-shadow:var(--md);transition:opacity .22s ease,transform .22s ease}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media (max-width:360px){
+      .title-row h1{font-size:16px}
+      .bot-line p{font-size:12px}
+      .cat-btn{font-size:14px}
+      .service-body{grid-template-columns:1fr 66px 1fr}
+      .svc-center{height:66px}
+      .svc-center:before{inset:13px}
+      .svc-core{width:32px;height:32px}
+      .hrone-entry{right:24px;bottom:158px}
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+  <main class="phone">
+    <section class="page">
+      <header class="topbar">
+        <button class="nav-btn" type="button" aria-label="返回" onclick="history.length>1?history.back():toast('已在服务台首页')">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="title-wrap">
+          <div class="title-row">
+            <h1>刘观福的人事行政服务台</h1>
+            <span class="title-tools">
+              <span class="headset" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><path d="M4 13v4a2 2 0 0 0 2 2h2v-8H6a2 2 0 0 0-2 2z"/><path d="M20 13v4a2 2 0 0 1-2 2h-2v-8h2a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <span class="play" aria-hidden="true"></span>
+            </span>
+          </div>
+          <div class="subtitle">1 名群成员｜1 个机器人</div>
+        </div>
+        <button class="nav-btn" type="button" aria-label="更多" onclick="toast('更多服务配置演示中')">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg>
+        </button>
+      </header>
+
+      <div class="chat">
+        <div class="watermark">刘观福 9045    刘观福 9045    刘观福 9045
+刘观福 9045    刘观福 9045    刘观福 9045
+刘观福 9045    刘观福 9045    刘观福 9045
+刘观福 9045    刘观福 9045    刘观福 9045
+刘观福 9045    刘观福 9045    刘观福 9045
+刘观福 9045    刘观福 9045    刘观福 9045</div>
+
+        <article class="message">
+          <div class="bot-line">
+            <span class="line-ic star" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5 5.5.8-4 3.9.9 5.5-4.8-2.6-4.8 2.6.9-5.5-4-3.9 5.5-.8L12 3z"/></svg></span>
+            <p>你可以点击下方的分类来定位问题，或发送问题关键词进行咨询。</p>
+          </div>
+          <div class="bot-line">
+            <span class="line-ic pin" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21v-7"/><path d="M9 4h6l1 7H8l1-7z"/><path d="M7 14h10"/></svg></span>
+            <p>人事服务台的各模块服务内容可参考下图。</p>
+          </div>
+
+          <div class="service-map" aria-label="HSSC 人力共享中心服务内容示意图">
+            <div class="service-hd">
+              <b>【HSSC 人力共享中心】各模块服务内容</b>
+              <span>HRAS</span>
+            </div>
+            <div class="service-body">
+              <div class="svc-col">
+                <div class="svc-item"><strong>员工关系</strong><span>入离调转 · 合同证明 · 人事咨询</span></div>
+                <div class="svc-item"><strong>假勤管理</strong><span>休假 · 考勤异常 · 加班出差</span></div>
+                <div class="svc-item"><strong>绩效管理</strong><span>绩效流程 · 目标确认 · 结果查询</span></div>
+              </div>
+              <div class="svc-center">
+                <div class="svc-core" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8.5 11.2h.01M15.5 11.2h.01M8.8 14.5c1.8 1.7 4.6 1.7 6.4 0"/></svg></div>
+              </div>
+              <div class="svc-col">
+                <div class="svc-item"><strong>薪酬核算</strong><span>薪资发放 · 个税社保 · 薪酬证明</span></div>
+                <div class="svc-item"><strong>福利管理</strong><span>五险一金 · 商业保险 · 年节福利</span></div>
+                <div class="svc-item"><strong>系统运营</strong><span>账号权限 · 流程配置 · 数据支持</span></div>
+              </div>
+            </div>
+            <div class="service-foot">24H 一站式解答人事服务台 — 日常事务的咨询与办理</div>
+          </div>
+
+          <div class="bot-line">
+            <span class="line-ic service" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 10a6 6 0 1 0-12 0v4a4 4 0 0 0 4 4h1"/><path d="M18 14v-4"/><path d="M14 21h-3a2 2 0 0 1 0-4h3a2 2 0 0 1 0 4z"/></svg></span>
+            <p>如果没找到相应的答案，可发送“转人工服务”召唤专属客服为你解答。</p>
+          </div>
+        </article>
+
+        <section class="category-card">
+          <h2>请选择分类，查看常见问题</h2>
+          <div class="cat-grid">
+            <button class="cat-btn" type="button" onclick="toast('基础人事类常见问题')">基础人事类</button>
+            <button class="cat-btn" type="button" onclick="toast('薪酬核算类常见问题')">薪酬核算类</button>
+            <button class="cat-btn" type="button" onclick="toast('系统运营类常见问题')">系统运营类</button>
+            <button class="cat-btn" type="button" onclick="toast('绩效管理类常见问题')">绩效管理类</button>
+            <button class="cat-btn" type="button" onclick="toast('五险一金类常见问题')">五险一金类</button>
+            <button class="cat-btn" type="button" onclick="toast('组织发展类常见问题')">组织发展类</button>
+            <button class="cat-btn" type="button" onclick="toast('数据分析类常见问题')">数据分析类</button>
+          </div>
+        </section>
+      </div>
+
+      <footer class="composer">
+        <div class="composer-input">
+          <span>发送给 刘观福的人事行政服务台</span>
+          <button class="composer-btn" type="button" aria-label="展开输入框" onclick="toast('输入框展开演示')">
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+          </button>
+        </div>
+        <div class="composer-tools">
+          <button class="composer-btn" type="button" aria-label="表情" onclick="toast('表情面板演示')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 10h.01M15.5 10h.01M8.8 14.4c1.8 1.7 4.6 1.7 6.4 0"/></svg></button>
+          <button class="composer-btn" type="button" aria-label="提及" onclick="toast('提及成员演示')"><svg viewBox="0 0 24 24"><path d="M16 8.5v4a4 4 0 1 1-2-3.5"/><path d="M16 12.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1"/></svg></button>
+          <button class="composer-btn" type="button" aria-label="语音" onclick="toast('语音输入演示')"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0"/><path d="M12 18v3"/></svg></button>
+          <button class="composer-btn" type="button" aria-label="图片" onclick="toast('图片上传演示')"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 13l2.5-2.5L15 15"/><path d="M14 13l2-2 4 4"/><path d="M8.5 8.5h.01"/></svg></button>
+          <button class="composer-btn" type="button" aria-label="字体" onclick="toast('文字样式演示')"><svg viewBox="0 0 24 24"><path d="M4 20L11 4h2l7 16"/><path d="M7 14h10"/></svg></button>
+          <button class="composer-btn" type="button" aria-label="更多" onclick="toast('更多操作演示')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></button>
+          <button class="composer-btn send-plane" type="button" aria-label="发送" onclick="toast('请先输入内容')"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+        </div>
+      </footer>
+    </section>
+    <button class="hrone-entry" type="button" aria-label="打开 HRONE 机器人" onclick="toast('HRONE 机器人入口已固定在右下角')">
+      <img class="hrone-logo-img" src="hrone-robot-logo.png" alt="HRONE">
+    </button>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    var toastTimer;
+    function toast(text){
+      var el=document.getElementById('toast');
+      el.textContent=text;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer=setTimeout(function(){el.classList.remove('show')},1600);
+    }
+  </script>
+</body>
+</html>

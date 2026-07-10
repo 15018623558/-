@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>工作台演示</title>
+  <style>
+    :root{
+      --pr:#2563EB;--pr50:#EFF6FF;--pr100:#DBEAFE;--pr200:#BFDBFE;--pr700:#1D4ED8;--pr900:#1E3A8A;
+      --em:#10B981;--em50:#ECFDF5;--em100:#D1FAE5;--em700:#047857;
+      --ac:#F59E0B;--ac50:#FFFBEB;--ac100:#FDE68A;
+      --ro:#F43F5E;--ro50:#FFF1F2;--ro100:#FFE4E6;
+      --vi:#8B5CF6;--vi50:#F5F3FF;--cy:#06B6D4;--cy50:#ECFEFF;--or:#F97316;--or50:rgba(249,115,22,.1);
+      --c9:#18181B;--c7:#3F3F46;--c6:#52525B;--c5:#71717A;--c4:#A1A1AA;--c3:#D4D4D8;--c2:#E4E4E7;--c1:#F4F4F5;--c0:#FAFAFA;
+      --sf:#FFF;--bg:#F5F5F4;--dv:#F4F4F5;
+      --shadow-card:0 1px 3px rgba(0,0,0,.05),0 1px 2px rgba(0,0,0,.03);
+      --shadow-card-hover:0 8px 20px -4px rgba(0,0,0,.08),0 2px 6px -2px rgba(0,0,0,.04);
+      --f:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;--m:'JetBrains Mono',monospace;
+      --r1:6px;--r2:8px;--r3:10px;--r4:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:var(--f);color:var(--c9);background:var(--bg);letter-spacing:0}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
+    .app{min-height:100vh}
+    .top{height:52px;background:var(--sf);border-bottom:1px solid var(--dv);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:20}
+    .brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;color:var(--c9)}
+    .logo{width:28px;height:28px;border-radius:6px;background:var(--pr);display:grid;place-items:center;color:#fff}
+    .logo svg,.ico svg,.step-ico svg,.entry-ico svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .nav{display:flex;align-items:center;gap:4px}
+    .nav button{height:34px;border:0;border-radius:var(--r1);background:transparent;color:var(--c5);font-size:13px;font-weight:600;padding:0 13px;cursor:pointer}
+    .nav button.act{background:var(--pr50);color:var(--pr)}
+    .wrap{padding:34px 32px 48px}
+    .hero{text-align:center;margin:0 auto 28px;max-width:780px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;height:26px;padding:0 10px;border:1px solid var(--pr100);background:var(--pr50);border-radius:999px;color:var(--pr);font-size:12px;font-weight:700}
+    .hero h1{margin:16px 0 8px;font-size:34px;line-height:1.18;font-weight:800;color:var(--c9)}
+    .hero p{margin:0;font-size:14px;line-height:1.7;color:var(--c5)}
+    .role-tabs{display:flex;justify-content:center;gap:10px;margin:22px 0 22px}
+    .role-tabs button{height:38px;border:0;border-bottom:3px solid transparent;background:transparent;color:var(--c5);font-size:15px;font-weight:800;padding:0 18px;cursor:pointer}
+    .role-tabs button.act{color:var(--pr);border-bottom-color:var(--pr)}
+    .banner{max-width:1280px;margin:0 auto 24px;background:var(--pr50);border:1px solid var(--pr100);border-radius:var(--r4);box-shadow:var(--shadow-card);padding:18px 22px;display:flex;align-items:center;gap:18px}
+    .banner .ico{width:46px;height:46px;border-radius:50%;background:var(--pr);color:#fff;display:grid;place-items:center;flex:0 0 46px}
+    .banner strong{display:block;font-size:17px;line-height:1.3;font-weight:800;color:var(--pr900)}
+    .banner span{display:block;margin-top:4px;font-size:13px;line-height:1.5;color:var(--pr700)}
+    .banner-copy{flex:1;min-width:0}
+    .banner-actions{margin-left:auto;display:flex;align-items:center;gap:10px;flex:0 0 auto}
+    .banner-btn{height:38px;display:inline-flex;align-items:center;gap:8px;padding:0 14px;border:1px solid var(--pr200);border-radius:var(--r2);background:var(--sf);color:var(--pr);font-size:13px;font-weight:800;box-shadow:var(--shadow-card);transition:all .12s ease;white-space:nowrap}
+    .banner-btn:hover{border-color:var(--pr);background:var(--pr50);box-shadow:var(--shadow-card-hover);transform:translateY(-1px)}
+    .banner-btn svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .role-panel{display:none;max-width:1680px;margin:0 auto;animation:fi .2s ease both}
+    .role-panel.show{display:block}
+    .columns{display:grid;grid-template-columns:repeat(4,minmax(280px,1fr));gap:16px;align-items:start}
+    .columns.employee{grid-template-columns:minmax(620px,2fr) minmax(320px,1fr)}
+    .columns.manager{grid-template-columns:minmax(320px,1fr) minmax(520px,1.55fr) minmax(320px,1fr)}
+    .columns.hr{grid-template-columns:repeat(3,minmax(280px,1fr))}
+    .phase{background:var(--sf);border:1px solid var(--c2);border-radius:var(--r3);box-shadow:var(--shadow-card);overflow:hidden;min-height:420px}
+    .phase-hd{padding:16px 18px;border-bottom:1px solid var(--dv)}
+    .phase-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .phase-title h2{min-width:0}
+    .scene-count{width:24px;height:24px;border-radius:999px;border:1px solid var(--pr100);background:var(--pr50);color:var(--pr);display:inline-flex;align-items:center;justify-content:center;font:800 12px/1 var(--m);flex:0 0 24px}
+    .phase h2{margin:0;font-size:16px;line-height:1.35;font-weight:800;color:var(--c9)}
+    .phase p{margin:4px 0 0;font-size:12px;line-height:1.45;color:var(--c5)}
+    .lane{padding:14px 16px}
+    .group{margin-bottom:14px}
+    .group-title{display:flex;align-items:center;gap:6px;margin:0 0 8px;font-size:12px;font-weight:800;color:var(--c6)}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--pr)}
+    .dot.em{background:var(--em)}.dot.ac{background:var(--ac)}.dot.ro{background:var(--ro)}.dot.vi{background:var(--vi)}
+    .step{display:flex;gap:10px;padding:13px 12px;border:1px solid transparent;border-radius:var(--r2);background:var(--c0);margin-bottom:8px;transition:all .12s ease}
+    .step:hover{border-color:var(--pr100);background:var(--pr50);box-shadow:var(--shadow-card-hover);transform:translateY(-1px)}
+    .step-ico{width:30px;height:30px;border-radius:var(--r1);display:grid;place-items:center;flex:0 0 30px;background:var(--sf);color:var(--pr);border:1px solid var(--c2)}
+    .step-main{flex:1;min-width:0}
+    .step b{display:block;font-size:13px;line-height:1.35;font-weight:800;color:var(--c9)}
+    .step span{display:block;margin-top:3px;font-size:12px;line-height:1.45;color:var(--c5)}
+    .meta{display:flex;align-items:center;gap:6px;margin-top:9px}
+    .tag{height:20px;display:inline-flex;align-items:center;border-radius:4px;padding:0 7px;background:var(--pr50);color:var(--pr);font-size:11px;font-weight:700}
+    .tag.phone{background:var(--em50);color:var(--em700)}.tag.todo{background:var(--ro50);color:var(--ro)}.tag.future{background:var(--c1);color:var(--c5)}
+    .arrow{margin-left:auto;color:var(--c4);font-size:16px;line-height:1}
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+    .stat{background:var(--sf);border:1px solid var(--c2);border-top:3px solid var(--pr);border-radius:var(--r2);box-shadow:var(--shadow-card);padding:14px}
+    .stat b{font:800 24px/1 var(--m);color:var(--c9)}
+    .stat span{display:block;margin-top:6px;font-size:12px;color:var(--c5);font-weight:600}
+    .entry-grid{display:grid;grid-template-columns:repeat(3,minmax(220px,1fr));gap:14px}
+    .entry{background:var(--sf);border:1px solid var(--c2);border-radius:var(--r3);box-shadow:var(--shadow-card);padding:18px;min-height:150px}
+    .entry-ico{width:36px;height:36px;border-radius:var(--r2);background:var(--pr50);color:var(--pr);display:grid;place-items:center;margin-bottom:12px}
+    .entry h3{margin:0;font-size:15px;font-weight:800;color:var(--c9)}
+    .entry p{margin:8px 0 14px;font-size:12px;line-height:1.55;color:var(--c5)}
+    .entry .link{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:var(--r1);background:var(--c1);color:var(--c5);font-size:12px;font-weight:700}
+    @keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    @media (max-width:1180px){
+      .columns,.columns.hr,.columns.manager,.columns.employee{grid-template-columns:1fr}
+      .summary,.entry-grid{grid-template-columns:1fr}
+      .banner{align-items:flex-start;flex-wrap:wrap}
+      .banner-actions{width:100%;margin-left:64px}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="3"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
+        HRONE 工作台演示
+      </div>
+      <nav class="nav" aria-label="页面导航">
+        <button class="act" type="button" onclick="switchRole('employee')">员工视角</button>
+        <button type="button" onclick="switchRole('manager')">管理者视角</button>
+        <button type="button" onclick="switchRole('hr')">HR视角</button>
+      </nav>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <span class="eyebrow">HRONE · 业务场景</span>
+        <h1>工作台场景全景图</h1>
+        <p>围绕 HRONE Agent、消息提醒、审批中心和异常处理，把员工、管理者、HR 三类工作台入口串成可演示的业务路径。</p>
+      </section>
+
+      <div class="role-tabs" aria-label="角色切换">
+        <button class="act" type="button" onclick="switchRole('employee')">员工视角</button>
+        <button type="button" onclick="switchRole('manager')">管理者视角</button>
+        <button type="button" onclick="switchRole('hr')">HR视角</button>
+      </div>
+
+      <section class="role-panel show" id="employee">
+        <div class="banner">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 01-4 4H7l-4 3V7a4 4 0 014-4h10a4 4 0 014 4z"/></svg></span>
+          <div class="banner-copy"><strong>员工发起入口：HRONE Agent + 我的申请 + 规则提醒</strong><span>员工从 HRONE Agent 发起请假申请，进入我的申请查看审批中详情和审批跟踪，并处理薪资发放通知。</span></div>
+          <div class="banner-actions">
+            <a class="banner-btn" href="HRONE-空数据-员工.html"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>HRONE Agent</a>
+            <a class="banner-btn" href="HRONE移动端首页规划 0706.html"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 7h4M11 17h2"/></svg>HRONE员工自助</a>
+          </div>
+        </div>
+        <div class="columns employee">
+          <article class="phase">
+            <div class="phase-hd"><div class="phase-title"><h2>请假申请全流程</h2><span class="scene-count">1</span></div><p>HRONE Agent 发起申请后，在我的申请中追踪流程，并通过规则提醒进入已同意流程。</p></div>
+            <div class="lane">
+              <div class="group"><div class="group-title"><i class="dot"></i>1 发起申请</div>
+                <a class="step" href="HRONE-空数据-员工.html"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 01-4 4H7l-4 3V7a4 4 0 014-4h10a4 4 0 014 4z"/></svg></span><span class="step-main"><b>进入界面：HRONE Agent</b><span>进入 HRONE Agent，使用底部快捷入口或对话发起请假。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=leave"><span class="step-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 5-5"/></svg></span><span class="step-main"><b>发起请假申请</b><span>进入首页常用“请假”同款假期余额页，再选择假种发起申请。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+              </div>
+              <div class="group"><div class="group-title"><i class="dot ac"></i>2 追踪流程</div>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=my-transfer-pending-detail"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="step-main"><b>我的申请：查看审批中的调动申请详情页</b><span>查看调动申请字段、当前处理节点和审批记录。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=my-apply-ongoing"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16l3-4 3 2 5-7"/></svg></span><span class="step-main"><b>审批跟踪：我的申请 · 进行中</b><span>进入我的申请进行中列表，跟踪审批节点、处理人和流转状态。</span><span class="meta"><em class="tag">进行中</em><i class="arrow">→</i></span></span></a>
+              </div>
+              <div class="group"><div class="group-title"><i class="dot em"></i>3 流程完结提醒</div>
+                <a class="step" href="审批通过提醒-员工.html"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span><span class="step-main"><b>审批通过提醒</b><span>消息卡片内可查看已通过的流程。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+              </div>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-hd"><div class="phase-title"><h2>待办处理</h2><span class="scene-count">2</span></div><p>收到薪资发放通知后进入待办提醒并查看工资单详情。</p></div>
+            <div class="lane">
+              <div class="group"><div class="group-title"><i class="dot ac"></i>薪资发放通知</div>
+                <a class="step" href="待办提醒-员工.html"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span><span class="step-main"><b>收到薪资发放通知</b><span>消息卡展示本月工资已发放，并提供待办处理入口。</span><span class="meta"><em class="tag todo">需处理</em><i class="arrow">→</i></span></span></a>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=salary-notice"><span class="step-ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M18 14h.01"/></svg></span><span class="step-main"><b>查看薪资发放通知详情页</b><span>点击去处理后进入薪资发放通知详情，查看工资单内容。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="role-panel" id="manager">
+        <div class="banner">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
+          <div class="banner-copy"><strong>管理者处理入口：待办汇总 + 审批提醒 + 团队查看</strong><span>管理者从 HRONE Agent 消息获取当天待办总数，也可从调动申请提醒直达审批详情，并进入我的团队查看团队明细。</span></div>
+          <div class="banner-actions">
+            <a class="banner-btn" href="HRONE-空数据-员工.html"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>HRONE Agent</a>
+            <a class="banner-btn" href="HRONE移动端首页规划 0706.html"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M10 7h4M11 17h2"/></svg>HRONE员工自助</a>
+          </div>
+        </div>
+        <div class="columns manager">
+          <article class="phase">
+            <div class="phase-hd"><div class="phase-title"><h2>Agent 待办汇总</h2><span class="scene-count">1</span></div><p>进入 HRONE Agent，收到当天所有待办汇总。</p></div>
+            <div class="lane">
+              <div class="group"><div class="group-title"><i class="dot"></i>管理者</div>
+                <a class="step" href="管理者待办.html"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 01-4 4H7l-4 3V7a4 4 0 014-4h10a4 4 0 014 4z"/></svg></span><span class="step-main"><b>进入 HRONE Agent</b><span>消息卡汇总当天全部待办事项数量。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=ap-center-pending"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><span class="step-main"><b>跳转至审批中心 · 待处理的</b><span>点击去处理后进入审批中心待处理列表。</span><span class="meta"><em class="tag todo">待处理</em><i class="arrow">→</i></span></span></a>
+              </div>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-hd"><div class="phase-title"><h2>调动审批处理</h2><span class="scene-count">2</span></div><p>收到调动申请待审批提醒后，进入流程详情页完成审批动作。</p></div>
+            <div class="lane">
+              <div class="group"><div class="group-title"><i class="dot vi"></i>2 调动申请待审批</div>
+                <a class="step" href="管理者-审批提醒.html"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg></span><span class="step-main"><b>收到调动申请待审批提醒</b><span>消息卡展示当前审批节点和处理入口。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+              </div>
+              <div class="group"><div class="group-title"><i class="dot em"></i>3 审批动作</div>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=ap-transfer-pending"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="step-main"><b>跳转至流程审批详情页</b><span>快速查看调动申请并执行审批操作。</span><span class="meta"><em class="tag todo">可审批</em><i class="arrow">→</i></span></span></a>
+              </div>
+            </div>
+          </article>
+          <article class="phase">
+            <div class="phase-hd"><div class="phase-title"><h2>查看我的团队</h2><span class="scene-count">3</span></div><p>从首页常用应用进入我的团队详情页面。</p></div>
+            <div class="lane">
+              <div class="group"><div class="group-title"><i class="dot"></i>团队查看</div>
+                <a class="step" href="HRONE移动端首页规划 0706.html?jump=team-detail"><span class="step-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span><span class="step-main"><b>查看我的团队</b><span>跳转到首页常用应用中的“我的团队”详情页。</span><span class="meta"><em class="tag phone">移动端</em><i class="arrow">→</i></span></span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="role-panel" id="hr">
+        <div class="banner">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1M9 13h1M9 17h1"/></svg></span>
+          <div><strong>HR 工作台：后续规划入口</strong><span>本版本仅展示 HR 视角入口，不展开具体子流程。</span></div>
+        </div>
+        <div class="entry-grid">
+          <article class="entry"><span class="entry-ico"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/></svg></span><h3>组织与人员工作台</h3><p>承接组织调整、人员异动、入转调离等集中处理入口。</p><span class="link">后续规划</span></article>
+          <article class="entry"><span class="entry-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></span><h3>考勤与假勤工作台</h3><p>承接考勤异常、假勤规则、月度统计与员工申诉处理。</p><span class="link">后续规划</span></article>
+          <article class="entry"><span class="entry-ico"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16l3-4 3 2 5-7"/></svg></span><h3>流程与数据工作台</h3><p>承接流程监控、待办分发、数据看板和异常预警。</p><span class="link">后续规划</span></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    function switchRole(id){
+      document.querySelectorAll('.role-panel').forEach(function(panel){panel.classList.toggle('show',panel.id===id)});
+      document.querySelectorAll('.role-tabs button,.nav button').forEach(function(btn){
+        var text=btn.textContent;
+        var active=(id==='employee'&&text.indexOf('员工')>-1)||(id==='manager'&&text.indexOf('管理者')>-1)||(id==='hr'&&text.indexOf('HR')>-1);
+        btn.classList.toggle('act',active);
+      });
+    }
+  </script>
+</body>
+</html>
