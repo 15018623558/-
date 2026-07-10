@@ -238,8 +238,11 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .salary-notice-action svg{width:13px;height:13px}
 #dt-salary .dt-body{padding:16px 16px 82px;background:linear-gradient(180deg,#F7FAFC 0%,var(--bg) 160px)}
 #dt-salary .perf-bottom{grid-template-columns:1fr}
-#dt-salary.ap-handled-readonly .dt-body{padding-bottom:16px}
-#dt-salary.ap-handled-readonly .perf-bottom{display:none}
+#dt-salary.ap-handled-readonly .dt-body,
+#dt-salary.salary-self-service .dt-body{padding-bottom:16px}
+#dt-salary.ap-handled-readonly .perf-bottom,
+#dt-salary.salary-self-service .perf-bottom{display:none}
+#dt-salary.salary-locked .salary-month-nav{display:none}
 #dt-salary .sec-t{margin-top:0;margin-bottom:10px;color:var(--c7);font-size:14px;font-weight:800;letter-spacing:0}
 .salary-hero{position:relative;min-height:136px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#047857 0%,var(--em) 54%,#34D399 100%);border-radius:22px;padding:18px 16px;box-shadow:0 10px 24px rgba(16,185,129,.22);color:#fff;margin:0 0 18px;text-align:center;overflow:hidden}
 .salary-hero::before{content:'';position:absolute;width:132px;height:132px;border-radius:50%;background:rgba(255,255,255,.06);left:-54px;bottom:-78px}
@@ -3700,7 +3703,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
             <div class="ai-rec-copy"><div class="ai-rec-main">2 条调动审批待处理</div><div class="ai-rec-sub">建议优先查看审批记录与申请信息</div></div>
             <span class="ai-rec-act">去处理</span>
           </div>
-          <div class="ai-rec-row" onclick="openDetail('dt-salary')">
+          <div class="ai-rec-row" onclick="openSalaryNoticeDetail()">
             <span class="ai-dot" style="background:var(--ac)"></span>
             <div class="ai-rec-copy"><div class="ai-rec-main">6月工资条待确认</div><div class="ai-rec-sub">确认后可在我的工资中查看明细</div></div>
             <span class="ai-rec-act">查看</span>
@@ -5511,6 +5514,7 @@ const SALARY_MONTH_DATA = {
   }
 };
 var salarySelectedMonth = '2026-05';
+var salaryEntryMode = 'self';
 const GOAL_TODO_DATA = [
   {type:'fillGoal',title:'填写6月绩效目标',desc:'绩效方案 - 高级产品经理',status:'进行中',deadline:'截止 6/30',todoTime:'2026-07-01 10:20:00',detail:'dt-goal-form'},
   {type:'perfConfirm',title:'确认5月绩效结果',desc:'绩效方案 - 2026年5月',status:'待处理',deadline:'截止 7/5',todoTime:'2026-07-01 09:40:00',detail:'dt-goal-confirm'}
@@ -5588,7 +5592,7 @@ const QUICK_POOL = {
   wodejixiao:{label:'绩效',bg:'var(--em50)',stroke:'#10B981',action:"openDetail('dt-goal-form')",svg:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',group:'jx'},
   tuanduijixiao:{label:'团队绩效',bg:'var(--pr50)',stroke:'#2563EB',action:'',svg:'<path d="M4 19h16"/><path d="M7 15l3-3 3 2 4-6"/><path d="M17 8h0"/>',group:'jx'},
   /* 薪酬 */
-  wodegongzi:{label:'工资',bg:'var(--ac50)',stroke:'#B45309',action:"openDetail('dt-salary')",svg:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M8 14h3"/>',group:'xc'},
+  wodegongzi:{label:'工资',bg:'var(--ac50)',stroke:'#B45309',action:"openSalarySelfService()",svg:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M8 14h3"/>',group:'xc'},
   tiaoxintongzhi:{label:'调薪通知',bg:'var(--vi50)',stroke:'#8B5CF6',action:'',svg:'<path d="M12 20V10M18 20V4M6 20v-4"/><path d="M15 7l3-3 3 3"/>',group:'xc'}
 };
 let quickList = ['qingjia','buqian','jiaban','xiaojia','wodegongzi','dangan','tuandui'];
@@ -6314,6 +6318,13 @@ function renderSalaryNotice(){
 }
 function openSalaryNoticeDetail(){
   salarySelectedMonth='2026-06';
+  salaryEntryMode='todo';
+  openDetail('dt-salary',0,'pd');
+}
+function openSalarySelfService(){
+  var keys=salaryMonthKeys();
+  salarySelectedMonth=keys[keys.length-1] || '2026-06';
+  salaryEntryMode='self';
   openDetail('dt-salary');
 }
 function salaryMonthKeys(){
@@ -6325,7 +6336,24 @@ function salaryDetailRowHtml(row){
   var cls=row[2]==='deduct'?' style="font-family:var(--m);color:var(--ro)"':' style="font-family:var(--m)"';
   return '<div class="fm-row"><span class="fm-lb">'+apSafeText(row[0])+'</span><span class="fm-vl"'+cls+'>'+apSafeText(row[1])+'</span></div>';
 }
+function salaryModeFromContext(tab,status){
+  if(Number(tab)===0 && status==='pd') return 'todo';
+  if(Number(tab)===1 && status==='ok') return 'handled';
+  return salaryEntryMode || 'self';
+}
+function prepareSalaryDetailEntry(tab,status){
+  var mode=salaryModeFromContext(tab,status);
+  var page=document.getElementById('dt-salary');
+  if(mode==='todo' || mode==='handled') salarySelectedMonth='2026-06';
+  if(page){
+    page.classList.toggle('salary-locked',mode==='todo' || mode==='handled');
+    page.classList.toggle('salary-self-service',mode==='self');
+    page.classList.toggle('ap-handled-readonly',mode==='handled');
+  }
+  salaryEntryMode=mode;
+}
 function renderSalaryDetail(){
+  prepareSalaryDetailEntry();
   var keys=salaryMonthKeys();
   if(keys.indexOf(salarySelectedMonth)<0) salarySelectedMonth=keys[keys.length-1] || '2026-06';
   var data=SALARY_MONTH_DATA[salarySelectedMonth];
@@ -6341,10 +6369,12 @@ function renderSalaryDetail(){
   if(amount) amount.textContent=data.amount;
   if(date) date.textContent='发薪日 '+data.payDate;
   if(list) list.innerHTML=data.details.map(salaryDetailRowHtml).join('');
-  if(prev) prev.disabled=idx<=0;
-  if(next) next.disabled=idx<0 || idx>=keys.length-1;
+  var locked=salaryEntryMode==='todo' || salaryEntryMode==='handled';
+  if(prev) prev.disabled=locked || idx<=0;
+  if(next) next.disabled=locked || idx<0 || idx>=keys.length-1;
 }
 function switchSalaryMonth(step){
+  if(salaryEntryMode==='todo' || salaryEntryMode==='handled') return;
   var keys=salaryMonthKeys();
   var idx=keys.indexOf(salarySelectedMonth);
   if(idx<0) idx=keys.length-1;
@@ -6779,7 +6809,7 @@ function aiActionChips(question){
     return "<button class=\"ai-chip\" onclick=\"switchTab(1)\">查看考勤</button><button class=\"ai-chip\" onclick=\"openDetail('dt-attend-day')\">查看当天记录</button>";
   }
   if(question.indexOf('工资')>-1 || question.indexOf('薪资')>-1){
-    return "<button class=\"ai-chip\" onclick=\"openDetail('dt-salary')\">查看工资条</button>";
+    return "<button class=\"ai-chip\" onclick=\"openSalaryNoticeDetail()\">查看工资条</button>";
   }
   return '<button class="ai-chip" onclick="switchTab(2)">待办中心</button><button class="ai-chip" onclick="switchTab(1)">考勤</button>';
 }
@@ -7295,7 +7325,10 @@ function openDetail(id, tab, status){
     renderMessages();
   }
   if(id==='dt-attend-records'){renderAtRecPage();}
-  if(id==='dt-salary'){renderSalaryDetail();}
+  if(id==='dt-salary'){
+    prepareSalaryDetailEntry(tab,status);
+    renderSalaryDetail();
+  }
   if(id==='dt-my-apply'){myAppVisibleCount=myAppPageSize;renderMyApplications();}
   if(id==='dt-blessing-wall'){renderBlessWall();}
   /* 审批通用详情页：刷新详情内容与底部操作 */
