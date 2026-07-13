@@ -4143,7 +4143,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
           </div>
         </div>
         <div class="perf-bottom">
-          <button class="perf-btn primary" onclick="confirmSalarySlip()">确认已查看</button>
+          <button class="perf-btn primary" onclick="confirmSalarySlip()">确认</button>
         </div>
       </div>
 
@@ -8368,12 +8368,14 @@ function trApSummaryCard(id, title, rows, badge){
     '<div class="tr-ap-summary-list">'+(rows && rows.length ? rows.join('') : '<div class="tr-ap-summary-empty">暂无信息</div>')+'</div>'+
   '</section>';
 }
-function trApFoldCard(id, title, summaryRows, extraRows, badge, openText){
-  return '<section class="tr-ap-summary-card is-collapsed" id="'+id+'">'+
+function trApFoldCard(id, title, summaryRows, extraRows, badge, openText, expandedByDefault){
+  var collapsedClass = expandedByDefault ? '' : ' is-collapsed';
+  var toggleText = expandedByDefault ? '收起' : (openText || '展开完整信息');
+  return '<section class="tr-ap-summary-card'+collapsedClass+'" id="'+id+'">'+
     '<div class="tr-ap-summary-hd"><span class="tr-ap-summary-title">'+trApEscape(title)+'</span><span class="tr-ap-summary-badge">'+trApEscape(badge||'')+'</span></div>'+
     '<div class="tr-ap-summary-list">'+summaryRows.join('')+'</div>'+
     '<div class="tr-ap-summary-extra"><div class="tr-ap-summary-list">'+extraRows.join('')+'</div></div>'+
-    '<button type="button" class="tr-ap-summary-toggle" onclick="trApToggleSummarySection(\''+id+'\',this)">'+trApEscape(openText || '展开完整信息')+'</button>'+
+    '<button type="button" class="tr-ap-summary-toggle" onclick="trApToggleSummarySection(\''+id+'\',this)">'+trApEscape(toggleText)+'</button>'+
   '</section>';
 }
 function trApHeroSummaryCard(){
@@ -8455,7 +8457,7 @@ function trApAfterCard(){
     trApSummaryRow('工作地区', trApSummaryText('trWorkRegionVal')),
     trApSummaryRow('合同主体变更', '否')
   ];
-  return trApFoldCard('trApSection3','调动后任职信息',summaryRows,extraRows,'4项摘要','展开完整信息');
+  return trApFoldCard('trApSection3','调动后任职信息',summaryRows,extraRows,'4项摘要','展开完整信息',true);
 }
 function trApToggleSummarySection(id, btn){
   var card = document.getElementById(id);
