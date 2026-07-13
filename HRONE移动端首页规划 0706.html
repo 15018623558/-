@@ -3430,7 +3430,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
       <!-- ═══ 待办模块 ═══ -->
       <div class="sec-card ani ani-d1 todo-card" id="home-todo-section">
         <div class="mod-hd" style="margin-bottom:4px">
-          <h3 style="display:flex;align-items:center;gap:5px">待办<span class="td-badge" id="todo-badge">5</span></h3>
+          <h3 style="display:flex;align-items:center;gap:5px">待办<span class="td-badge" id="todo-badge">4</span></h3>
           <button type="button" class="more-ln-inline" onclick="goApTodo()" aria-label="更多待办">更多</button>
         </div>
         <div class="todo-list" id="home-todo"></div>
@@ -3739,7 +3739,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
 
         <!-- Segmented -->
         <div class="ap-seg" id="ap-seg">
-          <div class="asg act" data-ap-tab="0" onclick="switchApTab(0)">待办<span class="sg-badge" id="ap-todo-count">5</span></div>
+          <div class="asg act" data-ap-tab="0" onclick="switchApTab(0)">待办<span class="sg-badge" id="ap-todo-count">4</span></div>
           <div class="asg" data-ap-tab="1" onclick="switchApTab(1)">已办</div>
           <div class="asg" data-ap-tab="3" onclick="switchApTab(3)">已发起</div>
           <div class="asg" data-ap-tab="2" onclick="switchApTab(2)">抄送我</div>
@@ -5009,7 +5009,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
     <div class="tb-it" data-tab="2">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l2 2 4-4"></path><path d="M9 17h6"></path><rect x="5" y="3" width="14" height="18" rx="2"></rect></svg>
       <span>待办</span>
-      <span class="badge">5</span>
+      <span class="badge" id="tab-todo-count">4</span>
     </div>
   </div>
 
@@ -5597,7 +5597,7 @@ const QUICK_POOL = {
 };
 let quickList = ['qingjia','buqian','jiaban','xiaojia','wodegongzi','dangan','tuandui'];
 const QA_COMMON_MAX = 12;
-const QUICK_INTERACTIVE_KEYS = ['qingjia','buqian','diaodong','dangan','tuandui','wodejixiao','wodegongzi'];
+const QUICK_INTERACTIVE_KEYS = ['qingjia','buqian','diaodong','tuandui','wodejixiao','wodegongzi'];
 
 function normalizeQuickList(){
   quickList = quickList.filter(function(key,index){return key&&quickList.indexOf(key)===index&&QUICK_POOL[key]&&key!=='allApps'});
@@ -5785,6 +5785,8 @@ function updateTodoBadges(count){
   if(homeBadge) homeBadge.textContent = text;
   var apBadge = document.getElementById('ap-todo-count');
   if(apBadge) apBadge.textContent = text;
+  var tabBadge = document.getElementById('tab-todo-count');
+  if(tabBadge) tabBadge.textContent = text;
 }
 function openAttendExceptionFromTodo(){
   openDetail('dt-attend-exception');
