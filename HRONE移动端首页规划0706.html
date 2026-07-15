@@ -883,6 +883,19 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .my-app-empty-state svg{width:50px;height:50px;margin-bottom:14px;color:var(--c3);opacity:.85;stroke-width:1.6}
 .my-app-empty-state .em-tt{font-size:14px;font-weight:700;color:var(--c7);line-height:1.3;margin-bottom:6px}
 .my-app-empty-state .em-ds{font-size:12px;font-weight:500;color:var(--c4);line-height:1.45}
+.list-empty{min-height:132px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 12px;color:var(--c4)}
+.list-empty .empty-ill{width:92px;height:82px;margin-bottom:10px;overflow:visible}
+.list-empty .ill-stroke{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.list-empty .ill-bg{fill:var(--s3)}
+.list-empty .ill-paper{fill:var(--pr)}
+.list-empty .ill-paper-line{fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round}
+.list-empty .ill-soft-line{color:var(--c3)}
+.list-empty .ill-blue-line{color:var(--pr)}
+.list-empty .ill-dot{fill:var(--pr100)}
+.list-empty .em-tt{font-size:13px;font-weight:700;color:var(--c7);line-height:1.3}
+.list-empty.detail-empty{min-height:290px;padding-top:44px;justify-content:flex-start}
+.list-end{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 8px;padding:0 8px;color:var(--c4);font-size:12px;font-weight:700;line-height:1.2;text-align:center}
+.list-end::before,.list-end::after{content:'';height:1px;flex:1;min-width:0;background:rgba(148,163,184,.36)}
 
 /* ── Check-in Timeline ── */
 .tl-it{display:flex;gap:10px;padding:8px 0;position:relative}
@@ -5653,6 +5666,19 @@ function apTimeFromNowMinutes(minutes){
   var date = new Date(Date.now() - Number(minutes || 0) * 60000);
   return date.getFullYear()+'-'+todoPad2(date.getMonth()+1)+'-'+todoPad2(date.getDate())+' '+todoPad2(date.getHours())+':'+todoPad2(date.getMinutes())+':'+todoPad2(date.getSeconds());
 }
+function listEmptyHtml(extraClass){
+  return '<div class="list-empty '+(extraClass||'')+'"><svg class="empty-ill" viewBox="0 0 110 92" aria-hidden="true">'+
+    '<path class="ill-bg" d="M45 18h34l16 16v33c0 6-5 11-11 11H39c-6 0-11-5-11-11V35c0-9 8-17 17-17z"></path>'+
+    '<path class="ill-stroke ill-soft-line" stroke-width="2" d="M79 18v16h16M31 34c10-18 38-22 56-4M86 42c5 12 1 25-9 33" stroke-dasharray="4 5"></path>'+
+    '<path class="ill-paper" d="M18 44l31-13 17 39-31 13z"></path>'+
+    '<path class="ill-paper-line" stroke-width="3" d="M31 52l16-7M35 62l18-8M39 71l13-6"></path>'+
+    '<path class="ill-dot" d="M26 18h4v4h-4zM86 13c9 2 15 8 14 15-10 2-18-2-22-9 2-4 4-6 8-6zM92 48a5 5 0 100-10 5 5 0 000 10z"></path>'+
+    '<path class="ill-stroke ill-blue-line" stroke-width="2" d="M12 28l5 5M17 28l-5 5M70 75l5 5M75 75l-5 5"></path>'+
+  '</svg><div class="em-tt">暂无数据</div></div>';
+}
+function listEndHtml(){
+  return '<div class="list-end">没有更多数据</div>';
+}
 function apFormatCardTime(value){
   var ts = todoParseTime(value);
   if(!ts) return String(value || '');
@@ -5986,9 +6012,9 @@ function renderTodo(){
   }).slice(0,1);
   updateTodoBadges(getApprovalPendingTodoCount(allHomeTodoItems.length));
   setTimeout(function(){updateTodoBadges();},0);
-  if(section) section.classList.toggle('td-hidden',items.length===0);
+  if(section) section.classList.remove('td-hidden');
   if(!items.length){
-    box.innerHTML='';
+    box.innerHTML=listEmptyHtml('home-list-empty');
     return;
   }
   box.innerHTML = items.map(function(t,index){
@@ -6134,10 +6160,10 @@ function renderHomeMyApplications(){
   var sorted=myAppSorted(myAppData(),'desc');
   var items=sorted.slice(0,1);
   _homeMyAppItems=items;
-  if(section) section.classList.toggle('td-hidden',items.length===0);
+  if(section) section.classList.remove('td-hidden');
   box.innerHTML = items.length ? items.map(function(item,index){
     return myAppCardHtml(item,index,'home');
-  }).join('') : '<div class="my-app-empty">暂无申请</div>';
+  }).join('') : listEmptyHtml('home-list-empty');
 }
 function openMyApplications(){
   myAppActiveTab='ongoing';
@@ -6205,13 +6231,11 @@ function renderMyApplications(){
   _myAppRenderedItems=items;
   var visible=items.slice(0,myAppVisibleCount);
   if(!items.length){
-    var filter=myAppFilters[myAppActiveTab] || myAppFilters.ongoing;
-    var hasFilter=!!(filter.search||filter.flow||filter.status);
-    list.innerHTML='<div class="my-app-empty-state"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><circle cx="29" cy="29" r="14"></circle><path d="M40 40l10 10"></path></svg><div class="em-tt">暂无待办</div><div class="em-ds">'+(hasFilter?'可以尝试调整筛选条件':'暂无相关申请流程')+'</div></div>';
+    list.innerHTML=listEmptyHtml('detail-empty');
     return;
   }
   list.innerHTML=visible.map(function(item,index){return myAppCardHtml(item,index,'detail');}).join('')+
-    (visible.length<items.length?'<div class="my-app-loading">继续下拉加载更多</div>':'');
+    (visible.length<items.length?'<div class="my-app-loading">继续下拉加载更多</div>':listEndHtml());
 }
 function switchMyAppTab(tab){
   myAppActiveTab=tab==='done'?'done':'ongoing';
@@ -11054,7 +11078,7 @@ function renderApList(){
 
   if(items.length===0){
     _apRenderedItems = [];
-    container.innerHTML = '<div class="ap-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg><div class="em-tt">暂无待办记录</div><div class="em-ds">'+(searchQ||apFilterFlow||apFilterStatus?'可以尝试调整筛选条件':'暂无相关事项')+'</div></div>';
+    container.innerHTML = listEmptyHtml('detail-empty');
     return;
   }
 
@@ -11080,7 +11104,7 @@ function renderApList(){
           '<div class="ap2-bot"><span class="ap2-tm">'+displayTime+'</span>'+actionHtml+'</div>'+
         '</div>'+
       '</div></div>';
-  }).join('');
+  }).join('') + listEndHtml();
 }
 
 /* ── Transfer Page JS ── */
