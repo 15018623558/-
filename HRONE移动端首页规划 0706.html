@@ -4,7 +4,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HR ONE · 移动端员工自助平台 · 设计规范原型</title>
-<link href="./HR ONE · 移动端员工自助平台 · 设计规范原型_files/css2" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -126,10 +125,17 @@ body{font-family:var(--f);background:#CBD5E1;display:flex;justify-content:center
 .msg-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
 .msg-foot.no-action{justify-content:flex-start}
 .msg-type-tag{height:20px;display:inline-flex;align-items:center;border-radius:999px;background:var(--s2);border:1px solid rgba(15,23,42,.04);color:var(--c5);padding:0 8px;font-size:9px;font-weight:600;line-height:1}
+.msg-actions{display:inline-flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
 .msg-action-btn{height:auto;display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:0;background:transparent;color:var(--c5);padding:0;font-size:12px;font-weight:600;font-family:var(--f);cursor:pointer;line-height:1.3}
 .msg-action-btn:active{opacity:.72}
 .msg-action-btn.primary{color:var(--pr)}
 .msg-action-btn.download{color:var(--pr)}
+.msg-action-btn.read{color:var(--c5)}
+.msg-bulk-bar{display:none;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px;padding:9px 12px;border-radius:14px;background:rgba(255,255,255,.78);border:1px solid var(--bd);box-shadow:var(--sx)}
+.msg-bulk-bar.show{display:flex}
+.msg-bulk-text{font-size:11px;font-weight:700;color:var(--c5);line-height:1.35}
+.msg-bulk-btn{height:28px;border:0;border-radius:14px;background:var(--pr50);color:var(--pr);padding:0 12px;font-size:11px;font-weight:800;font-family:var(--f);cursor:pointer;white-space:nowrap}
+.msg-bulk-btn:active{transform:scale(.97);opacity:.86}
 .msg-empty{padding:40px 20px;text-align:center;color:var(--c5);font-size:11px;font-weight:500;line-height:1.6}
 .msg-detail-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r3);box-shadow:var(--sx);padding:16px}
 .msg-detail-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -3851,6 +3857,10 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
             <div class="msg-type-scroll" id="msgTypeScroll"></div>
             <button class="msg-type-toggle" id="msgTypeToggle" onclick="toggleMsgTypePanel()" aria-label="展开消息类型"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button>
           </div>
+          <div class="msg-bulk-bar" id="msgBulkBar">
+            <span class="msg-bulk-text" id="msgBulkText">当前有 0 条未读消息</span>
+            <button class="msg-bulk-btn" type="button" id="msgBulkBtn" onclick="markVisibleUnreadMessagesRead()">全部标记为已读</button>
+          </div>
           <div class="msg-list act" id="msg-unread"></div>
           <div class="msg-list" id="msg-read"></div>
         </div>
@@ -4558,7 +4568,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
             <div class="tr-sec">异动信息</div>
             <div class="tr-fm-card">
               <div class="tr-date-row" onclick="trOpenDateSheet()"><span class="tr-fm-lb"><span class="req">*</span>调动日期</span><span class="tr-fm-vl tr-placeholder" id="trDateVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
-              <div class="tr-fm-row clickable tr-hidden-field" onclick="openTrDateTimeSheet()"><span class="tr-fm-lb"><span class="req">*</span>调动时间</span><span class="tr-fm-vl tr-placeholder" id="trTimeVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
+              <div class="tr-fm-row clickable" onclick="openTrDateTimeSheet()"><span class="tr-fm-lb"><span class="req">*</span>调动时间</span><span class="tr-fm-vl tr-placeholder" id="trTimeVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row clickable" onclick="openTrSheet(&#39;trReasonSheet&#39;)"><span class="tr-fm-lb"><span class="req">*</span>异动原因</span><span class="tr-fm-vl tr-placeholder" id="trReasonVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row clickable" onclick="openTrSheet(&#39;trTypeSheet&#39;)"><span class="tr-fm-lb"><span class="req">*</span>异动类型</span><span class="tr-fm-vl tr-placeholder" id="trTypeVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row"><span class="tr-fm-lb">合同主体</span><span class="tr-fm-vl readonly" id="trMainContractVal">深圳闽星科技有限公司</span></div>
@@ -4616,7 +4626,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
               <div class="tr-fm-row clickable" onclick="openTrCascadeSheet('office')"><span class="tr-fm-lb"><span class="req">*</span>办公地址</span><span class="tr-fm-vl tr-placeholder" id="trOfficeAddrVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row clickable" onclick="openTrSheet(&#39;trPersonTypeSheet&#39;)"><span class="tr-fm-lb"><span class="req">*</span>用工形式</span><span class="tr-fm-vl" id="trPersonTypeVal">正式员工</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row clickable" onclick="openTrSheet(&#39;trWorkRegionSheet&#39;)"><span class="tr-fm-lb"><span class="req">*</span>工作地区</span><span class="tr-fm-vl" id="trWorkRegionVal">中国大陆</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
-              <div class="tr-fm-row clickable tr-hidden-field" onclick="trOpenMultiSheet(&#39;trMultiVal&#39;)"><span class="tr-fm-lb"><span class="req">*</span>多选内容</span><span class="tr-fm-vl tr-placeholder" id="trMultiVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
+              <div class="tr-fm-row clickable" onclick="trOpenMultiSheet(&#39;trMultiVal&#39;)"><span class="tr-fm-lb"><span class="req">*</span>多选内容</span><span class="tr-fm-vl tr-placeholder" id="trMultiVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row"><span class="tr-fm-lb"><span class="req">*</span>是否变更合同主体</span><span class="tr-fm-vl" style="display:flex;align-items:center;justify-content:flex-end"><div class="tr-seg-toggle" id="trContractSeg"><span class="tr-seg-opt" data-val="是" onclick="trSegToggleContract(this)">是</span><span class="tr-seg-opt" data-val="否" onclick="trSegToggleContract(this)">否</span></div></span></div>
               <div class="tr-fm-row clickable" id="trContractRow" style="display:none" onclick="openTrSheet(&#39;trContractSheet&#39;)"><span class="tr-fm-lb"><span class="req">*</span>变更后合同主体</span><span class="tr-fm-vl tr-placeholder" id="trContractVal">请选择</span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg></span><span class="tr-edit-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></span></div>
               <div class="tr-fm-row tr-col"><div style="display:flex;justify-content:space-between;align-items:center"><span class="tr-fm-lb" style="width:auto">备注</span><span style="font-size:11px;color:var(--c4);font-family:var(--m)" id="trRemarkCount">0/200</span></div><textarea class="tr-textarea" id="trRemarkVal" maxlength="200" oninput="trUpdateRemarkCount()" placeholder="请输入"></textarea><div class="tr-row-sub">最多 200 字，超出后无法继续输入</div></div>
@@ -5003,7 +5013,7 @@ body.ap-modal-active .tab-bar{display:none!important;opacity:0!important;pointer
       <span>考勤</span>
     </div>
     <div class="tb-it" data-tab="ai">
-      <img class="tb-logo" src="hrone-tab-logo.png" alt="">
+      <img class="tb-logo" src="data:image/png;base64,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" alt="">
       <span>HRONE</span>
     </div>
     <div class="tb-it" data-tab="2">
@@ -7002,6 +7012,19 @@ function renderMsgTypes(){
 }
 function keepMsgTypeVisible(){
 }
+function renderMsgBulkBar(){
+  var bar=document.getElementById('msgBulkBar');
+  var text=document.getElementById('msgBulkText');
+  var btn=document.getElementById('msgBulkBtn');
+  if(!bar) return;
+  var visibleUnread=getMsgFiltered('unread');
+  var show=msgTabIndex===0&&visibleUnread.length>0;
+  bar.classList.toggle('show',show);
+  if(!show) return;
+  var isFiltered=!!msgSearchQuery||msgTypeKey!=='all';
+  if(text) text.textContent=(isFiltered?'当前结果':'当前')+'有 '+visibleUnread.length+' 条未读消息';
+  if(btn) btn.textContent=isFiltered?'当前结果全部标为已读':'全部标记为已读';
+}
 function renderMsgLists(){
   var unread=document.getElementById('msg-unread');
   var read=document.getElementById('msg-read');
@@ -7012,7 +7035,11 @@ function renderMsgLists(){
   var homeBadge=document.querySelector('.home-notify-badge');
   if(tabUnread) tabUnread.textContent='未读 '+formatMsgCount(unreadCount);
   if(tabRead) tabRead.textContent='已读 '+formatMsgCount(readCount);
-  if(homeBadge) homeBadge.textContent=formatMsgCount(unreadCount);
+  if(homeBadge){
+    homeBadge.textContent=formatMsgCount(unreadCount);
+    homeBadge.style.display=unreadCount?'':'none';
+  }
+  renderMsgBulkBar();
   if(unread) unread.innerHTML=renderMsgCards('unread');
   if(read) read.innerHTML=renderMsgCards('read');
 }
@@ -7020,12 +7047,16 @@ function renderMsgCards(status){
   var list=getMsgFiltered(status);
   if(list.length===0) return '<div class="msg-empty">'+(msgSearchQuery?'未找到相关消息':'当前分类暂无消息')+'</div>';
   return list.map(function(m){
-    var actionHtml='';
+    var actionBtns=[];
     if(m.action==='detail'){
-      actionHtml='<button class="msg-action-btn primary" onclick="openMsgAction(\''+m.id+'\')">查看详情</button>';
+      actionBtns.push('<button class="msg-action-btn primary" onclick="openMsgAction(\''+m.id+'\')">查看详情</button>');
     }else if(m.action==='download'){
-      actionHtml='<button class="msg-action-btn download" onclick="openMsgAction(\''+m.id+'\')">下载</button>';
+      actionBtns.push('<button class="msg-action-btn download" onclick="openMsgAction(\''+m.id+'\')">下载</button>');
     }
+    if(m.status==='unread'){
+      actionBtns.push('<button class="msg-action-btn read" onclick="markMessageRead(\''+m.id+'\',event)">标为已读</button>');
+    }
+    var actionHtml=actionBtns.length?'<div class="msg-actions">'+actionBtns.join('')+'</div>':'';
     var headline=getMsgHeadline(m);
     return '<div class="msg-card'+(m.status==='unread'?' unread':'')+'">'+
       '<div class="msg-top"><div class="msg-title">'+(m.status==='unread'?'<span class="msg-dot"></span>':'')+headline+'</div><div class="msg-time">'+m.time+'</div></div>'+
@@ -7058,6 +7089,31 @@ function toggleMsgTypePanel(){
 function searchMessages(input){
   msgSearchQuery=(input&&input.value?input.value:'').trim();
   renderMessages();
+}
+function markMessageRead(id,ev){
+  if(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+  }
+  var msg=MSG_DATA.find(function(m){return m.id===id});
+  if(!msg||msg.status!=='unread') return;
+  msg.status='read';
+  msg.readAt=trNowMinuteText();
+  renderMessages();
+  showTrToast('已标记为已读','success');
+}
+function markVisibleUnreadMessagesRead(){
+  var list=getMsgFiltered('unread');
+  if(!list.length) return;
+  var isFiltered=!!msgSearchQuery||msgTypeKey!=='all';
+  var tip='确认将'+(isFiltered?'当前筛选结果中的 ':'全部 ')+list.length+' 条未读消息标记为已读？';
+  if(!window.confirm(tip)) return;
+  list.forEach(function(msg){
+    msg.status='read';
+    msg.readAt=trNowMinuteText();
+  });
+  renderMessages();
+  showTrToast('已标记 '+list.length+' 条消息为已读','success');
 }
 function openMsgAction(id){
   var msg=MSG_DATA.find(function(m){return m.id===id});
@@ -13099,7 +13155,7 @@ function trParseDateOnly(text){
   return new Date(y,mo-1,day).getTime();
 }
 function trIsBusinessHiddenField(id){
-  var hiddenIds=['trTimeVal','trAreaVal','trMultiVal','trHeadcountVal','trWorkLocVal'];
+  var hiddenIds=['trAreaVal','trHeadcountVal','trWorkLocVal'];
   var baseId=String(id||'').replace(/^trAp/,'tr');
   if(hiddenIds.indexOf(baseId)>-1) return true;
   var el=document.getElementById(_resolveApId(baseId));
